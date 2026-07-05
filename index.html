@@ -14,17 +14,18 @@
 .header h1{font-size:1.4em;font-weight:800}
 .header p{font-size:.8em;opacity:.9}
 
-/* CARRUSEL */
-.eslogan-box{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;text-align:center;padding:20px 15px}
-.eslogan-box h2{font-size:1.5em;font-weight:800;margin-bottom:5px}
+/* CARRUSEL GRANDE */
+.eslogan-box{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;text-align:center;padding:24px 15px}
+.eslogan-box h2{font-size:1.8em;font-weight:800;margin-bottom:8px}
+.eslogan-box p{font-size:1em;opacity:.95}
 .carrusel{position:relative;overflow:hidden;border-radius:0 0 20px 20px;margin-bottom:15px}
 .carrusel-track{display:flex;transition:transform.5s ease}
 .carrusel-item{min-width:100%;position:relative}
-.carrusel-item img{width:100%;height:220px;object-fit:cover;display:block}
-.carrusel-text{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));color:white;padding:15px;font-weight:700;font-size:.95em}
-.carrusel-dots{display:flex;justify-content:center;gap:8px;padding:10px;background:var(--azul)}
-.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer}
-.dot.active{background:white}
+.carrusel-item img{width:100%;height:240px;object-fit:cover;display:block}
+.carrusel-text{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.85));color:white;padding:20px 15px;font-weight:800;font-size:1.2em;line-height:1.3;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+.carrusel-dots{display:flex;justify-content:center;gap:8px;padding:12px;background:var(--azul)}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer}
+.dot.active{background:white;width:12px;height:12px}
 
 .card{background:white;margin:15px;border-radius:18px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.08)}
 .puntos{display:flex;justify-content:space-between;align-items:center}
@@ -87,34 +88,60 @@ textarea.input-form{min-height:80px;resize:vertical}
   <h2 class="titulo">🎁 Beneficios Municipales</h2><div id="listaBeneficios"></div>
 </div>
 
-<!-- PANTALLA REPORTE NUEVA -->
+<!-- PANTALLA REPORTE NUEVA CON FOTO + DESCRIPCION -->
 <div id="pantalla-reporte" class="hidden">
   <header class="header"><h1>Reportar Misión</h1></header>
   <div class="card">
     <h3 id="tituloReporte">Misión</h3>
     <p style="font-size:.85em;color:#666;margin-bottom:10px" id="descReporte"></p>
-
     <label style="font-weight:700;font-size:.9em">1. Dirección donde lo hiciste</label>
     <input type="text" id="inputDireccion" class="input-form" placeholder="Ej: Av. Moreno 1200">
-
     <label style="font-weight:700;font-size:.9em">2. Describí lo que hiciste</label>
     <textarea id="inputDescripcion" class="input-form" placeholder="Contanos qué hiciste, cuánto tiempo, etc."></textarea>
-
     <label style="font-weight:700;font-size:.9em">3. Adjuntá una foto como evidencia</label>
     <input type="file" id="inputFoto" class="input-form" accept="image/*" capture="environment" onchange="previsualizarFoto(event)">
     <img id="previewImg" class="hidden">
     <div id="alertaFraude" class="alerta-fraude hidden">⚠️ Anti-fraude: Esta foto ya fue usada</div>
-
     <button class="btn" style="width:100%;margin-top:15px" onclick="enviarReporte()">Enviar para Validar</button>
     <button class="btn btn-rojo" style="width:100%;margin-top:10px" onclick="mostrarPantalla('inicio')">Cancelar</button>
   </div>
 </div>
 
-<!-- EL RESTO DE PANTALLAS -->
-<div id="pantalla-mapa" class="hidden">...</div>
-<div id="pantalla-alertas" class="hidden">...</div>
-<div id="pantalla-ranking" class="hidden">...</div>
+<!-- PANTALLA MAPA -->
+<div id="pantalla-mapa" class="hidden">
+  <header class="header"><h1>Mapa de Calor 3A</h1></header>
+  <div class="mapa">🗺️<br><span style="font-size:.4em">Puntos rojos: Problemas<br>Puntos verdes: Solucionado<br>Puntos violeta: Ayuda</span></div>
+  <div class="card">
+    <h3>Últimos Reportes</h3>
+    <p>🔴 Bache - Av. Moreno 1200 - hace 2hs</p>
+    <p>🟣 Abuelo necesita pasto - Barrio Unión - hace 1h</p>
+    <p>🟢 Plaza Limpia - Parque Cabañas - hace 1hs</p>
+  </div>
+</div>
 
+<!-- PANTALLA ALERTAS -->
+<div id="pantalla-alertas" class="hidden">
+  <header class="header"><h1>Alertas Vecinales</h1></header>
+  <div class="alerta-card"><b>🚨 Corte de Luz</b><p>Tu cuadra: Barrio Unión. EDEA trabajando.</p></div>
+  <div class="alerta-card"><b>🛠️ Jornada de Obra</b><p>Sábado 9hs: Pintamos la plaza. Suma 250pts</p></div>
+  <div class="alerta-card"><b>♻️ Reciclado</b><p>Hoy pasa el camión por tu barrio a las 15hs</p></div>
+</div>
+
+<!-- PANTALLA RANKING -->
+<div id="pantalla-ranking" class="hidden">
+  <header class="header"><h1>Ranking 3A</h1></header>
+  <div class="card"><h3>🏆 Barrios</h3>
+    <div class="ranking-item"><span>1. Barrio Unión</span><b>15.420 pts</b></div>
+    <div class="ranking-item"><span>2. Barrio Obrero</span><b>12.100 pts</b></div>
+    <div class="ranking-item"><span>3. Centro</span><b>9.800 pts</b></div>
+  </div>
+  <div class="card"><h3>🏫 Escuelas</h3>
+    <div class="ranking-item"><span>1. Secundaria N°1</span><b>8.200 pts</b></div>
+    <div class="ranking-item"><span>2. Comercial</span><b>6.500 pts</b></div>
+  </div>
+</div>
+
+<!-- MENU -->
 <nav class="menu-bottom">
   <div class="menu-item active" onclick="mostrarPantalla('inicio')"><span>🏠</span>Inicio</div>
   <div class="menu-item" onclick="mostrarPantalla('mapa')"><span>🗺️</span>Mapa</div>
@@ -125,7 +152,7 @@ textarea.input-form{min-height:80px;resize:vertical}
 <div class="toast" id="toast"></div>
 
 <script>
-// ===== CARRUSEL =====
+// ===== CARRUSEL AUTO =====
 let carruselIndex = 0;
 function iniciarCarrusel(){
   const track = document.getElementById('carruselTrack');
@@ -230,7 +257,6 @@ function actualizarUI(){
     </div>`).join('');
 }
 
-// NUEVA FUNCION: ABRIR FORMULARIO
 function abrirReporte(idMision){
   misionActual = MISIONES.find(m=>m.id==idMision);
   document.getElementById('tituloReporte').innerText = misionActual.titulo;
@@ -243,28 +269,15 @@ function abrirReporte(idMision){
   mostrarPantalla('reporte');
 }
 
-// NUEVA FUNCION: ENVIAR REPORTE
 function enviarReporte(){
   const direccion = document.getElementById('inputDireccion').value;
   const descripcion = document.getElementById('inputDescripcion').value;
-
   if(!direccion ||!descripcion){toast("Completá dirección y descripción"); return;}
   if(!fotoActualHash){toast("Adjuntá una foto"); return;}
   if(baseFotos.find(f => f.hash === fotoActualHash)){toast("❌ Fraude detectado"); return;}
 
   baseFotos.push({hash: fotoActualHash, usuario: usuario.nombre, mision: misionActual.titulo, fecha: new Date().toISOString()});
-
-  reportesPendientes.push({
-    id: Date.now(),
-    usuario: usuario.nombre,
-    barrio: usuario.barrio,
-    mision: misionActual.titulo,
-    direccion: direccion,
-    descripcion: descripcion,
-    puntos: misionActual.pts,
-    estado: "Pendiente",
-    fecha: new Date().toISOString()
-  });
+  reportesPendientes.push({id: Date.now(), usuario: usuario.nombre, barrio: usuario.barrio, mision: misionActual.titulo, direccion: direccion, descripcion: descripcion, puntos: misionActual.pts, estado: "Pendiente", fecha: new Date().toISOString()});
 
   usuario.puntos += misionActual.pts;
   if(misionActual.pts==300 &&!usuario.insignias.includes("Guardián de Plazas")) usuario.insignias.push("🏞️ Guardián de Plazas");
