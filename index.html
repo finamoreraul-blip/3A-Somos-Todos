@@ -9,42 +9,42 @@
   :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700;--violeta:#8e44ad}
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
   body{background:#f0f4f8;color:#222;padding-bottom:90px}
-.hidden{display:none}
-.header{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;padding:18px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-.header h1{font-size:1.4em;font-weight:800;letter-spacing:.5px}
-.header p{font-size:.8em;opacity:.9}
+ .hidden{display:none}
+ .header{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;padding:18px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+ .header h1{font-size:1.4em;font-weight:800;letter-spacing:.5px}
+ .header p{font-size:.8em;opacity:.9}
 
-.eslogan-box{
+ .eslogan-box{
     background:linear-gradient(135deg,var(--azul),var(--verde));
     color:white;
     text-align:center;
     padding:25px 15px 20px 15px;
   }
-.eslogan-box h2{font-size:1.9em;font-weight:800;margin-bottom:8px}
-.eslogan-box p{font-size:1em;opacity:.95}
+ .eslogan-box h2{font-size:1.9em;font-weight:800;margin-bottom:8px}
+ .eslogan-box p{font-size:1em;opacity:.95}
 
-/* CARRUSEL FOTOS ENTERAS V2 */
-.carrusel-wrapper{
+  /* CARRUSEL FOTOS ENTERAS */
+ .carrusel-wrapper{
     padding:25px 0 0 0;
     background:#f0f4f8;
   }
-.carrusel{
+ .carrusel{
     position:relative;
     overflow:hidden;
     border-radius:20px;
     margin:0 10px 15px 10px;
-    background:#111; /* negro más oscuro */
+    background:#111;
     box-shadow:0 6px 20px rgba(0,0,0,.15)
   }
-.carrusel-track{display:flex;transition:transform.6s ease}
-.carrusel-item{min-width:100%;position:relative;background:#111;display:flex;align-items:center;justify-content:center}
-.carrusel-item img{
+ .carrusel-track{display:flex;transition:transform.6s cubic-bezier(.4,0,.2,1)}
+ .carrusel-item{min-width:100%;position:relative;background:#111;display:flex;align-items:center;justify-content:center}
+ .carrusel-item img{
     width:100%;
-    height:340px; /* un toque más alto */
-    object-fit:contain; /* FOTO ENTERA */
+    height:340px;
+    object-fit:contain;
     display:block;
   }
-.carrusel-text{
+ .carrusel-text{
     position:absolute;
     bottom:0;
     left:0;
@@ -58,39 +58,39 @@
     border-radius:0 0 20px 20px;
     text-align:center;
   }
-.carrusel-dots{display:flex;justify-content:center;gap:10px;padding:15px 0}
-.dot{width:12px;height:12px;border-radius:50%;background:#555;cursor:pointer;transition:.3s}
-.dot.active{background:var(--verde);width:14px;height:14px} /* verde activo */
+ .carrusel-dots{display:flex;justify-content:center;gap:10px;padding:15px 0}
+ .dot{width:12px;height:12px;border-radius:50%;background:#555;cursor:pointer;transition:.3s}
+ .dot.active{background:var(--verde);width:14px;height:14px}
 
-.card{background:white;margin:15px;border-radius:18px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.08)}
-.puntos{display:flex;justify-content:space-between;align-items:center}
-.puntos h2{color:var(--azul);font-size:2.2em;font-weight:800}
-.nivel-badge{background:var(--oro);color:#333;padding:6px 14px;border-radius:20px;font-weight:800;font-size:.8em}
-.barra{height:12px;background:#e0e0e0;border-radius:10px;margin-top:12px;overflow:hidden}
-.progreso{height:100%;width:0;background:linear-gradient(90deg,var(--azul),var(--verde));border-radius:10px;transition:.8s}
-.titulo{padding:0 20px;margin:25px 0 12px;font-size:1.3em;font-weight:700;color:var(--azul)}
-.mision{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:white;border-left:6px solid;box-shadow:0 3px 10px rgba(0,0,0,.06);transition:.2s}
-.mision:active{transform:scale(.98)}
-.mision.verde{border-color:var(--verde)}.mision.naranja{border-color:var(--naranja)}.mision.rojo{border-color:var(--rojo)}.mision.violeta{border-color:var(--violeta)}
-.beneficio{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:linear-gradient(135deg,#fff,#e8f5e9);border:2px solid var(--verde)}
-.grupo-whatsapp{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:linear-gradient(135deg,#e8f5e9,#d4f1d7);border:2px solid #25D366}
-.icon{font-size:2.5em;min-width:45px;text-align:center}.info{flex:1}.info h3,h4{color:var(--azul);margin-bottom:4px;font-weight:700}
-.info p{font-size:.85em;color:#555}.pts{font-weight:800;font-size:1.1em}
-.pts.verde{color:var(--verde)}.pts.naranja{color:var(--naranja)}.pts.rojo{color:var(--rojo)}.pts.violeta{color:var(--violeta)}
-.btn{background:var(--verde);color:white;border:none;padding:10px 18px;border-radius:25px;font-weight:700;cursor:pointer;transition:.2s}
-.btn:active{transform:scale(.95)}.btn:disabled{background:#ccc;cursor:not-allowed}.btn-azul{background:var(--azul)}.btn-rojo{background:var(--rojo)}.btn-verde{background:#25D366}
-.input-form{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins';font-size:1em}
+ .card{background:white;margin:15px;border-radius:18px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.08)}
+ .puntos{display:flex;justify-content:space-between;align-items:center}
+ .puntos h2{color:var(--azul);font-size:2.2em;font-weight:800}
+ .nivel-badge{background:var(--oro);color:#333;padding:6px 14px;border-radius:20px;font-weight:800;font-size:.8em}
+ .barra{height:12px;background:#e0e0e0;border-radius:10px;margin-top:12px;overflow:hidden}
+ .progreso{height:100%;width:0;background:linear-gradient(90deg,var(--azul),var(--verde));border-radius:10px;transition:width.8s ease}
+ .titulo{padding:0 20px;margin:25px 0 12px;font-size:1.3em;font-weight:700;color:var(--azul)}
+ .mision{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:white;border-left:6px solid;box-shadow:0 3px 10px rgba(0,0,0,.06);transition:.2s}
+ .mision:active{transform:scale(.98)}
+ .mision.verde{border-color:var(--verde)}.mision.naranja{border-color:var(--naranja)}.mision.rojo{border-color:var(--rojo)}.mision.violeta{border-color:var(--violeta)}
+ .beneficio{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:linear-gradient(135deg,#fff,#e8f5e9);border:2px solid var(--verde)}
+ .grupo-whatsapp{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:linear-gradient(135deg,#e8f5e9,#d4f1d7);border:2px solid #25D366}
+ .icon{font-size:2.5em;min-width:45px;text-align:center}.info{flex:1}.info h3,h4{color:var(--azul);margin-bottom:4px;font-weight:700}
+ .info p{font-size:.85em;color:#555}.pts{font-weight:800;font-size:1.1em}
+ .pts.verde{color:var(--verde)}.pts.naranja{color:var(--naranja)}.pts.rojo{color:var(--rojo)}.pts.violeta{color:var(--violeta)}
+ .btn{background:var(--verde);color:white;border:none;padding:10px 18px;border-radius:25px;font-weight:700;cursor:pointer;transition:.2s}
+ .btn:active{transform:scale(.95)}.btn:disabled{background:#ccc;cursor:not-allowed}.btn-azul{background:var(--azul)}.btn-rojo{background:var(--rojo)}.btn-verde{background:#25D366}
+ .input-form{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins';font-size:1em}
   textarea.input-form{min-height:80px;resize:vertical}
-.mapa{height:250px;background:#dbeafe;border-radius:15px;margin:15px;display:flex;align-items:center;justify-content:center;font-size:3em;text-align:center;font-weight:700;color:var(--azul)}
-.alerta-card{background:#fff3cd;border-left:5px solid var(--naranja);padding:12px;margin:12px 15px;border-radius:10px;font-size:.9em}
-.ranking-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee}
-.insignia{display:inline-block;background:#e8f5e9;color:var(--verde);padding:5px 10px;border-radius:15px;font-size:.8em;margin:4px;font-weight:600}
-.menu-bottom{position:fixed;bottom:0;width:100%;background:white;display:flex;justify-content:space-around;padding:8px 0;box-shadow:0 -3px 12px rgba(0,0,0,.1)}
-.menu-item{text-align:center;font-size:.7em;color:#888;cursor:pointer;flex:1}.menu-item.active{color:var(--azul);font-weight:700}
-.menu-item span{font-size:1.8em;display:block}.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#333;color:white;padding:12px 20px;border-radius:25px;z-index:99;opacity:0;transition:.3s}
-.toast.show{opacity:1} #previewImg{width:100%;border-radius:10px;margin-top:10px;max-height:200px;object-fit:cover}
-.alerta-fraude{background:#ffebee;border:1px solid var(--rojo);color:var(--rojo);padding:10px;border-radius:10px;margin-top:10px;font-size:.85em;font-weight:600}
-.contador{font-weight:800;color:#25D366;font-size:.9em}
+ .mapa{height:250px;background:#dbeafe;border-radius:15px;margin:15px;display:flex;align-items:center;justify-content:center;font-size:3em;text-align:center;font-weight:700;color:var(--azul)}
+ .alerta-card{background:#fff3cd;border-left:5px solid var(--naranja);padding:12px;margin:12px 15px;border-radius:10px;font-size:.9em}
+ .ranking-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee}
+ .insignia{display:inline-block;background:#e8f5e9;color:var(--verde);padding:5px 10px;border-radius:15px;font-size:.8em;margin:4px;font-weight:600}
+ .menu-bottom{position:fixed;bottom:0;width:100%;background:white;display:flex;justify-content:space-around;padding:8px 0;box-shadow:0 -3px 12px rgba(0,0,0,.1)}
+ .menu-item{text-align:center;font-size:.7em;color:#888;cursor:pointer;flex:1}.menu-item.active{color:var(--azul);font-weight:700}
+ .menu-item span{font-size:1.8em;display:block}.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#333;color:white;padding:12px 20px;border-radius:25px;z-index:99;opacity:0;transition:.3s}
+ .toast.show{opacity:1} #previewImg{width:100%;border-radius:10px;margin-top:10px;max-height:200px;object-fit:cover}
+ .alerta-fraude{background:#ffebee;border:1px solid var(--rojo);color:var(--rojo);padding:10px;border-radius:10px;margin-top:10px;font-size:.85em;font-weight:600}
+ .contador{font-weight:800;color:#25D366;font-size:.9em}
 </style>
 </head>
 <body>
@@ -110,7 +110,6 @@
         <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=900"><div class="carrusel-text">👴 Ayudando a un vecino</div></div>
         <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=900"><div class="carrusel-text">🚧 Tapando baches entre todos</div></div>
         <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1462143338525-5a35afba7e13?w=900"><div class="carrusel-text">🌱 Armando huerta comunitaria</div></div>
-        <!-- 2 FOTOS NUEVAS -->
         <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900"><div class="carrusel-text">🎨 Pintando murales en la escuela</div></div>
         <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=900"><div class="carrusel-text">♻️ Jornada de reciclado barrial</div></div>
       </div>
@@ -154,7 +153,7 @@
 <div id="pantalla-mapa" class="hidden">
   <header class="header"><h1>Mapa de Calor 3A</h1></header>
   <div class="mapa">🗺️<br><span style="font-size:.4em">Puntos rojos: Problemas<br>Puntos verdes: Solucionado<br>Puntos violeta: Ayuda</span></div>
-  <div class="card"><h3>Últimos Reportes</h3><p>🔴 Bache - Av. Moreno 1200</p><p>🟣 Abuelo necesita pasto - Barrio Unión</p><p>🟢 Plaza Limpia - Parque Cabañas</p></div>
+  <div class="card"><h3>Últimos Reportes</h3><p>🔴 Bache - Av. Moreno 1200</p><p>🟣 Abuelo necesita pasto - Barrio Unión</p><p>🟢 Plaza Limpia - Parque Cabañas</p><p>🔴 Luz rota - Calle 25 de Mayo 800</p></div>
 </div>
 
 <div id="pantalla-alertas" class="hidden">
@@ -162,6 +161,7 @@
   <div class="alerta-card"><b>🚨 Corte de Luz</b><p>Tu cuadra: Barrio Unión. EDEA trabajando. Est. 18hs</p></div>
   <div class="alerta-card"><b>🛠️ Jornada de Obra</b><p>Sábado 9hs: Pintamos la plaza. Suma 250pts + vianda</p></div>
   <div class="alerta-card"><b>♻️ Reciclado</b><p>Hoy pasa el camión por tu barrio a las 15hs</p></div>
+  <div class="alerta-card"><b>💧 Corte de Agua</b><p>Mañana 8 a 12hs. Barrio Obrero por mantenimiento</p></div>
 </div>
 
 <div id="pantalla-ranking" class="hidden">
@@ -170,11 +170,19 @@
     <div class="ranking-item"><span>1. Barrio Unión</span><b>15.420 pts</b></div>
     <div class="ranking-item"><span>2. Barrio Obrero</span><b>12.100 pts</b></div>
     <div class="ranking-item"><span>3. Centro</span><b>9.800 pts</b></div>
+    <div class="ranking-item"><span>4. Villa Clelia</span><b>8.500 pts</b></div>
+    <div class="ranking-item"><span>5. Barrio San Martín</span><b>7.200 pts</b></div>
   </div>
   <div class="card"><h3>🏫 Escuelas</h3>
     <div class="ranking-item"><span>1. Secundaria N°1</span><b>8.200 pts</b></div>
     <div class="ranking-item"><span>2. Comercial</span><b>6.500 pts</b></div>
     <div class="ranking-item"><span>3. Técnica N°2</span><b>5.900 pts</b></div>
+    <div class="ranking-item"><span>4. EP N°14</span><b>4.300 pts</b></div>
+  </div>
+  <div class="card"><h3>👤 Vecinos Destacados</h3>
+    <div class="ranking-item"><span>1. María López</span><b>3.450 pts</b></div>
+    <div class="ranking-item"><span>2. Juan Pérez</span><b>3.200 pts</b></div>
+    <div class="ranking-item"><span>3. Ana García</span><b>2.980 pts</b></div>
   </div>
 </div>
 
@@ -206,7 +214,7 @@ function iniciarCarrusel(){
     dot.onclick = () => irCarrusel(i);
     dotsContainer.appendChild(dot);
   }
-  setInterval(() => {carruselIndex = (carruselIndex + 1) % items; irCarrusel(carruselIndex)}, 4500); /* 4.5 seg */
+  setInterval(() => {carruselIndex = (carruselIndex + 1) % items; irCarrusel(carruselIndex)}, 4500);
 }
 function irCarrusel(i){
   carruselIndex = i;
