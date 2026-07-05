@@ -210,20 +210,18 @@ function cargarReportes(){
 
 function aprobarMision(id){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
-  let r = reportes.find(x=>x.id==id);
-  r.estado = "Aprobado";
+  reportes = reportes.filter(x=>x.id!=id); // ELIMINARLO PARA QUE NO VUELVA
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
-  alert(`✅ Misión aprobada! ${r.puntos} pts confirmados para ${r.usuario}`);
+  alert(`✅ Misión aprobada y eliminada de la lista`);
   cargarDatos();
 }
 
 function rechazarMision(id){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
   let r = reportes.find(x=>x.id==id);
-  r.estado = "Rechazado";
   let usuario = JSON.parse(localStorage.getItem('usuario3A'));
-  usuario.puntos -= r.puntos;
-  localStorage.setItem('usuario3A', JSON.stringify(usuario));
+  if(usuario && usuario.id == r.usuarioId){usuario.puntos -= r.puntos;localStorage.setItem('usuario3A', JSON.stringify(usuario));}
+  reportes = reportes.filter(x=>x.id!=id); // TAMBIEN ELIMINARLO
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
   alert("❌ Misión rechazada y puntos quitados");
   cargarDatos();
@@ -247,11 +245,9 @@ function cargarCanjes(){
 
 function marcarEntregado(id){
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
-  let c = canjes.find(x=>x.id==id);
-  c.estado = "Entregado";
-  localStorage.setItem('canjes3A', JSON.stringify(canjes));
+  let c = canjes.find(x=>x.id==id);c.estado = "Entregado";
+  localStorage.setItem('canjes3A', JSON.stringify(canjes));cargarDatos();
   alert("✅ Canje marcado como entregado");
-  cargarDatos();
 }
 
 function cargarRanking(){
