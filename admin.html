@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3A ADMIN - Panel Municipal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+  body{background:#f0f4f8;color:#222}
+  .header{background:linear-gradient(135deg,var(--azul),var(--rojo));color:white;padding:20px;text-align:center}
+  .header h1{font-size:1.6em;font-weight:800}
+  .login-box{max-width:400px;margin:50px auto;background:white;padding:30px;border-radius:18px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+  .input-form{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins';font-size:1em}
+  .btn{background:var(--verde);color:white;border:none;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer;width:100%;font-size:1em}
+  .btn:hover{opacity:.9}
+  .btn-rojo{background:var(--rojo)}.btn-azul{background:var(--azul)}
+  .hidden{display:none}
+  .container{max-width:1200px;margin:20px auto;padding:0 15px}
+  .tabs{display:flex;gap:10px;margin-bottom:20px}
+  .tab-btn{flex:1;padding:15px;background:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .tab-btn.active{background:var(--azul);color:white}
+  .card{background:white;margin-bottom:15px;border-radius:16px;padding:20px;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+  .reporte-pendiente{border-left:5px solid var(--naranja)}
+  .reporte-foto{width:100%;max-width:400px;border-radius:10px;margin:10px 0}
+  .datos{margin:10px 0;font-size:.9em}
+  .datos b{color:var(--azul)}
+  .acciones{display:flex;gap:10px;margin-top:15px}
+  .tabla{width:100%;border-collapse:collapse;font-size:.9em}
+  .tabla th{background:var(--azul);color:white;padding:10px;text-align:left}
+  .tabla td{padding:10px;border-bottom:1px solid #eee}
+  .badge{padding:5px 10px;border-radius:15px;font-size:.8em;font-weight:700}
+  .badge.pendiente{background:#fff3cd;color:#856404}
+  .badge.aprobado{background:#d4edda;color:#155724}
+  .badge.canjeado{background:#cce5ff;color:#004085}
+  .stat-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:20px}
+  .stat{background:white;padding:20px;border-radius:16px;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+  .stat h3{font-size:2em;color:var(--verde);font-weight:800}
+  .stat p{color:#666;font-size:.9em}
+</style>
+</head>
+<body>
+
+<!-- PANTALLA LOGIN -->
+<div id="login" class="login-box">
+  <h2 style="text-align:center;color:var(--azul);margin-bottom:20px">🔐 Panel 3A ADMIN</h2>
+  <input type="password" id="pass" class="input-form" placeholder="Contraseña">
+  <button class="btn" onclick="entrar()">Entrar</button>
+  <p style="font-size:.8em;color:#666;margin-top:10px;text-align:center">Clave por defecto: 3asomos2025</p>
+</div>
+
+<!-- PANEL PRINCIPAL -->
+<div id="panel" class="hidden">
+  <header class="header">
+    <h1>3A SOMOS TODOS - PANEL ADMIN</h1>
+    <p>Municipalidad de Tres Arroyos</p>
+  </header>
+
+  <div class="container">
+    <div class="stat-box">
+      <div class="stat"><h3 id="statPendientes">0</h3><p>Misiones Pendientes</p></div>
+      <div class="stat"><h3 id="statCanjes">0</h3><p>Canjes Solicitados</p></div>
+      <div class="stat"><h3 id="statVecinos">0</h3><p>Vecinos Activos</p></div>
+      <div class="stat"><h3 id="statPuntos">0</h3><p>Puntos Entregados</p></div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="mostrarTab('misiones')">📋 Validar Misiones</button>
+      <button class="tab-btn" onclick="mostrarTab('canjes')">🎁 Canjes</button>
+      <button class="tab-btn" onclick="mostrarTab('ranking')">🏆 Ranking</button>
+    </div>
+
+    <!-- TAB MISIONES -->
+    <div id="tab-misiones">
+      <h2 style="color:var(--azul);margin-bottom:15px">Misiones Pendientes de Validación</h2>
+      <div id="listaReportes"></div>
+    </div>
+
+    <!-- TAB CANJES -->
+    <div id="tab-canjes" class="hidden">
+      <h2 style="color:var(--azul);margin-bottom:15px">Solicitudes de Canje</h2>
+      <table class="tabla">
+        <thead><tr><th>Fecha</th><th>Vecino</th><th>Beneficio</th><th>Estado</th><th>Acción</th></tr></thead>
+        <tbody id="listaCanjes"></tbody>
+      </table>
+    </div>
+
+    <!-- TAB RANKING -->
+    <div id="tab-ranking" class="hidden">
+      <h2 style="color:var(--azul);margin-bottom:15px">Ranking de Vecinos</h2>
+      <table class="tabla">
+        <thead><tr><th>Puesto</th><th>Nombre</th><th>Barrio</th><th>Puntos</th><th>Nivel</th></tr></thead>
+        <tbody id="listaRanking"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+const CLAVE = "3asomos2025";
+
+function entrar(){
+  if(document.getElementById('pass').value === CLAVE){
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('panel').classList.remove('hidden');
+    cargarDatos();
+  }else{alert("Contraseña incorrecta")}
+}
+
+function cargarDatos(){
+  actualizarStats();
+  cargarReportes();
+  cargarCanjes();
+  cargarRanking();
+}
+
+function actualizarStats(){
+  let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
+  let usuario = JSON.parse(localStorage.getItem('usuario3A'));
+  
+  document.getElementById('statPendientes').innerText = reportes.filter(r=>r.estado=="Pendiente").length;
+  document.getElementById('statCanjes').innerText = canjes.filter(c=>c.estado=="Pendiente").length;
+  document.getElementById('statVecinos').innerText = usuario ? 1 : 0; // En real serian varios usuarios
+  document.getElementById('statPuntos').innerText = usuario ? usuario.puntos.toLocaleString() : 0;
+}
+
+function cargarReportes(){
+  let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  let baseFotos = JSON.parse(localStorage.getItem('baseFotos3A')) || [];
+  let html = "";
+  
+  if(reportes.length == 0) html = "<div class='card'>No hay misiones pendientes</div>";
+  
+  reportes.filter(r=>r.estado=="Pendiente").forEach(r=>{
+    let foto = baseFotos.find(f=>f.usuario==r.usuario && f.mision==r.mision);
+    html += `<div class="card reporte-pendiente">
+      <h3>${r.mision}</h3>
+      <div class="datos"><b>Vecino:</b> ${r.usuario} - <b>Barrio:</b> ${r.barrio}</div>
+      <div class="datos"><b>Dirección:</b> ${r.direccion}</div>
+      <div class="datos"><b>Descripción:</b> ${r.descripcion}</div>
+      <div class="datos"><b>Puntos:</b> ${r.puntos} pts</div>
+      <div class="acciones">
+        <button class="btn" onclick="aprobarMision(${r.id})">✅ Aprobar</button>
+        <button class="btn btn-rojo" onclick="rechazarMision(${r.id})">❌ Rechazar</button>
+      </div>
+    </div>`
+  });
+  document.getElementById('listaReportes').innerHTML = html;
+}
+
+function aprobarMision(id){
+  let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  let r = reportes.find(x=>x.id==id);
+  r.estado = "Aprobado";
+  localStorage.setItem('reportes3A', JSON.stringify(reportes));
+  alert(`Misión aprobada! ${r.puntos} pts confirmados para ${r.usuario}`);
+  cargarDatos();
+}
+
+function rechazarMision(id){
+  let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  let r = reportes.find(x=>x.id==id);
+  r.estado = "Rechazado";
+  // Restar puntos si ya se habian sumado
+  let usuario = JSON.parse(localStorage.getItem('usuario3A'));
+  usuario.puntos -= r.puntos;
+  localStorage.setItem('usuario3A', JSON.stringify(usuario));
+  localStorage.setItem('reportes3A', JSON.stringify(reportes));
+  alert("Misión rechazada y puntos quitados");
+  cargarDatos();
+}
+
+function cargarCanjes(){
+  let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
+  let html = "";
+  if(canjes.length == 0) html = "<tr><td colspan='5'>No hay canjes solicitados</td></tr>";
+  canjes.forEach(c=>{
+    html += `<tr>
+      <td>${new Date(c.fecha).toLocaleDateString()}</td>
+      <td>${c.nombre}<br><small>DNI: ${c.dni} - ${c.barrio}</small></td>
+      <td>${c.beneficio}</td>
+      <td><span class="badge ${c.estado.toLowerCase()}">${c.estado}</span></td>
+      <td><button class="btn btn-azul" onclick="marcarEntregado(${c.id})">Marcar Entregado</button></td>
+    </tr>`
+  });
+  document.getElementById('listaCanjes').innerHTML = html;
+}
+
+function marcarEntregado(id){
+  let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
+  let c = canjes.find(x=>x.id==id);
+  c.estado = "Entregado";
+  localStorage.setItem('canjes3A', JSON.stringify(canjes));
+  alert("Canje marcado como entregado");
+  cargarDatos();
+}
+
+function cargarRanking(){
+  let usuario = JSON.parse(localStorage.getItem('usuario3A'));
+  let html = "";
+  if(usuario){
+    html = `<tr><td>1</td><td>${usuario.nombre}</td><td>${usuario.barrio}</td><td>${usuario.puntos.toLocaleString()}</td><td>${usuario.nivel}</td></tr>`
+  }
+  document.getElementById('listaRanking').innerHTML = html;
+}
+
+function mostrarTab(tab){
+  document.querySelectorAll('[id^="tab-"]').forEach(t=>t.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.remove('hidden');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
