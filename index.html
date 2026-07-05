@@ -3,15 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MI BARRIO 3A</title>
+<title>3A SOMOS TODOS</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700}
+  :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700;--violeta:#8e44ad}
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
   body{background:#f0f4f8;color:#222;padding-bottom:90px}
 .hidden{display:none}
 .header{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;padding:18px;text-align:center;position:sticky;top:0;z-index:10}
-.header h1{font-size:1.5em;font-weight:800}
+.header h1{font-size:1.4em;font-weight:800}
+.header p{font-size:.8em;opacity:.9}
+
+/* CARRUSEL */
+.eslogan-box{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;text-align:center;padding:20px 15px}
+.eslogan-box h2{font-size:1.5em;font-weight:800;margin-bottom:5px}
+.carrusel{position:relative;overflow:hidden;border-radius:0 0 20px 20px;margin-bottom:15px}
+.carrusel-track{display:flex;transition:transform.5s ease}
+.carrusel-item{min-width:100%;position:relative}
+.carrusel-item img{width:100%;height:220px;object-fit:cover;display:block}
+.carrusel-text{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));color:white;padding:15px;font-weight:700;font-size:.95em}
+.carrusel-dots{display:flex;justify-content:center;gap:8px;padding:10px;background:var(--azul)}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer}
+.dot.active{background:white}
+
 .card{background:white;margin:15px;border-radius:18px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.08)}
 .puntos{display:flex;justify-content:space-between;align-items:center}
 .puntos h2{color:var(--azul);font-size:2.2em}
@@ -20,13 +34,15 @@
 .progreso{height:100%;width:0;background:linear-gradient(90deg,var(--azul),var(--verde));border-radius:10px;transition:.8s}
 .titulo{padding:0 20px;margin:25px 0 12px;font-size:1.3em;font-weight:700;color:var(--azul)}
 .mision{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:white;border-left:6px solid;box-shadow:0 3px 10px rgba(0,0,0,.06)}
-.mision.verde{border-color:var(--verde)}.mision.naranja{border-color:var(--naranja)}.mision.rojo{border-color:var(--rojo)}
+.mision.verde{border-color:var(--verde)}.mision.naranja{border-color:var(--naranja)}.mision.rojo{border-color:var(--rojo)}.mision.violeta{border-color:var(--violeta)}
 .beneficio{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:linear-gradient(135deg,#fff,#e8f5e9);border:2px solid var(--verde)}
 .icon{font-size:2.5em}.info{flex:1}.info h3,h4{color:var(--azul);margin-bottom:4px}
 .info p{font-size:.85em;color:#555}.pts{font-weight:800;font-size:1.1em}
-.pts.verde{color:var(--verde)}.pts.naranja{color:var(--naranja)}.pts.rojo{color:var(--rojo)}
+.pts.verde{color:var(--verde)}.pts.naranja{color:var(--naranja)}.pts.rojo{color:var(--rojo)}.pts.violeta{color:var(--violeta)}
 .btn{background:var(--verde);color:white;border:none;padding:10px 18px;border-radius:25px;font-weight:700;cursor:pointer}
-.btn:disabled{background:#ccc}.btn-azul{background:var(--azul)}
+.btn:disabled{background:#ccc}.btn-azul{background:var(--azul)}.btn-rojo{background:var(--rojo)}
+.input-form{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins'}
+textarea.input-form{min-height:80px;resize:vertical}
 .mapa{height:250px;background:#dbeafe;border-radius:15px;margin:15px;display:flex;align-items:center;justify-content:center;font-size:3em;text-align:center}
 .alerta-card{background:#fff3cd;border-left:5px solid var(--naranja);padding:12px;margin:12px 15px;border-radius:10px}
 .ranking-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee}
@@ -42,7 +58,22 @@
 
 <!-- PANTALLA INICIO -->
 <div id="pantalla-inicio">
-  <header class="header"><h1>MI BARRIO 3A</h1><p>El que cuida, gana</p></header>
+  <header class="header"><h1>3A SOMOS TODOS</h1><p>El que cuida, gana. El que ayuda, suma</p></header>
+
+  <div class="eslogan-box">
+    <h2>Transformemos 3A entre todos</h2>
+    <p>Tu acción vale puntos. Tus puntos valen beneficios.</p>
+  </div>
+  <div class="carrusel">
+    <div class="carrusel-track" id="carruselTrack">
+      <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=800"><div class="carrusel-text">🧹 Limpiando la plaza del barrio</div></div>
+      <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800"><div class="carrusel-text">👴 Ayudando a un vecino</div></div>
+      <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800"><div class="carrusel-text">🚧 Tapando baches entre todos</div></div>
+      <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1462143338525-5a35afba7e13?w=800"><div class="carrusel-text">🌱 Armando huerta comunitaria</div></div>
+    </div>
+    <div class="carrusel-dots" id="carruselDots"></div>
+  </div>
+
   <div class="card">
     <div class="puntos">
       <div><h2 id="puntosTotales">0</h2><span id="userInfo">Cargando...</span></div>
@@ -56,54 +87,34 @@
   <h2 class="titulo">🎁 Beneficios Municipales</h2><div id="listaBeneficios"></div>
 </div>
 
-<!-- PANTALLA MAPA -->
-<div id="pantalla-mapa" class="hidden">
-  <header class="header"><h1>Mapa de Calor 3A</h1></header>
-  <div class="mapa">🗺️<br><span style="font-size:.4em">Puntos rojos: Problemas<br>Puntos verdes: Solucionado</span></div>
+<!-- PANTALLA REPORTE NUEVA -->
+<div id="pantalla-reporte" class="hidden">
+  <header class="header"><h1>Reportar Misión</h1></header>
   <div class="card">
-    <h3>Últimos Reportes</h3>
-    <p>🔴 Bache - Av. Moreno 1200 - hace 2hs</p>
-    <p>🟡 Basura - Plaza San Martín - hace 5hs</p>
-    <p>🟢 Plaza Limpia - Parque Cabañas - hace 1hs</p>
-  </div>
-</div>
+    <h3 id="tituloReporte">Misión</h3>
+    <p style="font-size:.85em;color:#666;margin-bottom:10px" id="descReporte"></p>
 
-<!-- PANTALLA ALERTAS -->
-<div id="pantalla-alertas" class="hidden">
-  <header class="header"><h1>Alertas Vecinales</h1></header>
-  <div class="alerta-card"><b>🚨 Corte de Luz</b><p>Tu cuadra: Barrio Unión. EDEA trabajando.</p></div>
-  <div class="alerta-card"><b>🚑 Accidente</b><p>Av. Moreno y Colón. Evitar zona.</p></div>
-  <div class="alerta-card"><b>♻️ Reciclado</b><p>Hoy pasa el camión por tu barrio a las 15hs</p></div>
-</div>
+    <label style="font-weight:700;font-size:.9em">1. Dirección donde lo hiciste</label>
+    <input type="text" id="inputDireccion" class="input-form" placeholder="Ej: Av. Moreno 1200">
 
-<!-- PANTALLA RANKING -->
-<div id="pantalla-ranking" class="hidden">
-  <header class="header"><h1>Ranking 3A</h1></header>
-  <div class="card"><h3>🏆 Barrios</h3>
-    <div class="ranking-item"><span>1. Barrio Unión</span><b>15.420 pts</b></div>
-    <div class="ranking-item"><span>2. Barrio Obrero</span><b>12.100 pts</b></div>
-    <div class="ranking-item"><span>3. Centro</span><b>9.800 pts</b></div>
-  </div>
-  <div class="card"><h3>🏫 Escuelas</h3>
-    <div class="ranking-item"><span>1. Secundaria N°1</span><b>8.200 pts</b></div>
-    <div class="ranking-item"><span>2. Comercial</span><b>6.500 pts</b></div>
-  </div>
-</div>
+    <label style="font-weight:700;font-size:.9em">2. Describí lo que hiciste</label>
+    <textarea id="inputDescripcion" class="input-form" placeholder="Contanos qué hiciste, cuánto tiempo, etc."></textarea>
 
-<!-- PANTALLA FOTO -->
-<div id="pantalla-foto" class="hidden">
-  <header class="header"><h1>Subir Evidencia</h1></header>
-  <div class="card">
-    <h3 id="tituloMisionFoto">Misión</h3>
-    <input type="file" id="inputFoto" accept="image/*" capture="environment" onchange="previsualizarFoto(event)">
+    <label style="font-weight:700;font-size:.9em">3. Adjuntá una foto como evidencia</label>
+    <input type="file" id="inputFoto" class="input-form" accept="image/*" capture="environment" onchange="previsualizarFoto(event)">
     <img id="previewImg" class="hidden">
     <div id="alertaFraude" class="alerta-fraude hidden">⚠️ Anti-fraude: Esta foto ya fue usada</div>
-    <button class="btn" style="width:100%;margin-top:10px" onclick="enviarFoto()">Enviar a Validación</button>
-    <button class="btn btn-azul" style="width:100%;margin-top:10px" onclick="mostrarPantalla('inicio')">Cancelar</button>
+
+    <button class="btn" style="width:100%;margin-top:15px" onclick="enviarReporte()">Enviar para Validar</button>
+    <button class="btn btn-rojo" style="width:100%;margin-top:10px" onclick="mostrarPantalla('inicio')">Cancelar</button>
   </div>
 </div>
 
-<!-- MENU -->
+<!-- EL RESTO DE PANTALLAS -->
+<div id="pantalla-mapa" class="hidden">...</div>
+<div id="pantalla-alertas" class="hidden">...</div>
+<div id="pantalla-ranking" class="hidden">...</div>
+
 <nav class="menu-bottom">
   <div class="menu-item active" onclick="mostrarPantalla('inicio')"><span>🏠</span>Inicio</div>
   <div class="menu-item" onclick="mostrarPantalla('mapa')"><span>🗺️</span>Mapa</div>
@@ -114,11 +125,36 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// ===== CARRUSEL =====
+let carruselIndex = 0;
+function iniciarCarrusel(){
+  const track = document.getElementById('carruselTrack');
+  const items = track.children.length;
+  const dotsContainer = document.getElementById('carruselDots');
+  dotsContainer.innerHTML = '';
+  for(let i=0; i<items; i++){
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i==0?' active':'');
+    dot.onclick = () => irCarrusel(i);
+    dotsContainer.appendChild(dot);
+  }
+  setInterval(() => {
+    carruselIndex = (carruselIndex + 1) % items;
+    irCarrusel(carruselIndex);
+  }, 4000);
+}
+function irCarrusel(i){
+  carruselIndex = i;
+  document.getElementById('carruselTrack').style.transform = `translateX(-${i*100}%)`;
+  document.querySelectorAll('.dot').forEach((d,idx)=>d.classList.toggle('active', idx==i));
+}
+
 // ===== DATOS =====
 let usuario = JSON.parse(localStorage.getItem('usuario3A')) || {
   nombre: "Juan Pérez", barrio: "Barrio Unión", puntos: 1250, nivel: "BRONCE", id: "user_001", insignias: []
 };
 let baseFotos = JSON.parse(localStorage.getItem('baseFotos3A')) || [];
+let reportesPendientes = JSON.parse(localStorage.getItem('reportes3A')) || [];
 
 const NIVELES = [
   {nombre:"BRONCE", min:0, max:1000}, {nombre:"PLATA", min:1000, max:2000},
@@ -126,24 +162,36 @@ const NIVELES = [
 ];
 
 const MISIONES = [
-  {id:1, cat:"verde", icon:"🧹", titulo:"Vereda Limpia", desc:"Foto de tu cuadra", pts:50},
+  {id:1, cat:"verde", icon:"🧹", titulo:"Vereda Limpia", desc:"Foto de tu cuadra limpia", pts:50},
   {id:2, cat:"verde", icon:"♻️", titulo:"Punto Verde", desc:"Entregar 5kg reciclables", pts:80},
   {id:3, cat:"naranja", icon:"🚨", titulo:"Reportar Problema", desc:"Bache, luz, basura", pts:100},
-  {id:4, cat:"naranja", icon:"🏞️", titulo:"Limpiar Plaza", desc:"Foto limpiando plaza", pts:300},
-  {id:5, cat:"rojo", icon:"🛡️", titulo:"Denuncia Violencia", desc:"Alerta anónima", pts:500},
-  {id:6, cat:"rojo", icon:"🚑", titulo:"Denuncia Accidente", desc:"Persona accidentada", pts:500}
+  {id:4, cat:"naranja", icon:"👴", titulo:"Ayudar a un Abuelo", desc:"Cortar pasto / Hacer compras", pts:150},
+  {id:5, cat:"naranja", icon:"🔧", titulo:"Arreglo Vecinal", desc:"Canilla, luz, puerta", pts:200},
+  {id:6, cat:"rojo", icon:"🏞️", titulo:"Limpiar Plaza", desc:"Foto limpiando plaza", pts:300},
+  {id:7, cat:"rojo", icon:"🚧", titulo:"Tapar Bache", desc:"Con material o tierra", pts:300},
+  {id:8, cat:"rojo", icon:"🎨", titulo:"Pintar Espacio", desc:"Juegos, pared, cordón", pts:250},
+  {id:9, cat:"rojo", icon:"🛡️", titulo:"Denuncia Violencia", desc:"Alerta anónima", pts:500},
+  {id:10, cat:"rojo", icon:"🚑", titulo:"Emergencia Vecinal", desc:"Accidente / Ayuda urgente", pts:500},
+  {id:11, cat:"violeta", icon:"🌱", titulo:"Huerta Comunitaria", desc:"Armar/regar huerta", pts:400},
+  {id:12, cat:"violeta", icon:"🛠️", titulo:"Arreglar Juegos", desc:"Plaza en condiciones", pts:500}
 ];
 
 const BENEFICIOS = [
   {id:1, img:"🏊", titulo:"Mes Gratis Poli", costo:800},
   {id:2, img:"📦", titulo:"Bolsón Mercadería", costo:1500},
-  {id:3, img:"🎒", titulo:"Kit Escolar", costo:2000}
+  {id:3, img:"🎒", titulo:"Kit Escolar", costo:2000},
+  {id:4, img:"🧱", titulo:"Bolsa de Cemento", costo:3000},
+  {id:5, img:"🔨", titulo:"Kit Herramientas", costo:2500},
+  {id:6, img:"🏠", titulo:"2 Chapas", costo:5000}
 ];
 
 let misionActual = null; let fotoActualHash = null;
 
-// ===== FUNCIONES =====
-function guardar(){localStorage.setItem('usuario3A', JSON.stringify(usuario)); localStorage.setItem('baseFotos3A', JSON.stringify(baseFotos))}
+function guardar(){
+  localStorage.setItem('usuario3A', JSON.stringify(usuario));
+  localStorage.setItem('baseFotos3A', JSON.stringify(baseFotos));
+  localStorage.setItem('reportes3A', JSON.stringify(reportesPendientes));
+}
 function toast(msg){const t=document.getElementById('toast');t.innerText=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
 
 async function generarHashImagen(file){return btoa(file.name + file.size + file.lastModified)}
@@ -172,7 +220,7 @@ function actualizarUI(){
   document.getElementById('listaMisiones').innerHTML = MISIONES.map(m => `
     <div class="mision ${m.cat}">
       <div class="icon">${m.icon}</div><div class="info"><h3>${m.titulo}</h3><p>${m.desc}</p></div>
-      <div><p class="pts ${m.cat}">+${m.pts}</p><button class="btn" onclick="abrirCamara(${m.id})">Hacer</button></div>
+      <div><p class="pts ${m.cat}">+${m.pts}</p><button class="btn" onclick="abrirReporte(${m.id})">Hacer</button></div>
     </div>`).join('');
 
   document.getElementById('listaBeneficios').innerHTML = BENEFICIOS.map(b => `
@@ -182,28 +230,62 @@ function actualizarUI(){
     </div>`).join('');
 }
 
-function abrirCamara(idMision){misionActual = MISIONES.find(m=>m.id==idMision); document.getElementById('tituloMisionFoto').innerText = misionActual.titulo; document.getElementById('inputFoto').value = ""; document.getElementById('previewImg').classList.add('hidden'); document.getElementById('alertaFraude').classList.add('hidden'); mostrarPantalla('foto')}
+// NUEVA FUNCION: ABRIR FORMULARIO
+function abrirReporte(idMision){
+  misionActual = MISIONES.find(m=>m.id==idMision);
+  document.getElementById('tituloReporte').innerText = misionActual.titulo;
+  document.getElementById('descReporte').innerText = misionActual.desc;
+  document.getElementById('inputDireccion').value = "";
+  document.getElementById('inputDescripcion').value = "";
+  document.getElementById('inputFoto').value = "";
+  document.getElementById('previewImg').classList.add('hidden');
+  document.getElementById('alertaFraude').classList.add('hidden');
+  mostrarPantalla('reporte');
+}
 
-function enviarFoto(){
-  if(!fotoActualHash){toast("Subí una foto"); return;}
+// NUEVA FUNCION: ENVIAR REPORTE
+function enviarReporte(){
+  const direccion = document.getElementById('inputDireccion').value;
+  const descripcion = document.getElementById('inputDescripcion').value;
+
+  if(!direccion ||!descripcion){toast("Completá dirección y descripción"); return;}
+  if(!fotoActualHash){toast("Adjuntá una foto"); return;}
   if(baseFotos.find(f => f.hash === fotoActualHash)){toast("❌ Fraude detectado"); return;}
+
   baseFotos.push({hash: fotoActualHash, usuario: usuario.nombre, mision: misionActual.titulo, fecha: new Date().toISOString()});
+
+  reportesPendientes.push({
+    id: Date.now(),
+    usuario: usuario.nombre,
+    barrio: usuario.barrio,
+    mision: misionActual.titulo,
+    direccion: direccion,
+    descripcion: descripcion,
+    puntos: misionActual.pts,
+    estado: "Pendiente",
+    fecha: new Date().toISOString()
+  });
+
   usuario.puntos += misionActual.pts;
   if(misionActual.pts==300 &&!usuario.insignias.includes("Guardián de Plazas")) usuario.insignias.push("🏞️ Guardián de Plazas");
   if(misionActual.pts==500 &&!usuario.insignias.includes("Héroe 3A")) usuario.insignias.push("🦸 Héroe 3A");
-  guardar(); actualizarUI(); mostrarPantalla('inicio'); toast(`✅ +${misionActual.pts} pts. En validación 24hs`);
+  if(misionActual.pts==400 &&!usuario.insignias.includes("Manos a la Obra")) usuario.insignias.push("🛠️ Manos a la Obra");
+
+  guardar(); actualizarUI(); mostrarPantalla('inicio');
+  toast(`✅ Reporte enviado! +${misionActual.pts} pts en validación`);
 }
 
 function canjear(id){let benef = BENEFICIOS.find(b=>b.id==id); if(usuario.puntos >= benef.costo){usuario.puntos -= benef.costo; guardar(); actualizarUI(); toast(`¡Canje exitoso! Retirá en Acción Social`)}}
 
 function mostrarPantalla(pant){
-  ['inicio','mapa','alertas','ranking','foto'].forEach(p=>document.getElementById('pantalla-'+p).classList.add('hidden'));
+  ['inicio','mapa','alertas','ranking','reporte'].forEach(p=>document.getElementById('pantalla-'+p).classList.add('hidden'));
   document.querySelectorAll('.menu-item').forEach(i=>i.classList.remove('active'));
   document.getElementById('pantalla-'+pant).classList.remove('hidden');
-  if(pant!='foto'){let idx = ['inicio','mapa','alertas','ranking'].indexOf(pant); if(idx>=0) document.querySelectorAll('.menu-item')[idx].classList.add('active')}
+  if(pant!='reporte'){let idx = ['inicio','mapa','alertas','ranking'].indexOf(pant); if(idx>=0) document.querySelectorAll('.menu-item')[idx].classList.add('active')}
 }
 
 actualizarUI();
+iniciarCarrusel();
 </script>
 </body>
 </html>
