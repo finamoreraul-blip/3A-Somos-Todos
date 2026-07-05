@@ -9,35 +9,40 @@
   :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700}
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
   body{background:#f0f4f8;color:#222}
-  .header{background:linear-gradient(135deg,var(--azul),var(--rojo));color:white;padding:20px;text-align:center}
+  .header{background:linear-gradient(135deg,var(--azul),var(--rojo));color:white;padding:20px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.2)}
   .header h1{font-size:1.6em;font-weight:800}
+  .header p{font-size:.9em;opacity:.9}
+  .tiempo-sesion{background:rgba(0,0,0,.25);padding:8px 15px;border-radius:20px;font-size:.85em;margin-top:10px;display:inline-block;font-weight:600}
   .login-box{max-width:400px;margin:50px auto;background:white;padding:30px;border-radius:18px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
   .input-form{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins';font-size:1em}
-  .btn{background:var(--verde);color:white;border:none;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer;width:100%;font-size:1em}
-  .btn:hover{opacity:.9}
+  .btn{background:var(--verde);color:white;border:none;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer;width:100%;font-size:1em;transition:.2s}
+  .btn:hover{opacity:.9;transform:scale(.98)}
   .btn-rojo{background:var(--rojo)}.btn-azul{background:var(--azul)}
   .hidden{display:none}
   .container{max-width:1200px;margin:20px auto;padding:0 15px}
   .tabs{display:flex;gap:10px;margin-bottom:20px}
-  .tab-btn{flex:1;padding:15px;background:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .tab-btn{flex:1;padding:15px;background:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:.2s}
   .tab-btn.active{background:var(--azul);color:white}
-  .card{background:white;margin-bottom:15px;border-radius:16px;padding:20px;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+  .card{background:white;margin-bottom:15px;border-radius:16px;padding:20px;box-shadow:0 3px 12px rgba(0,0,0,.08);animation:fadeIn .3s}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
   .reporte-pendiente{border-left:5px solid var(--naranja)}
-  .reporte-foto{width:100%;max-width:400px;border-radius:10px;margin:10px 0}
   .datos{margin:10px 0;font-size:.9em}
   .datos b{color:var(--azul)}
   .acciones{display:flex;gap:10px;margin-top:15px}
-  .tabla{width:100%;border-collapse:collapse;font-size:.9em}
-  .tabla th{background:var(--azul);color:white;padding:10px;text-align:left}
-  .tabla td{padding:10px;border-bottom:1px solid #eee}
-  .badge{padding:5px 10px;border-radius:15px;font-size:.8em;font-weight:700}
+  .tabla{width:100%;border-collapse:collapse;font-size:.9em;background:white;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+  .tabla th{background:var(--azul);color:white;padding:12px;text-align:left;font-weight:700}
+  .tabla td{padding:12px;border-bottom:1px solid #eee}
+  .badge{padding:6px 12px;border-radius:15px;font-size:.8em;font-weight:700}
   .badge.pendiente{background:#fff3cd;color:#856404}
-  .badge.aprobado{background:#d4edda;color:#155724}
-  .badge.canjeado{background:#cce5ff;color:#004085}
+  .badge.entregado{background:#d4edda;color:#155724}
   .stat-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:20px}
   .stat{background:white;padding:20px;border-radius:16px;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.08)}
-  .stat h3{font-size:2em;color:var(--verde);font-weight:800}
-  .stat p{color:#666;font-size:.9em}
+  .stat h3{font-size:2.2em;color:var(--verde);font-weight:800}
+  .stat p{color:#666;font-size:.9em;margin-top:5px}
+  .live-dot{width:10px;height:10px;background:#00ff00;border-radius:50%;display:inline-block;margin-right:8px;animation:pulse 1.5s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.2)}}
+  .ultimo-acceso{font-size:.85em;color:#555;text-align:center;margin-top:12px;line-height:1.5}
+  .salir{position:absolute;top:15px;right:20px;background:rgba(255,255,255,.2);border:none;color:white;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:600}
 </style>
 </head>
 <body>
@@ -47,14 +52,17 @@
   <h2 style="text-align:center;color:var(--azul);margin-bottom:20px">🔐 Panel 3A ADMIN</h2>
   <input type="password" id="pass" class="input-form" placeholder="Contraseña">
   <button class="btn" onclick="entrar()">Entrar</button>
+  <div id="ultimoAcceso" class="ultimo-acceso"></div>
   <p style="font-size:.8em;color:#666;margin-top:10px;text-align:center">Clave por defecto: 3asomos2025</p>
 </div>
 
 <!-- PANEL PRINCIPAL -->
 <div id="panel" class="hidden">
   <header class="header">
-    <h1>3A SOMOS TODOS - PANEL ADMIN</h1>
+    <button class="salir" onclick="salir()">Salir</button>
+    <h1><span class="live-dot"></span>3A SOMOS TODOS - PANEL ADMIN</h1>
     <p>Municipalidad de Tres Arroyos</p>
+    <div class="tiempo-sesion">⏱️ Tiempo en sesión: <span id="contadorSesion">00:00:00</span></div>
   </header>
 
   <div class="container">
@@ -66,9 +74,9 @@
     </div>
 
     <div class="tabs">
-      <button class="tab-btn active" onclick="mostrarTab('misiones')">📋 Validar Misiones</button>
-      <button class="tab-btn" onclick="mostrarTab('canjes')">🎁 Canjes</button>
-      <button class="tab-btn" onclick="mostrarTab('ranking')">🏆 Ranking</button>
+      <button class="tab-btn active" onclick="mostrarTab('misiones', this)">📋 Validar Misiones</button>
+      <button class="tab-btn" onclick="mostrarTab('canjes', this)">🎁 Canjes</button>
+      <button class="tab-btn" onclick="mostrarTab('ranking', this)">🏆 Ranking</button>
     </div>
 
     <!-- TAB MISIONES -->
@@ -99,13 +107,63 @@
 
 <script>
 const CLAVE = "3asomos2025";
+let intervaloActualizacion = null;
+let intervaloContador = null;
+let inicioSesion = null;
+
+// MOSTRAR ULTIMO ACCESO AL CARGAR
+window.onload = function(){
+  let ultimo = localStorage.getItem('ultimoAccesoAdmin');
+  let duracion = localStorage.getItem('duracionUltimaSesion');
+  if(ultimo && duracion){
+    let fecha = new Date(parseInt(ultimo));
+    document.getElementById('ultimoAcceso').innerHTML = 
+      `<b>Último tiempo de conexión:</b> ${duracion}<br><small>${fecha.toLocaleString('es-AR')}</small>`;
+  }
+}
 
 function entrar(){
   if(document.getElementById('pass').value === CLAVE){
     document.getElementById('login').classList.add('hidden');
     document.getElementById('panel').classList.remove('hidden');
+    
+    // Guardar inicio de sesion
+    inicioSesion = Date.now();
+    localStorage.setItem('ultimoAccesoAdmin', inicioSesion);
+    
     cargarDatos();
+    
+    // ACTUALIZAR CADA 5 SEGUNDOS EN TIEMPO REAL
+    intervaloActualizacion = setInterval(cargarDatos, 5000);
+    
+    // CONTADOR DE SESION CADA 1 SEGUNDO
+    intervaloContador = setInterval(actualizarContadorSesion, 1000);
+    
   }else{alert("Contraseña incorrecta")}
+}
+
+function actualizarContadorSesion(){
+  if(!inicioSesion) return;
+  let diff = Date.now() - inicioSesion;
+  let h = String(Math.floor(diff / 3600000)).padStart(2,'0');
+  let m = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+  let s = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+  document.getElementById('contadorSesion').innerText = `${h}:${m}:${s}`;
+}
+
+function salir(){
+  // Guardar duración de la sesión
+  if(inicioSesion){
+    let diff = Date.now() - inicioSesion;
+    let h = Math.floor(diff / 3600000);
+    let m = Math.floor((diff % 3600000) / 60000);
+    let s = Math.floor((diff % 60000) / 1000);
+    let duracion = `${h} horas, ${m} minutos, ${s} segundos`;
+    localStorage.setItem('duracionUltimaSesion', duracion);
+  }
+  clearInterval(intervaloActualizacion);
+  clearInterval(intervaloContador);
+  location.reload();
 }
 
 function cargarDatos(){
@@ -122,25 +180,25 @@ function actualizarStats(){
   
   document.getElementById('statPendientes').innerText = reportes.filter(r=>r.estado=="Pendiente").length;
   document.getElementById('statCanjes').innerText = canjes.filter(c=>c.estado=="Pendiente").length;
-  document.getElementById('statVecinos').innerText = usuario ? 1 : 0; // En real serian varios usuarios
+  document.getElementById('statVecinos').innerText = usuario ? 1 : 0;
   document.getElementById('statPuntos').innerText = usuario ? usuario.puntos.toLocaleString() : 0;
 }
 
 function cargarReportes(){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
-  let baseFotos = JSON.parse(localStorage.getItem('baseFotos3A')) || [];
   let html = "";
   
-  if(reportes.length == 0) html = "<div class='card'>No hay misiones pendientes</div>";
+  let pendientes = reportes.filter(r=>r.estado=="Pendiente");
+  if(pendientes.length == 0) 
+    html = "<div class='card'>✅ No hay misiones pendientes</div>";
   
-  reportes.filter(r=>r.estado=="Pendiente").forEach(r=>{
-    let foto = baseFotos.find(f=>f.usuario==r.usuario && f.mision==r.mision);
+  pendientes.forEach(r=>{
     html += `<div class="card reporte-pendiente">
       <h3>${r.mision}</h3>
       <div class="datos"><b>Vecino:</b> ${r.usuario} - <b>Barrio:</b> ${r.barrio}</div>
       <div class="datos"><b>Dirección:</b> ${r.direccion}</div>
       <div class="datos"><b>Descripción:</b> ${r.descripcion}</div>
-      <div class="datos"><b>Puntos:</b> ${r.puntos} pts</div>
+      <div class="datos"><b>Puntos:</b> ${r.puntos} pts - <b>Fecha:</b> ${new Date(r.fecha).toLocaleString('es-AR')}</div>
       <div class="acciones">
         <button class="btn" onclick="aprobarMision(${r.id})">✅ Aprobar</button>
         <button class="btn btn-rojo" onclick="rechazarMision(${r.id})">❌ Rechazar</button>
@@ -155,7 +213,7 @@ function aprobarMision(id){
   let r = reportes.find(x=>x.id==id);
   r.estado = "Aprobado";
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
-  alert(`Misión aprobada! ${r.puntos} pts confirmados para ${r.usuario}`);
+  alert(`✅ Misión aprobada! ${r.puntos} pts confirmados para ${r.usuario}`);
   cargarDatos();
 }
 
@@ -163,26 +221,25 @@ function rechazarMision(id){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
   let r = reportes.find(x=>x.id==id);
   r.estado = "Rechazado";
-  // Restar puntos si ya se habian sumado
   let usuario = JSON.parse(localStorage.getItem('usuario3A'));
   usuario.puntos -= r.puntos;
   localStorage.setItem('usuario3A', JSON.stringify(usuario));
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
-  alert("Misión rechazada y puntos quitados");
+  alert("❌ Misión rechazada y puntos quitados");
   cargarDatos();
 }
 
 function cargarCanjes(){
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
   let html = "";
-  if(canjes.length == 0) html = "<tr><td colspan='5'>No hay canjes solicitados</td></tr>";
+  if(canjes.length == 0) html = "<tr><td colspan='5' style='text-align:center;padding:20px'>No hay canjes solicitados</td></tr>";
   canjes.forEach(c=>{
     html += `<tr>
-      <td>${new Date(c.fecha).toLocaleDateString()}</td>
-      <td>${c.nombre}<br><small>DNI: ${c.dni} - ${c.barrio}</small></td>
+      <td>${new Date(c.fecha).toLocaleString('es-AR')}</td>
+      <td><b>${c.nombre}</b><br><small>DNI: ${c.dni} - ${c.barrio} - Tel: ${c.telefono}</small></td>
       <td>${c.beneficio}</td>
       <td><span class="badge ${c.estado.toLowerCase()}">${c.estado}</span></td>
-      <td><button class="btn btn-azul" onclick="marcarEntregado(${c.id})">Marcar Entregado</button></td>
+      <td>${c.estado=="Pendiente"? `<button class="btn btn-azul" onclick="marcarEntregado(${c.id})">Entregado</button>` : '-'}</td>
     </tr>`
   });
   document.getElementById('listaCanjes').innerHTML = html;
@@ -193,7 +250,7 @@ function marcarEntregado(id){
   let c = canjes.find(x=>x.id==id);
   c.estado = "Entregado";
   localStorage.setItem('canjes3A', JSON.stringify(canjes));
-  alert("Canje marcado como entregado");
+  alert("✅ Canje marcado como entregado");
   cargarDatos();
 }
 
@@ -202,15 +259,17 @@ function cargarRanking(){
   let html = "";
   if(usuario){
     html = `<tr><td>1</td><td>${usuario.nombre}</td><td>${usuario.barrio}</td><td>${usuario.puntos.toLocaleString()}</td><td>${usuario.nivel}</td></tr>`
+  }else{
+    html = `<tr><td colspan='5' style='text-align:center;padding:20px'>No hay vecinos registrados</td></tr>`
   }
   document.getElementById('listaRanking').innerHTML = html;
 }
 
-function mostrarTab(tab){
+function mostrarTab(tab, btn){
   document.querySelectorAll('[id^="tab-"]').forEach(t=>t.classList.add('hidden'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.remove('hidden');
-  event.target.classList.add('active');
+  btn.classList.add('active');
 }
 </script>
 </body>
