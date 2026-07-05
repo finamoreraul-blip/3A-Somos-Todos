@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,18 +14,18 @@
 .header h1{font-size:1.4em;font-weight:800}
 .header p{font-size:.8em;opacity:.9}
 
-/* CARRUSEL GRANDE */
-.eslogan-box{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;text-align:center;padding:24px 15px}
+/* CARRUSEL */
+.eslogan-box{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;text-align:center;padding:24px 15px 15px 15px}
 .eslogan-box h2{font-size:1.8em;font-weight:800;margin-bottom:8px}
-.eslogan-box p{font-size:1em;opacity:.95}
-.carrusel{position:relative;overflow:hidden;border-radius:0 0 20px 20px;margin-bottom:15px}
+.eslogan-box p{font-size:1em;opacity:.95;margin-bottom:0}
+.carrusel{position:relative;overflow:hidden;border-radius:20px;margin:0 15px 15px 15px;box-shadow:0 4px 15px rgba(0,0,0,.1)}
 .carrusel-track{display:flex;transition:transform.5s ease}
 .carrusel-item{min-width:100%;position:relative}
-.carrusel-item img{width:100%;height:240px;object-fit:cover;display:block}
-.carrusel-text{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.85));color:white;padding:20px 15px;font-weight:800;font-size:1.2em;line-height:1.3;text-shadow:0 2px 6px rgba(0,0,0,.6)}
-.carrusel-dots{display:flex;justify-content:center;gap:8px;padding:12px;background:var(--azul)}
-.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer}
-.dot.active{background:white;width:12px;height:12px}
+.carrusel-item img{width:100%;height:220px;object-fit:cover;display:block}
+.carrusel-text{position:absolute;bottom:10px;left:10px;right:10px;background:rgba(0,0,0,.7);color:white;padding:12px 15px;font-weight:800;font-size:1.1em;line-height:1.3;border-radius:12px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.carrusel-dots{display:flex;justify-content:center;gap:8px;padding:10px 0}
+.dot{width:10px;height:10px;border-radius:50%;background:rgba(0,86,179,.3);cursor:pointer}
+.dot.active{background:var(--azul);width:12px;height:12px}
 
 .card{background:white;margin:15px;border-radius:18px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.08)}
 .puntos{display:flex;justify-content:space-between;align-items:center}
@@ -38,11 +37,12 @@
 .mision{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:white;border-left:6px solid;box-shadow:0 3px 10px rgba(0,0,0,.06)}
 .mision.verde{border-color:var(--verde)}.mision.naranja{border-color:var(--naranja)}.mision.rojo{border-color:var(--rojo)}.mision.violeta{border-color:var(--violeta)}
 .beneficio{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:linear-gradient(135deg,#fff,#e8f5e9);border:2px solid var(--verde)}
+.grupo-whatsapp{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:linear-gradient(135deg,#e8f5e9,#d4f1d7);border:2px solid #25D366} /* VERDE WHATSAPP */
 .icon{font-size:2.5em}.info{flex:1}.info h3,h4{color:var(--azul);margin-bottom:4px}
 .info p{font-size:.85em;color:#555}.pts{font-weight:800;font-size:1.1em}
 .pts.verde{color:var(--verde)}.pts.naranja{color:var(--naranja)}.pts.rojo{color:var(--rojo)}.pts.violeta{color:var(--violeta)}
 .btn{background:var(--verde);color:white;border:none;padding:10px 18px;border-radius:25px;font-weight:700;cursor:pointer}
-.btn:disabled{background:#ccc}.btn-azul{background:var(--azul)}.btn-rojo{background:var(--rojo)}
+.btn:disabled{background:#ccc}.btn-azul{background:var(--azul)}.btn-rojo{background:var(--rojo)}.btn-verde{background:#25D366} /* BOTON WHATSAPP */
 .input-form{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins'}
 textarea.input-form{min-height:80px;resize:vertical}
 .mapa{height:250px;background:#dbeafe;border-radius:15px;margin:15px;display:flex;align-items:center;justify-content:center;font-size:3em;text-align:center}
@@ -54,6 +54,7 @@ textarea.input-form{min-height:80px;resize:vertical}
 .menu-item span{font-size:1.8em;display:block}.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#333;color:white;padding:12px 20px;border-radius:25px;z-index:99;opacity:0;transition:.3s}
 .toast.show{opacity:1} #previewImg{width:100%;border-radius:10px;margin-top:10px;max-height:200px;object-fit:cover}
 .alerta-fraude{background:#ffebee;border:1px solid var(--rojo);color:var(--rojo);padding:10px;border-radius:10px;margin-top:10px;font-size:.85em}
+.contador{font-weight:800;color:#25D366;font-size:.9em}
 </style>
 </head>
 <body>
@@ -85,11 +86,16 @@ textarea.input-form{min-height:80px;resize:vertical}
     <p style="font-size:.85em;margin-top:8px" id="siguienteNivel"></p>
     <div id="misInsignias" style="margin-top:10px"></div>
   </div>
+
   <h2 class="titulo">🎯 Misiones</h2><div id="listaMisiones"></div>
   <h2 class="titulo">🎁 Beneficios Municipales</h2><div id="listaBeneficios"></div>
+
+  <!-- NUEVO: GRUPOS WHATSAPP -->
+  <h2 class="titulo">💬 Grupos de WhatsApp del Barrio</h2>
+  <div id="listaGrupos"></div>
 </div>
 
-<!-- PANTALLA REPORTE NUEVA CON FOTO + DESCRIPCION -->
+<!-- PANTALLA REPORTE -->
 <div id="pantalla-reporte" class="hidden">
   <header class="header"><h1>Reportar Misión</h1></header>
   <div class="card">
@@ -112,12 +118,7 @@ textarea.input-form{min-height:80px;resize:vertical}
 <div id="pantalla-mapa" class="hidden">
   <header class="header"><h1>Mapa de Calor 3A</h1></header>
   <div class="mapa">🗺️<br><span style="font-size:.4em">Puntos rojos: Problemas<br>Puntos verdes: Solucionado<br>Puntos violeta: Ayuda</span></div>
-  <div class="card">
-    <h3>Últimos Reportes</h3>
-    <p>🔴 Bache - Av. Moreno 1200 - hace 2hs</p>
-    <p>🟣 Abuelo necesita pasto - Barrio Unión - hace 1h</p>
-    <p>🟢 Plaza Limpia - Parque Cabañas - hace 1hs</p>
-  </div>
+  <div class="card"><h3>Últimos Reportes</h3><p>🔴 Bache - Av. Moreno 1200</p><p>🟣 Abuelo necesita pasto - Barrio Unión</p><p>🟢 Plaza Limpia - Parque Cabañas</p></div>
 </div>
 
 <!-- PANTALLA ALERTAS -->
@@ -142,7 +143,6 @@ textarea.input-form{min-height:80px;resize:vertical}
   </div>
 </div>
 
-<!-- MENU -->
 <nav class="menu-bottom">
   <div class="menu-item active" onclick="mostrarPantalla('inicio')"><span>🏠</span>Inicio</div>
   <div class="menu-item" onclick="mostrarPantalla('mapa')"><span>🗺️</span>Mapa</div>
@@ -166,10 +166,7 @@ function iniciarCarrusel(){
     dot.onclick = () => irCarrusel(i);
     dotsContainer.appendChild(dot);
   }
-  setInterval(() => {
-    carruselIndex = (carruselIndex + 1) % items;
-    irCarrusel(carruselIndex);
-  }, 4000);
+  setInterval(() => {carruselIndex = (carruselIndex + 1) % items; irCarrusel(carruselIndex)}, 4000);
 }
 function irCarrusel(i){
   carruselIndex = i;
@@ -179,15 +176,13 @@ function irCarrusel(i){
 
 // ===== DATOS =====
 let usuario = JSON.parse(localStorage.getItem('usuario3A')) || {
-  nombre: "Juan Pérez", barrio: "Barrio Unión", puntos: 1250, nivel: "BRONCE", id: "user_001", insignias: []
+  nombre: "Juan Pérez", barrio: "Barrio Unión", puntos: 1250, nivel: "BRONCE", id: "user_001", insignias: [], gruposUnidos: []
 };
 let baseFotos = JSON.parse(localStorage.getItem('baseFotos3A')) || [];
 let reportesPendientes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+let contadoresGrupos = JSON.parse(localStorage.getItem('contadoresGrupos3A')) || {union: 240, obra: 85}; // CONTADOR REAL
 
-const NIVELES = [
-  {nombre:"BRONCE", min:0, max:1000}, {nombre:"PLATA", min:1000, max:2000},
-  {nombre:"ORO", min:2000, max:5000}, {nombre:"DIAMANTE", min:5000, max:99999}
-];
+const NIVELES = [{nombre:"BRONCE", min:0, max:1000}, {nombre:"PLATA", min:1000, max:2000}, {nombre:"ORO", min:2000, max:5000}, {nombre:"DIAMANTE", min:5000, max:99999}];
 
 const MISIONES = [
   {id:1, cat:"verde", icon:"🧹", titulo:"Vereda Limpia", desc:"Foto de tu cuadra limpia", pts:50},
@@ -213,12 +208,18 @@ const BENEFICIOS = [
   {id:6, img:"🏠", titulo:"2 Chapas", costo:5000}
 ];
 
+const GRUPOS = [
+  {id:'union', icon:'📱', titulo:'Grupo Barrio Unión', desc:'Alertas, ayuda, compra/venta', link:'https://chat.whatsapp.com/TU-LINK-BARRIO-UNION'},
+  {id:'obra', icon:'🛠️', titulo:'Grupo Manos a la Obra 3A', desc:'Para coordinar misiones y obras', link:'https://chat.whatsapp.com/TU-LINK-MANOS-OBRA'}
+];
+
 let misionActual = null; let fotoActualHash = null;
 
 function guardar(){
   localStorage.setItem('usuario3A', JSON.stringify(usuario));
   localStorage.setItem('baseFotos3A', JSON.stringify(baseFotos));
   localStorage.setItem('reportes3A', JSON.stringify(reportesPendientes));
+  localStorage.setItem('contadoresGrupos3A', JSON.stringify(contadoresGrupos));
 }
 function toast(msg){const t=document.getElementById('toast');t.innerText=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
 
@@ -242,54 +243,65 @@ function actualizarUI(){
   let prox = NIVELES[NIVELES.indexOf(nivelActual)+1];
   document.getElementById('siguienteNivel').innerText = prox? `Faltan ${(prox.min - usuario.puntos).toLocaleString()} pts para ${prox.nombre}` : "¡Máximo nivel!";
 
-  document.getElementById('misInsignias').innerHTML = usuario.insignias.length?
-    '<b>Insignias:</b><br>' + usuario.insignias.map(i=>`<span class="insignia">${i}</span>`).join('') : '';
+  document.getElementById('misInsignias').innerHTML = usuario.insignias.length? '<b>Insignias:</b><br>' + usuario.insignias.map(i=>`<span class="insignia">${i}</span>`).join('') : '';
 
-  document.getElementById('listaMisiones').innerHTML = MISIONES.map(m => `
-    <div class="mision ${m.cat}">
-      <div class="icon">${m.icon}</div><div class="info"><h3>${m.titulo}</h3><p>${m.desc}</p></div>
-      <div><p class="pts ${m.cat}">+${m.pts}</p><button class="btn" onclick="abrirReporte(${m.id})">Hacer</button></div>
-    </div>`).join('');
+  document.getElementById('listaMisiones').innerHTML = MISIONES.map(m => `<div class="mision ${m.cat}"><div class="icon">${m.icon}</div><div class="info"><h3>${m.titulo}</h3><p>${m.desc}</p></div><div><p class="pts ${m.cat}">+${m.pts}</p><button class="btn" onclick="abrirReporte(${m.id})">Hacer</button></div></div>`).join('');
 
-  document.getElementById('listaBeneficios').innerHTML = BENEFICIOS.map(b => `
-    <div class="beneficio">
-      <div class="icon">${b.img}</div><div class="info"><h4>${b.titulo}</h4><p class="pts">${b.costo.toLocaleString()} Puntos</p></div>
-      <button class="btn btn-azul" ${usuario.puntos < b.costo? 'disabled' : ''} onclick="canjear(${b.id})">Canjear</button>
-    </div>`).join('');
+  document.getElementById('listaBeneficios').innerHTML = BENEFICIOS.map(b => `<div class="beneficio"><div class="icon">${b.img}</div><div class="info"><h4>${b.titulo}</h4><p class="pts">${b.costo.toLocaleString()} Puntos</p></div><button class="btn btn-azul" ${usuario.puntos < b.costo? 'disabled' : ''} onclick="canjear(${b.id})">Canjear</button></div>`).join('');
+
+  // NUEVO: LISTA DE GRUPOS CON CONTADOR
+  document.getElementById('listaGrupos').innerHTML = GRUPOS.map(g => {
+    let yaUnido = usuario.gruposUnidos.includes(g.id);
+    return `<div class="grupo-whatsapp">
+      <div class="icon">${g.icon}</div>
+      <div class="info">
+        <h4>${g.titulo}</h4>
+        <p>${g.desc}</p>
+        <p class="contador">${contadoresGrupos[g.id].toLocaleString()} vecinos</p>
+      </div>
+      <button class="btn btn-verde" ${yaUnido? 'disabled' : ''} onclick="unirseGrupo('${g.id}')">${yaUnido? 'Unido ✓' : 'Unirme'}</button>
+    </div>`
+  }).join('');
 }
 
 function abrirReporte(idMision){
   misionActual = MISIONES.find(m=>m.id==idMision);
   document.getElementById('tituloReporte').innerText = misionActual.titulo;
   document.getElementById('descReporte').innerText = misionActual.desc;
-  document.getElementById('inputDireccion').value = "";
-  document.getElementById('inputDescripcion').value = "";
-  document.getElementById('inputFoto').value = "";
-  document.getElementById('previewImg').classList.add('hidden');
-  document.getElementById('alertaFraude').classList.add('hidden');
+  document.getElementById('inputDireccion').value = ""; document.getElementById('inputDescripcion').value = ""; document.getElementById('inputFoto').value = "";
+  document.getElementById('previewImg').classList.add('hidden'); document.getElementById('alertaFraude').classList.add('hidden');
   mostrarPantalla('reporte');
 }
 
 function enviarReporte(){
-  const direccion = document.getElementById('inputDireccion').value;
-  const descripcion = document.getElementById('inputDescripcion').value;
+  const direccion = document.getElementById('inputDireccion').value; const descripcion = document.getElementById('inputDescripcion').value;
   if(!direccion ||!descripcion){toast("Completá dirección y descripción"); return;}
   if(!fotoActualHash){toast("Adjuntá una foto"); return;}
   if(baseFotos.find(f => f.hash === fotoActualHash)){toast("❌ Fraude detectado"); return;}
-
   baseFotos.push({hash: fotoActualHash, usuario: usuario.nombre, mision: misionActual.titulo, fecha: new Date().toISOString()});
   reportesPendientes.push({id: Date.now(), usuario: usuario.nombre, barrio: usuario.barrio, mision: misionActual.titulo, direccion: direccion, descripcion: descripcion, puntos: misionActual.pts, estado: "Pendiente", fecha: new Date().toISOString()});
-
   usuario.puntos += misionActual.pts;
   if(misionActual.pts==300 &&!usuario.insignias.includes("Guardián de Plazas")) usuario.insignias.push("🏞️ Guardián de Plazas");
   if(misionActual.pts==500 &&!usuario.insignias.includes("Héroe 3A")) usuario.insignias.push("🦸 Héroe 3A");
   if(misionActual.pts==400 &&!usuario.insignias.includes("Manos a la Obra")) usuario.insignias.push("🛠️ Manos a la Obra");
-
-  guardar(); actualizarUI(); mostrarPantalla('inicio');
-  toast(`✅ Reporte enviado! +${misionActual.pts} pts en validación`);
+  guardar(); actualizarUI(); mostrarPantalla('inicio'); toast(`✅ Reporte enviado! +${misionActual.pts} pts en validación`);
 }
 
 function canjear(id){let benef = BENEFICIOS.find(b=>b.id==id); if(usuario.puntos >= benef.costo){usuario.puntos -= benef.costo; guardar(); actualizarUI(); toast(`¡Canje exitoso! Retirá en Acción Social`)}}
+
+// NUEVA FUNCION: UNIRSE A GRUPO
+function unirseGrupo(idGrupo){
+  if(usuario.gruposUnidos.includes(idGrupo)){toast("Ya estás en este grupo"); return;}
+
+  let grupo = GRUPOS.find(g=>g.id==idGrupo);
+  usuario.gruposUnidos.push(idGrupo);
+  contadoresGrupos[idGrupo] += 1; // SUMA 1 AL CONTADOR
+  usuario.puntos += 30; // BONUS POR SUMARSE
+
+  guardar(); actualizarUI();
+  toast(`✅ +30 pts! Te unimos al grupo`);
+  window.open(grupo.link, '_blank'); // ABRE WHATSAPP
+}
 
 function mostrarPantalla(pant){
   ['inicio','mapa','alertas','ranking','reporte'].forEach(p=>document.getElementById('pantalla-'+p).classList.add('hidden'));
