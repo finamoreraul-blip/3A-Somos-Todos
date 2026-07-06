@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,21 +20,24 @@
   .btn-rojo{background:var(--rojo)}.btn-azul{background:var(--azul)}.btn-verde{background:#25D366}
   .hidden{display:none !important}
   .container{max-width:1200px;margin:20px auto;padding:0 15px}
-  .tabs{display:flex;gap:10px;margin-bottom:20px}
-  .tab-btn{flex:1;padding:15px;background:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:.2s}
+  .tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+  .tab-btn{flex:1;min-width:150px;padding:15px;background:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:.2s}
   .tab-btn.active{background:var(--azul);color:white}
   .card{background:white;margin-bottom:15px;border-radius:16px;padding:20px;box-shadow:0 3px 12px rgba(0,0,0,.08);animation:fadeIn .3s}
   @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
   .reporte-pendiente{border-left:5px solid var(--naranja)}
+  .reporte-aprobado{border-left:5px solid var(--verde);opacity:.7}
   .datos{margin:10px 0;font-size:.9em}
   .datos b{color:var(--azul)}
   .acciones{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap}
-  .tabla{width:100%;border-collapse:collapse;font-size:.9em;background:white;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+  .tabla{width:100%;border-collapse:collapse;font-size:.85em;background:white;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08)}
   .tabla th{background:var(--azul);color:white;padding:12px;text-align:left;font-weight:700}
   .tabla td{padding:12px;border-bottom:1px solid #eee}
   .badge{padding:6px 12px;border-radius:15px;font-size:.8em;font-weight:700}
   .badge.pendiente{background:#fff3cd;color:#856404}
   .badge.entregado{background:#d4edda;color:#155724}
+  .badge.aprobado{background:#d4edda;color:#155724}
+  .badge.rechazado{background:#f8d7da;color:#721c24}
   .stat-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:20px}
   .stat{background:white;padding:20px;border-radius:16px;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.08)}
   .stat h3{font-size:2.2em;color:var(--verde);font-weight:800}
@@ -62,7 +64,7 @@
 <!-- PANEL PRINCIPAL -->
 <div id="panel" class="hidden">
   
-  <!-- MODAL ENTREGAR CANJE - EMPIEZA OCULTO -->
+  <!-- MODAL ENTREGAR CANJE -->
   <div id="modalEntregar" class="modal hidden">
     <div class="modal-content">
       <h3 style="color:var(--azul);margin-bottom:15px">📦 Marcar como Entregado</h3>
@@ -87,7 +89,7 @@
   <div class="container">
     <div class="stat-box">
       <div class="stat"><h3 id="statPendientes">0</h3><p>Misiones Pendientes</p></div>
-      <div class="stat"><h3 id="statCanjes">0</h3><p>Canjes Solicitados</p></div>
+      <div class="stat"><h3 id="statCanjes">0</h3><p>Canjes Pendientes</p></div>
       <div class="stat"><h3 id="statVecinos">0</h3><p>Vecinos Activos</p></div>
       <div class="stat"><h3 id="statPuntos">0</h3><p>Puntos Entregados</p></div>
     </div>
@@ -95,6 +97,7 @@
     <div class="tabs">
       <button class="tab-btn active" onclick="mostrarTab('misiones', this)">📋 Validar Misiones</button>
       <button class="tab-btn" onclick="mostrarTab('canjes', this)">🎁 Canjes</button>
+      <button class="tab-btn" onclick="mostrarTab('historial', this)">📜 Historial</button>
       <button class="tab-btn" onclick="mostrarTab('ranking', this)">🏆 Ranking</button>
     </div>
 
@@ -106,11 +109,20 @@
 
     <!-- TAB CANJES -->
     <div id="tab-canjes" class="hidden">
-      <h2 style="color:var(--azul);margin-bottom:15px">Solicitudes de Canje</h2>
+      <h2 style="color:var(--azul);margin-bottom:15px">Solicitudes de Canje Pendientes</h2>
       <table class="tabla">
-        <thead><tr><th>Fecha</th><th>Vecino</th><th>Beneficio</th><th>Estado</th><th>Acción</th></tr></thead>
+        <thead><tr><th>Fecha</th><th>Vecino</th><th>Beneficio</th><th>Puntos</th><th>Acción</th></tr></thead>
         <tbody id="listaCanjes"></tbody>
       </table>
+    </div>
+
+    <!-- TAB HISTORIAL -->
+    <div id="tab-historial" class="hidden">
+      <h2 style="color:var(--azul);margin-bottom:15px">📜 Historial Completo</h2>
+      <h3 style="margin:20px 0 10px;color:var(--verde)">Misiones Validadas</h3>
+      <table class="tabla" id="tablaHistorialMisiones"></table>
+      <h3 style="margin:20px 0 10px;color:var(--verde)">Canjes Entregados</h3>
+      <table class="tabla" id="tablaHistorialCanjes"></table>
     </div>
 
     <!-- TAB RANKING -->
@@ -131,7 +143,6 @@ let intervaloContador = null;
 let inicioSesion = null;
 let canjeSeleccionado = null;
 
-// MOSTRAR ULTIMO ACCESO AL CARGAR
 window.onload = function(){
   let ultimo = localStorage.getItem('ultimoAccesoAdmin');
   let duracion = localStorage.getItem('duracionUltimaSesion');
@@ -146,14 +157,11 @@ function entrar(){
   if(document.getElementById('pass').value === CLAVE){
     document.getElementById('login').classList.add('hidden');
     document.getElementById('panel').classList.remove('hidden');
-    
     inicioSesion = Date.now();
     localStorage.setItem('ultimoAccesoAdmin', inicioSesion);
-    
     cargarDatos();
     intervaloActualizacion = setInterval(cargarDatos, 5000);
     intervaloContador = setInterval(actualizarContadorSesion, 1000);
-    
   }else{alert("Contraseña incorrecta")}
 }
 
@@ -184,6 +192,7 @@ function cargarDatos(){
   actualizarStats();
   cargarReportes();
   cargarCanjes();
+  cargarHistorial();
   cargarRanking();
 }
 
@@ -192,24 +201,24 @@ function actualizarStats(){
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
   let usuario = JSON.parse(localStorage.getItem('usuario3A'));
   
+  let puntosEntregados = reportes.filter(r=>r.estado=="Aprobado").reduce((sum,r)=>sum+r.puntos,0);
+  
   document.getElementById('statPendientes').innerText = reportes.filter(r=>r.estado=="Pendiente").length;
   document.getElementById('statCanjes').innerText = canjes.filter(c=>c.estado=="Pendiente").length;
   document.getElementById('statVecinos').innerText = usuario ? 1 : 0;
-  document.getElementById('statPuntos').innerText = usuario ? usuario.puntos.toLocaleString() : 0;
+  document.getElementById('statPuntos').innerText = puntosEntregados.toLocaleString();
 }
 
 function cargarReportes(){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
   let html = "";
   
-  // ARREGLO: FILTRAR SOLO PENDIENTES Y GUARDAR
-  reportes = reportes.filter(r=>r.estado=="Pendiente");
-  localStorage.setItem('reportes3A', JSON.stringify(reportes));
+  let pendientes = reportes.filter(r=>r.estado=="Pendiente");
   
-  if(reportes.length == 0) 
+  if(pendientes.length == 0) 
     html = "<div class='card'>✅ No hay misiones pendientes</div>";
   
-  reportes.forEach(r=>{
+  pendientes.forEach(r=>{
     html += `<div class="card reporte-pendiente">
       <h3>${r.mision}</h3>
       <div class="datos"><b>Vecino:</b> ${r.usuario} - <b>Barrio:</b> ${r.barrio}</div>
@@ -227,7 +236,8 @@ function cargarReportes(){
 
 function aprobarMision(id){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
-  reportes = reportes.filter(x=>x.id!=id);
+  let r = reportes.find(x=>x.id==id);
+  if(r){r.estado = "Aprobado";}
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
   alert(`✅ Misión aprobada`);
   cargarDatos();
@@ -236,9 +246,11 @@ function aprobarMision(id){
 function rechazarMision(id){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
   let r = reportes.find(x=>x.id==id);
-  let usuario = JSON.parse(localStorage.getItem('usuario3A'));
-  if(usuario && usuario.id == r.usuarioId){usuario.puntos -= r.puntos;localStorage.setItem('usuario3A', JSON.stringify(usuario));}
-  reportes = reportes.filter(x=>x.id!=id);
+  if(r){
+    r.estado = "Rechazado";
+    let usuario = JSON.parse(localStorage.getItem('usuario3A'));
+    if(usuario && usuario.id == r.usuarioId){usuario.puntos -= r.puntos;localStorage.setItem('usuario3A', JSON.stringify(usuario));}
+  }
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
   alert("❌ Misión rechazada");
   cargarDatos();
@@ -247,14 +259,15 @@ function rechazarMision(id){
 function cargarCanjes(){
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
   let html = "";
-  if(canjes.length == 0) html = "<tr><td colspan='5' style='text-align:center;padding:20px'>No hay canjes solicitados</td></tr>";
-  canjes.forEach(c=>{
+  let pendientes = canjes.filter(c=>c.estado=="Pendiente");
+  if(pendientes.length == 0) html = "<tr><td colspan='5' style='text-align:center;padding:20px'>No hay canjes pendientes</td></tr>";
+  pendientes.forEach(c=>{
     html += `<tr>
       <td>${new Date(c.fecha).toLocaleString('es-AR')}</td>
       <td><b>${c.nombre}</b><br><small>DNI: ${c.dni} - ${c.barrio} - Tel: ${c.telefono}</small></td>
       <td>${c.beneficio}</td>
-      <td><span class="badge ${c.estado.toLowerCase()}">${c.estado}</span></td>
-      <td>${c.estado=="Pendiente"? `<button class="btn btn-verde" onclick="abrirModalEntrega(${c.id})">Entregado + WhatsApp</button>` : '-'}</td>
+      <td>${c.costo.toLocaleString()} pts</td>
+      <td><button class="btn btn-verde" onclick="abrirModalEntrega(${c.id})">Entregado + WhatsApp</button></td>
     </tr>`
   });
   document.getElementById('listaCanjes').innerHTML = html;
@@ -276,21 +289,59 @@ function cerrarModal(){
 function confirmarEntrega(){
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
   let c = canjes.find(x=>x.id==canjeSeleccionado);
-  c.estado = "Entregado";
-  localStorage.setItem('canjes3A', JSON.stringify(canjes));
+  if(c){
+    c.estado = "Entregado";
+    localStorage.setItem('canjes3A', JSON.stringify(canjes));
+    
+    let lugar = document.getElementById('lugarRetiro').value || "Acción Social Municipal";
+    let horario = document.getElementById('horarioRetiro').value || "8 a 13hs";
+    let notas = document.getElementById('notasRetiro').value || "Traer DNI";
+    
+    let mensaje = `Hola ${c.nombre}!%0A%0ATu canje de *${c.beneficio}* ya esta aprobado. %0A%0A*Lugar:* ${lugar}%0A*Horario:* ${horario}%0A*Requisito:* ${notas} + DNI ${c.dni}%0A%0AGracias por sumar por Tres Arroyos!%0A- 3A Somos Todos`;
+    let url = `https://wa.me/54${c.telefono.replace(/[^0-9]/g, '')}?text=${mensaje}`;
+    window.open(url, '_blank');
+    
+    cerrarModal();
+    cargarDatos();
+    alert("✅ Canje marcado y WhatsApp enviado");
+  }
+}
+
+function cargarHistorial(){
+  let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
   
-  // ENVIAR WHATSAPP
-  let lugar = document.getElementById('lugarRetiro').value || "Acción Social Municipal";
-  let horario = document.getElementById('horarioRetiro').value || "8 a 13hs";
-  let notas = document.getElementById('notasRetiro').value || "Traer DNI";
+  // HISTORIAL MISIONES
+  let htmlM = "<thead><tr><th>Fecha</th><th>Vecino</th><th>Misión</th><th>Puntos</th><th>Estado</th></tr></thead><tbody>";
+  let validados = reportes.filter(r=>r.estado=="Aprobado" || r.estado=="Rechazado");
+  if(validados.length==0) htmlM += "<tr><td colspan='5'>No hay historial</td></tr>";
+  validados.forEach(r=>{
+    htmlM += `<tr>
+      <td>${new Date(r.fecha).toLocaleString('es-AR')}</td>
+      <td><b>${r.usuario}</b><br><small>${r.barrio}</small></td>
+      <td>${r.mision}<br><small>${r.direccion}</small></td>
+      <td>${r.puntos}</td>
+      <td><span class="badge ${r.estado.toLowerCase()}">${r.estado}</span></td>
+    </tr>`
+  });
+  htmlM += "</tbody>";
+  document.getElementById('tablaHistorialMisiones').innerHTML = htmlM;
   
-  let mensaje = `Hola ${c.nombre}!%0A%0ATu canje de *${c.beneficio}* ya esta aprobado. %0A%0A*Lugar:* ${lugar}%0A*Horario:* ${horario}%0A*Requisito:* ${notas} + DNI ${c.dni}%0A%0AGracias por sumar por Tres Arroyos!%0A- 3A Somos Todos`;
-  let url = `https://wa.me/54${c.telefono.replace(/[^0-9]/g, '')}?text=${mensaje}`;
-  window.open(url, '_blank');
-  
-  cerrarModal();
-  cargarDatos();
-  alert("✅ Canje marcado y WhatsApp enviado");
+  // HISTORIAL CANJES
+  let htmlC = "<thead><tr><th>Fecha</th><th>Vecino - DNI</th><th>Beneficio</th><th>Puntos</th><th>Estado</th></tr></thead><tbody>";
+  let entregados = canjes.filter(c=>c.estado=="Entregado");
+  if(entregados.length==0) htmlC += "<tr><td colspan='5'>No hay historial</td></tr>";
+  entregados.forEach(c=>{
+    htmlC += `<tr>
+      <td>${new Date(c.fecha).toLocaleString('es-AR')}</td>
+      <td><b>${c.nombre}</b><br><small>DNI: ${c.dni} - ${c.barrio} - Tel: ${c.telefono}</small></td>
+      <td>${c.beneficio}</td>
+      <td>${c.costo.toLocaleString()}</td>
+      <td><span class="badge entregado">Entregado</span></td>
+    </tr>`
+  });
+  htmlC += "</tbody>";
+  document.getElementById('tablaHistorialCanjes').innerHTML = htmlC;
 }
 
 function cargarRanking(){
