@@ -8,7 +8,7 @@
 <style>
   :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700;--violeta:#8e44ad}
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-  body{background:#f0f4f8;color:#222;padding-bottom:20px}
+  body{background:#f0f4f8;color:#222}
 .hidden{display:none}
 .header{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;padding:18px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.1)}
 .header h1{font-size:1.4em;font-weight:800;letter-spacing:.5px}
@@ -31,14 +31,7 @@
 .progreso{height:100%;width:0;background:linear-gradient(90deg,var(--azul),var(--verde));border-radius:10px;transition:width.8s ease}
 .titulo{padding:0 20px;margin:25px 0 12px;font-size:1.3em;font-weight:700;color:var(--azul)}
 
-.reporte-admin{
-  background:white;
-  margin:12px 15px;
-  padding:18px;
-  border-radius:16px;
-  box-shadow:0 3px 10px rgba(0,0,0,.06);
-  border-left:6px solid var(--naranja);
-}
+.reporte-admin{background:white;margin:12px 15px;padding:18px;border-radius:16px;box-shadow:0 3px 10px rgba(0,0,0,.06);border-left:6px solid var(--naranja)}
 .reporte-admin .header-reporte{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .reporte-admin h3{color:var(--azul);font-size:1.1em;font-weight:700}
 .estado-badge{padding:5px 12px;border-radius:15px;font-size:.8em;font-weight:700}
@@ -52,11 +45,8 @@
 .foto-admin{width:100%;max-height:250px;object-fit:cover;border-radius:10px;margin:10px 0}
 
 .btn{background:var(--verde);color:white;border:none;padding:10px 18px;border-radius:25px;font-weight:700;cursor:pointer;transition:.2s;margin-right:8px;margin-top:10px}
-.btn:active{transform:scale(.95)}
-.btn:disabled{background:#ccc;cursor:not-allowed}
-.btn-azul{background:var(--azul)}
-.btn-rojo{background:var(--rojo)}
-.btn-naranja{background:var(--naranja)}
+.btn:active{transform:scale(.95)}.btn:disabled{background:#ccc;cursor:not-allowed}
+.btn-azul{background:var(--azul)}.btn-rojo{background:var(--rojo)}.btn-naranja{background:var(--naranja)}
 
 .input-form{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins';font-size:1em}
   
@@ -75,78 +65,124 @@
 .empty{text-align:center;padding:40px 20px;color:#888}
 .empty .icon{font-size:4em;margin-bottom:15px;opacity:.3}
 
-.menu-bottom{position:fixed;bottom:0;width:100%;background:white;display:flex;justify-content:space-around;padding:8px 0;box-shadow:0 -3px 12px rgba(0,0,0,.1)}
-.menu-item{text-align:center;font-size:.7em;color:#888;cursor:pointer;flex:1}
-.menu-item.active{color:var(--azul);font-weight:700}
-.menu-item span{font-size:1.8em;display:block}
+.contador-top{background:white;margin:15px;border-radius:18px;padding:15px;display:flex;justify-content:space-around;text-align:center}
+.contador-item h4{color:var(--azul);font-size:1.6em;font-weight:800}
+.contador-item p{font-size:.8em;color:#666}
+
+.login-box{max-width:400px;margin:80px auto}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>3A SOMOS TODOS - ADMIN</h1>
-  <p>Panel de Validación Municipal</p>
-</div>
-
-<div class="eslogan-box">
-  <h2>Validemos juntos</h2>
-  <p>Revisá y aprobá las misiones de los vecinos</p>
-</div>
-
-<!-- STATS -->
-<div class="stats-grid">
-  <div class="stat-card">
-    <h3 id="statPendientes">0</h3>
-    <p>Pendientes</p>
+<!-- PANTALLA LOGIN -->
+<div id="pantalla-login">
+  <div class="eslogan-box">
+    <h2>Panel Admin 3A</h2>
+    <p>Acceso Municipal</p>
   </div>
-  <div class="stat-card">
-    <h3 id="statAprobadas">0</h3>
-    <p>Aprobadas Hoy</p>
-  </div>
-  <div class="stat-card">
-    <h3 id="statPuntos">0</h3>
-    <p>Pts en Juego</p>
-  </div>
-  <div class="stat-card">
-    <h3 id="statCanjes">0</h3>
-    <p>Canjes Pend.</p>
+  <div class="card login-box">
+    <h3 style="color:var(--azul);margin-bottom:15px">Iniciar Sesión</h3>
+    <label style="font-weight:700">Usuario</label>
+    <input type="text" id="userAdmin" class="input-form" placeholder="admin">
+    <label style="font-weight:700">Contraseña</label>
+    <input type="password" id="passAdmin" class="input-form" placeholder="1234">
+    <button class="btn btn-azul" style="width:100%" onclick="loginAdmin()">Ingresar</button>
+    <p style="font-size:.8em;color:#888;margin-top:10px;text-align:center">Usuario: admin | Pass: 1234</p>
   </div>
 </div>
 
-<!-- TABS -->
-<div class="tabs-admin">
-  <button class="tab-admin active" onclick="cambiarTab('pendientes', this)">📋 Pendientes</button>
-  <button class="tab-admin" onclick="cambiarTab('historial', this)">📚 Historial</button>
-  <button class="tab-admin" onclick="cambiarTab('canjes', this)">🎁 Canjes</button>
-</div>
+<!-- PANTALLA ADMIN -->
+<div id="pantalla-admin" class="hidden">
+  <div class="header">
+    <h1>3A SOMOS TODOS - ADMIN</h1>
+    <p>Panel de Validación Municipal</p>
+  </div>
 
-<!-- CONTENIDO PENDIENTES -->
-<div id="tab-pendientes">
-  <h2 class="titulo">Misiones para Validar</h2>
-  <div id="listaPendientes"></div>
-</div>
+  <div class="eslogan-box">
+    <h2>Validemos juntos</h2>
+    <p>Revisá y aprobá las misiones de los vecinos</p>
+  </div>
 
-<!-- CONTENIDO HISTORIAL -->
-<div id="tab-historial" class="hidden">
-  <h2 class="titulo">Historial de Misiones</h2>
-  <div id="listaHistorial"></div>
-</div>
+  <!-- CONTADOR ARRIBA -->
+  <div class="contador-top">
+    <div class="contador-item">
+      <h4 id="contPendientes">0</h4>
+      <p>Pendientes</p>
+    </div>
+    <div class="contador-item">
+      <h4 id="contAprobadas">0</h4>
+      <p>Aprobadas</p>
+    </div>
+    <div class="contador-item">
+      <h4 id="contPuntos">0</h4>
+      <p>Puntos</p>
+    </div>
+  </div>
 
-<!-- CONTENIDO CANJES -->
-<div id="tab-canjes" class="hidden">
-  <h2 class="titulo">Solicitudes de Canje</h2>
-  <div id="listaCanjes"></div>
+  <!-- TABS -->
+  <div class="tabs-admin">
+    <button class="tab-admin active" onclick="cambiarTab('pendientes', this)">📋 Pendientes</button>
+    <button class="tab-admin" onclick="cambiarTab('historial', this)">📚 Historial</button>
+    <button class="tab-admin" onclick="cambiarTab('canjes', this)">🎁 Canjes</button>
+    <button class="btn btn-rojo" style="margin-left:auto;padding:8px 15px" onclick="logout()">Salir</button>
+  </div>
+
+  <!-- CONTENIDO PENDIENTES -->
+  <div id="tab-pendientes">
+    <h2 class="titulo">Misiones para Validar</h2>
+    <div id="listaPendientes"></div>
+  </div>
+
+  <!-- CONTENIDO HISTORIAL -->
+  <div id="tab-historial" class="hidden">
+    <h2 class="titulo">Historial de Misiones</h2>
+    <div id="listaHistorial"></div>
+  </div>
+
+  <!-- CONTENIDO CANJES -->
+  <div id="tab-canjes" class="hidden">
+    <h2 class="titulo">Solicitudes de Canje</h2>
+    <div id="listaCanjes"></div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
 let tabActual = 'pendientes';
+const USER_ADMIN = "admin";
+const PASS_ADMIN = "1234";
 
 document.addEventListener('DOMContentLoaded', function(){
-  cargarTodo();
-  setInterval(cargarTodo, 3000); // Revisa cada 3 seg
+  if(localStorage.getItem('adminLogueado')=='true'){
+    mostrarAdmin();
+  }
+  setInterval(cargarTodo, 3000);
 });
+
+function loginAdmin(){
+  let user = document.getElementById('userAdmin').value;
+  let pass = document.getElementById('passAdmin').value;
+  if(user==USER_ADMIN && pass==PASS_ADMIN){
+    localStorage.setItem('adminLogueado','true');
+    mostrarAdmin();
+    toast("✅ Bienvenido Admin");
+  }else{
+    toast("❌ Usuario o contraseña incorrecta");
+  }
+}
+
+function logout(){
+  localStorage.setItem('adminLogueado','false');
+  document.getElementById('pantalla-login').classList.remove('hidden');
+  document.getElementById('pantalla-admin').classList.add('hidden');
+}
+
+function mostrarAdmin(){
+  document.getElementById('pantalla-login').classList.add('hidden');
+  document.getElementById('pantalla-admin').classList.remove('hidden');
+  cargarTodo();
+}
 
 function toast(msg){
   const t = document.getElementById('toast');
@@ -173,12 +209,11 @@ function cargarTodo(){
   let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
   
-  // ACTUALIZAR STATS
-  document.getElementById('statPendientes').innerText = reportes.length;
-  document.getElementById('statAprobadas').innerText = historial.filter(h=>h.estado=='Aprobada').length;
+  // ACTUALIZAR CONTADOR
+  document.getElementById('contPendientes').innerText = reportes.length;
+  document.getElementById('contAprobadas').innerText = historial.filter(h=>h.estado=='Aprobada').length;
   let puntosPend = reportes.reduce((acc,r)=>acc+r.puntos,0);
-  document.getElementById('statPuntos').innerText = puntosPend;
-  document.getElementById('statCanjes').innerText = canjes.length;
+  document.getElementById('contPuntos').innerText = puntosPend;
   
   if(tabActual=='pendientes') cargarPendientes(reportes);
   if(tabActual=='historial') cargarHistorial(historial);
@@ -282,23 +317,18 @@ function cargarCanjes(canjes){
 function aprobarMision(id){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
   let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
-  let usuario = JSON.parse(localStorage.getItem('usuario3A')) || {};
   
   let reporte = reportes.find(r=>r.id==id);
   if(!reporte) return;
   
-  // 1. Quitar de pendientes
   reportes = reportes.filter(r=>r.id!=id);
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
   
-  // 2. Agregar a historial
   reporte.estado = "Aprobada";
   historial.push(reporte);
   localStorage.setItem('historialMisiones3A', JSON.stringify(historial));
   
-  // 3. Los puntos ya se sumaron al enviar, no sumar de nuevo
-  // 4. Marcar cambio para que el index se actualice
-  localStorage.setItem('ultimaAccion', Date.now());
+  localStorage.setItem('ultimaAccion', Date.now()); // FIX BUG
   
   toast(`✅ Aprobada! ${reporte.usuario}`);
   cargarTodo();
@@ -314,21 +344,17 @@ function rechazarMision(id){
   let reporte = reportes.find(r=>r.id==id);
   if(!reporte) return;
   
-  // 1. Quitar puntos que se habían sumado al enviar
   usuario.puntos = (usuario.puntos || 0) - reporte.puntos;
   localStorage.setItem('usuario3A', JSON.stringify(usuario));
   
-  // 2. Quitar de pendientes
   reportes = reportes.filter(r=>r.id!=id);
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
   
-  // 3. Agregar a historial como rechazada
   reporte.estado = "Rechazada";
   historial.push(reporte);
   localStorage.setItem('historialMisiones3A', JSON.stringify(historial));
   
-  // 4. Marcar cambio
-  localStorage.setItem('ultimaAccion', Date.now());
+  localStorage.setItem('ultimaAccion', Date.now()); // FIX BUG
   
   toast(`❌ Rechazada. -${reporte.puntos} pts`);
   cargarTodo();
@@ -348,7 +374,6 @@ function cancelarCanje(id){
   let canje = canjes.find(c=>c.id==id);
   let usuario = JSON.parse(localStorage.getItem('usuario3A')) || {};
   
-  // Devolver puntos
   usuario.puntos = (usuario.puntos || 0) + canje.costo;
   localStorage.setItem('usuario3A', JSON.stringify(usuario));
   
