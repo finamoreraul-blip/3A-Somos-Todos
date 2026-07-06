@@ -127,11 +127,8 @@
   </div>
 
   <h2 class="titulo">🎯 Misiones</h2><div id="listaMisiones"></div>
-
-  <!-- BENEFICIOS CON FORMULARIO NUEVO -->
   <h2 class="titulo">🎁 Beneficios Municipales</h2><div id="listaBeneficios"></div>
 
-  <!-- NUEVO: FORMULARIO DE CANJE COMPLETO -->
   <div class="card" id="formCanje" style="display:none">
     <h3>📝 Solicitar Canje</h3>
     <label style="font-weight:700;font-size:.9em">Nombre y Apellido *</label>
@@ -220,7 +217,18 @@
 document.addEventListener('DOMContentLoaded', function() {
   iniciarCarrusel();
   actualizarUI();
+  setInterval(syncDatos, 3000);
 });
+
+let ultimoSync = localStorage.getItem('ultimaAccion') || 0;
+function syncDatos(){
+  let nuevoSync = localStorage.getItem('ultimaAccion');
+  if(nuevoSync && nuevoSync != ultimoSync){
+    ultimoSync = nuevoSync;
+    actualizarUI();
+    toast("🔄 Datos actualizados");
+  }
+}
 
 let carruselIndex = 0;
 function iniciarCarrusel(){
@@ -246,7 +254,7 @@ function irCarrusel(i){
 let usuario = JSON.parse(localStorage.getItem('usuario3A')) || {nombre: "Juan Pérez", barrio: "Barrio Unión", puntos: 1250, nivel: "BRONCE", id: "user_001", insignias: [], gruposUnidos: []};
 let baseFotos = JSON.parse(localStorage.getItem('baseFotos3A')) || [];
 let reportesPendientes = JSON.parse(localStorage.getItem('reportes3A')) || [];
-let canjesPendientes = JSON.parse(localStorage.getItem('canjes3A')) || []; // NUEVO
+let canjesPendientes = JSON.parse(localStorage.getItem('canjes3A')) || [];
 let contadoresGrupos = JSON.parse(localStorage.getItem('contadoresGrupos3A')) || {union: 240, obra: 85};
 
 const NIVELES = [{nombre:"BRONCE", min:0, max:1000}, {nombre:"PLATA", min:1000, max:2000}, {nombre:"ORO", min:2000, max:5000}, {nombre:"DIAMANTE", min:5000, max:99999}];
@@ -282,9 +290,9 @@ function guardar(){
   localStorage.setItem('usuario3A', JSON.stringify(usuario));
   localStorage.setItem('baseFotos3A', JSON.stringify(baseFotos));
   localStorage.setItem('reportes3A', JSON.stringify(reportesPendientes));
-  localStorage.setItem('canjes3A', JSON.stringify(canjesPendientes)); // NUEVO
+  localStorage.setItem('canjes3A', JSON.stringify(canjesPendientes));
   localStorage.setItem('contadoresGrupos3A', JSON.stringify(contadoresGrupos));
-  localStorage.setItem('ultimaAccion', Date.now()); // ANTI BUG
+  localStorage.setItem('ultimaAccion', Date.now());
 }
 function toast(msg){const t=document.getElementById('toast');t.innerText=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
 
@@ -298,6 +306,9 @@ async function previsualizarFoto(event){
 }
 
 function actualizarUI(){
+  usuario = JSON.parse(localStorage.getItem('usuario3A')) || usuario;
+  reportesPendientes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  
   let nivelActual = NIVELES.find(n => usuario.puntos >= n.min && usuario.puntos < n.max);
   usuario.nivel = nivelActual.nombre;
   document.getElementById('puntosTotales').innerText = usuario.puntos.toLocaleString();
@@ -312,7 +323,6 @@ function actualizarUI(){
 
   document.getElementById('listaMisiones').innerHTML = MISIONES.map(m => `<div class="mision ${m.cat}"><div class="icon">${m.icon}</div><div class="info"><h3>${m.titulo}</h3><p>${m.desc}</p></div><div><p class="pts ${m.cat}">+${m.pts}</p><button class="btn" onclick="abrirReporte(${m.id})">Hacer</button></div></div>`).join('');
 
-  // BENEFICIOS AHORA ABREN FORMULARIO
   document.getElementById('listaBeneficios').innerHTML = BENEFICIOS.map(b => `<div class="beneficio"><div class="icon">${b.img}</div><div class="info"><h4>${b.titulo}</h4><p class="pts">${b.costo.toLocaleString()} Puntos</p></div><button class="btn btn-azul" ${usuario.puntos < b.costo? 'disabled' : ''} onclick="abrirFormCanje(${b.id})">Canjear</button></div>`).join('');
 
   document.getElementById('listaGrupos').innerHTML = GRUPOS.map(g => {
@@ -321,7 +331,6 @@ function actualizarUI(){
   }).join('');
 }
 
-// NUEVAS FUNCIONES CANJE
 function abrirFormCanje(id){
   let benef = BENEFICIOS.find(b=>b.id==id);
   document.getElementById('beneficioElegido').value = benef.titulo;
@@ -334,19 +343,7 @@ function confirmarCanje(){
   let costo = parseInt(document.getElementById('costoElegido').value);
   if(!document.getElementById('nombreCanje').value ||!document.getElementById('dniCanje').value ||!document.getElementById('telCanje').value){toast("Completa Nombre, DNI y Tel"); return;}
   if(usuario.puntos < costo){toast("No tenes puntos"); return;}
-
-  canjesPendientes.push({
-    id: Date.now(),
-    nombre: document.getElementById('nombreCanje').value,
-    dni: document.getElementById('dniCanje').value,
-    tel: document.getElementById('telCanje').value,
-    barrio: document.getElementById('barrioCanje').value,
-    dir: document.getElementById('dirCanje').value,
-    beneficio: document.getElementById('beneficioElegido').value,
-    costo: costo,
-    estado: "Pendiente",
-    fecha: new Date().toISOString()
-  });
+  canjesPendientes.push({id: Date.now(), nombre: document.getElementById('nombreCanje').value, dni: document.getElementById('dniCanje').value, tel: document.getElementById('telCanje').value, barrio: document.getElementById('barrioCanje').value, dir: document.getElementById('dirCanje').value, beneficio: document.getElementById('beneficioElegido').value, costo: costo, estado: "Pendiente", fecha: new Date().toISOString()});
   usuario.puntos -= costo;
   guardar(); actualizarUI(); cerrarFormCanje();
   toast(`✅ Canje solicitado! Te avisamos por WhatsApp`);
