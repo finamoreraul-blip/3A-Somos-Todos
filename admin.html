@@ -3,386 +3,388 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin 3A SOMOS TODOS</title>
+<title>3A ADMIN - Panel Municipal</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700;--violeta:#8e44ad}
+  :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700}
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
   body{background:#f0f4f8;color:#222}
-.hidden{display:none}
-.header{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;padding:18px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-.header h1{font-size:1.4em;font-weight:800;letter-spacing:.5px}
-.header p{font-size:.8em;opacity:.9}
-
-.eslogan-box{
-    background:linear-gradient(135deg,var(--azul),var(--verde));
-    color:white;
-    text-align:center;
-    padding:25px 15px 20px 15px;
-  }
-.eslogan-box h2{font-size:1.9em;font-weight:800;margin-bottom:8px}
-.eslogan-box p{font-size:1em;opacity:.95}
-
-.card{background:white;margin:15px;border-radius:18px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.08)}
-.puntos{display:flex;justify-content:space-between;align-items:center}
-.puntos h2{color:var(--azul);font-size:2.2em;font-weight:800}
-.nivel-badge{background:var(--oro);color:#333;padding:6px 14px;border-radius:20px;font-weight:800;font-size:.8em}
-.barra{height:12px;background:#e0e0e0;border-radius:10px;margin-top:12px;overflow:hidden}
-.progreso{height:100%;width:0;background:linear-gradient(90deg,var(--azul),var(--verde));border-radius:10px;transition:width.8s ease}
-.titulo{padding:0 20px;margin:25px 0 12px;font-size:1.3em;font-weight:700;color:var(--azul)}
-
-.reporte-admin{background:white;margin:12px 15px;padding:18px;border-radius:16px;box-shadow:0 3px 10px rgba(0,0,0,.06);border-left:6px solid var(--naranja)}
-.reporte-admin .header-reporte{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.reporte-admin h3{color:var(--azul);font-size:1.1em;font-weight:700}
-.estado-badge{padding:5px 12px;border-radius:15px;font-size:.8em;font-weight:700}
-.estado-pendiente{background:#fff3cd;color:#856404}
-.estado-aprobada{background:#d4edda;color:#155724}
-.estado-rechazada{background:#f8d7da;color:#721c24}
-
-.info-linea{display:flex;gap:10px;margin:6px 0;font-size:.9em}
-.info-linea b{color:#444;min-width:80px}
-.descripcion-box{background:#f8f9fa;padding:12px;border-radius:10px;margin:10px 0;font-size:.9em}
-.foto-admin{width:100%;max-height:250px;object-fit:cover;border-radius:10px;margin:10px 0}
-
-.btn{background:var(--verde);color:white;border:none;padding:10px 18px;border-radius:25px;font-weight:700;cursor:pointer;transition:.2s;margin-right:8px;margin-top:10px}
-.btn:active{transform:scale(.95)}.btn:disabled{background:#ccc;cursor:not-allowed}
-.btn-azul{background:var(--azul)}.btn-rojo{background:var(--rojo)}.btn-naranja{background:var(--naranja)}
-
-.input-form{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins';font-size:1em}
-  
-.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:15px}
-.stat-card{background:white;padding:18px;border-radius:16px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.06)}
-.stat-card h3{font-size:1.8em;color:var(--azul);font-weight:800}
-.stat-card p{font-size:.85em;color:#666;margin-top:4px}
-
-.tabs-admin{display:flex;gap:8px;margin:15px;padding:0 15px;overflow-x:auto}
-.tab-admin{padding:12px 18px;background:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.tab-admin.active{background:var(--azul);color:white}
-
-.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#333;color:white;padding:12px 20px;border-radius:25px;z-index:99;opacity:0;transition:.3s}
-.toast.show{opacity:1}
-
-.empty{text-align:center;padding:40px 20px;color:#888}
-.empty .icon{font-size:4em;margin-bottom:15px;opacity:.3}
-
-.contador-top{background:white;margin:15px;border-radius:18px;padding:15px;display:flex;justify-content:space-around;text-align:center}
-.contador-item h4{color:var(--azul);font-size:1.6em;font-weight:800}
-.contador-item p{font-size:.8em;color:#666}
-
-.login-box{max-width:400px;margin:80px auto}
+  .header{background:linear-gradient(135deg,var(--azul),var(--rojo));color:white;padding:20px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+  .header h1{font-size:1.6em;font-weight:800}
+  .header p{font-size:.9em;opacity:.9}
+  .tiempo-sesion{background:rgba(0,0,0,.25);padding:8px 15px;border-radius:20px;font-size:.85em;margin-top:10px;display:inline-block;font-weight:600}
+  .login-box{max-width:400px;margin:50px auto;background:white;padding:30px;border-radius:18px;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+  .input-form{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins';font-size:1em}
+  .btn{background:var(--verde);color:white;border:none;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer;width:100%;font-size:1em;transition:.2s}
+  .btn:hover{opacity:.9;transform:scale(.98)}
+  .btn-rojo{background:var(--rojo)}.btn-azul{background:var(--azul)}.btn-verde{background:#25D366}
+  .hidden{display:none !important}
+  .container{max-width:1200px;margin:20px auto;padding:0 15px}
+  .tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+  .tab-btn{flex:1;min-width:150px;padding:15px;background:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:.2s}
+  .tab-btn.active{background:var(--azul);color:white}
+  .card{background:white;margin-bottom:15px;border-radius:16px;padding:20px;box-shadow:0 3px 12px rgba(0,0,0,.08);animation:fadeIn .3s}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .reporte-pendiente{border-left:5px solid var(--naranja)}
+  .datos{margin:10px 0;font-size:.9em}
+  .datos b{color:var(--azul)}
+  .acciones{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap}
+  .tabla{width:100%;border-collapse:collapse;font-size:.85em;background:white;border-radius:12px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+  .tabla th{background:var(--azul);color:white;padding:12px;text-align:left;font-weight:700}
+  .tabla td{padding:12px;border-bottom:1px solid #eee}
+  .badge{padding:6px 12px;border-radius:15px;font-size:.8em;font-weight:700}
+  .badge.pendiente{background:#fff3cd;color:#856404}
+  .badge.entregado{background:#d4edda;color:#155724}
+  .badge.aprobado{background:#d4edda;color:#155724}
+  .badge.rechazado{background:#f8d7da;color:#721c24}
+  .stat-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:20px}
+  .stat{background:white;padding:20px;border-radius:16px;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+  .stat h3{font-size:2.2em;color:var(--verde);font-weight:800}
+  .stat p{color:#666;font-size:.9em;margin-top:5px}
+  .live-dot{width:10px;height:10px;background:#00ff00;border-radius:50%;display:inline-block;margin-right:8px;animation:pulse 1.5s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.2)}}
+  .ultimo-acceso{font-size:.85em;color:#555;text-align:center;margin-top:12px;line-height:1.5}
+  .salir{position:absolute;top:15px;right:20px;background:rgba(255,255,255,.2);border:none;color:white;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:600}
+  .modal{background:rgba(0,0,0,.5);position:fixed;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:99}
+  .modal-content{background:white;padding:25px;border-radius:18px;width:90%;max-width:400px}
+  .alerta-sync{background:var(--naranja);color:white;padding:10px;border-radius:10px;margin-bottom:15px;text-align:center;font-weight:700}
 </style>
 </head>
 <body>
 
 <!-- PANTALLA LOGIN -->
-<div id="pantalla-login">
-  <div class="eslogan-box">
-    <h2>Panel Admin 3A</h2>
-    <p>Acceso Municipal</p>
-  </div>
-  <div class="card login-box">
-    <h3 style="color:var(--azul);margin-bottom:15px">Iniciar Sesión</h3>
-    <label style="font-weight:700">Usuario</label>
-    <input type="text" id="userAdmin" class="input-form" placeholder="admin">
-    <label style="font-weight:700">Contraseña</label>
-    <input type="password" id="passAdmin" class="input-form" placeholder="1234">
-    <button class="btn btn-azul" style="width:100%" onclick="loginAdmin()">Ingresar</button>
-    <p style="font-size:.8em;color:#888;margin-top:10px;text-align:center">Usuario: admin | Pass: 1234</p>
-  </div>
+<div id="login" class="login-box">
+  <h2 style="text-align:center;color:var(--azul);margin-bottom:20px">🔐 Panel 3A ADMIN</h2>
+  <input type="password" id="pass" class="input-form" placeholder="Contraseña">
+  <button class="btn" onclick="entrar()">Entrar</button>
+  <div id="ultimoAcceso" class="ultimo-acceso"></div>
+  <p style="font-size:.8em;color:#666;margin-top:10px;text-align:center">Clave por defecto: 3asomos2025</p>
 </div>
 
-<!-- PANTALLA ADMIN -->
-<div id="pantalla-admin" class="hidden">
-  <div class="header">
-    <h1>3A SOMOS TODOS - ADMIN</h1>
-    <p>Panel de Validación Municipal</p>
-  </div>
-
-  <div class="eslogan-box">
-    <h2>Validemos juntos</h2>
-    <p>Revisá y aprobá las misiones de los vecinos</p>
-  </div>
-
-  <!-- CONTADOR ARRIBA -->
-  <div class="contador-top">
-    <div class="contador-item">
-      <h4 id="contPendientes">0</h4>
-      <p>Pendientes</p>
-    </div>
-    <div class="contador-item">
-      <h4 id="contAprobadas">0</h4>
-      <p>Aprobadas</p>
-    </div>
-    <div class="contador-item">
-      <h4 id="contPuntos">0</h4>
-      <p>Puntos</p>
+<!-- PANEL PRINCIPAL -->
+<div id="panel" class="hidden">
+  
+  <!-- MODAL ENTREGAR CANJE -->
+  <div id="modalEntregar" class="modal hidden">
+    <div class="modal-content">
+      <h3 style="color:var(--azul);margin-bottom:15px">📦 Marcar como Entregado</h3>
+      <label style="font-weight:700;font-size:.9em">Lugar de Retiro</label>
+      <input type="text" id="lugarRetiro" class="input-form" placeholder="Ej: Acción Social, Moreno 124">
+      <label style="font-weight:700;font-size:.9em">Horario de Retiro</label>
+      <input type="text" id="horarioRetiro" class="input-form" placeholder="Ej: Lun a Vie de 8 a 13hs">
+      <label style="font-weight:700;font-size:.9em">Notas Adicionales</label>
+      <input type="text" id="notasRetiro" class="input-form" placeholder="Traer DNI original">
+      <button class="btn btn-verde" onclick="confirmarEntrega()">Enviar WhatsApp y Marcar</button>
+      <button class="btn btn-rojo" style="margin-top:10px" onclick="cerrarModal()">Cancelar</button>
     </div>
   </div>
 
-  <!-- TABS -->
-  <div class="tabs-admin">
-    <button class="tab-admin active" onclick="cambiarTab('pendientes', this)">📋 Pendientes</button>
-    <button class="tab-admin" onclick="cambiarTab('historial', this)">📚 Historial</button>
-    <button class="tab-admin" onclick="cambiarTab('canjes', this)">🎁 Canjes</button>
-    <button class="btn btn-rojo" style="margin-left:auto;padding:8px 15px" onclick="logout()">Salir</button>
-  </div>
+  <header class="header">
+    <button class="salir" onclick="salir()">Salir</button>
+    <h1><span class="live-dot"></span>3A SOMOS TODOS - PANEL ADMIN</h1>
+    <p>Municipalidad de Tres Arroyos</p>
+    <div class="tiempo-sesion">⏱️ Tiempo en sesión: <span id="contadorSesion">00:00:00</span></div>
+  </header>
 
-  <!-- CONTENIDO PENDIENTES -->
-  <div id="tab-pendientes">
-    <h2 class="titulo">Misiones para Validar</h2>
-    <div id="listaPendientes"></div>
-  </div>
+  <div class="container">
+    <div id="alertaSync" class="alerta-sync hidden">⚡ Se detectaron cambios. Recargando...</div>
+    
+    <div class="stat-box">
+      <div class="stat"><h3 id="statPendientes">0</h3><p>Misiones Pendientes</p></div>
+      <div class="stat"><h3 id="statCanjes">0</h3><p>Canjes Pendientes</p></div>
+      <div class="stat"><h3 id="statVecinos">0</h3><p>Vecinos Activos</p></div>
+      <div class="stat"><h3 id="statPuntos">0</h3><p>Puntos Entregados</p></div>
+    </div>
 
-  <!-- CONTENIDO HISTORIAL -->
-  <div id="tab-historial" class="hidden">
-    <h2 class="titulo">Historial de Misiones</h2>
-    <div id="listaHistorial"></div>
-  </div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="mostrarTab('misiones', this)">📋 Validar Misiones</button>
+      <button class="tab-btn" onclick="mostrarTab('canjes', this)">🎁 Canjes</button>
+      <button class="tab-btn" onclick="mostrarTab('historial', this)">📜 Historial</button>
+      <button class="tab-btn" onclick="mostrarTab('ranking', this)">🏆 Ranking</button>
+    </div>
 
-  <!-- CONTENIDO CANJES -->
-  <div id="tab-canjes" class="hidden">
-    <h2 class="titulo">Solicitudes de Canje</h2>
-    <div id="listaCanjes"></div>
+    <!-- TAB MISIONES -->
+    <div id="tab-misiones">
+      <h2 style="color:var(--azul);margin-bottom:15px">Misiones Pendientes de Validación</h2>
+      <div id="listaReportes"></div>
+    </div>
+
+    <!-- TAB CANJES -->
+    <div id="tab-canjes" class="hidden">
+      <h2 style="color:var(--azul);margin-bottom:15px">Solicitudes de Canje Pendientes</h2>
+      <table class="tabla">
+        <thead><tr><th>Fecha</th><th>Vecino</th><th>Beneficio</th><th>Puntos</th><th>Acción</th></tr></thead>
+        <tbody id="listaCanjes"></tbody>
+      </table>
+    </div>
+
+    <!-- TAB HISTORIAL -->
+    <div id="tab-historial" class="hidden">
+      <h2 style="color:var(--azul);margin-bottom:15px">📜 Historial Completo</h2>
+      <h3 style="margin:20px 0 10px;color:var(--verde)">Misiones Validadas</h3>
+      <table class="tabla" id="tablaHistorialMisiones"></table>
+      <h3 style="margin:20px 0 10px;color:var(--verde)">Canjes Entregados</h3>
+      <table class="tabla" id="tablaHistorialCanjes"></table>
+    </div>
+
+    <!-- TAB RANKING -->
+    <div id="tab-ranking" class="hidden">
+      <h2 style="color:var(--azul);margin-bottom:15px">Ranking de Vecinos</h2>
+      <table class="tabla">
+        <thead><tr><th>Puesto</th><th>Nombre</th><th>Barrio</th><th>Puntos</th><th>Nivel</th></tr></thead>
+        <tbody id="listaRanking"></tbody>
+      </table>
+    </div>
   </div>
 </div>
-
-<div class="toast" id="toast"></div>
 
 <script>
-let tabActual = 'pendientes';
-const USER_ADMIN = "admin";
-const PASS_ADMIN = "1234";
+const CLAVE = "3asomos2025";
+let intervaloActualizacion = null;
+let intervaloContador = null;
+let inicioSesion = null;
+let canjeSeleccionado = null;
 
-document.addEventListener('DOMContentLoaded', function(){
-  if(localStorage.getItem('adminLogueado')=='true'){
-    mostrarAdmin();
+// ESCUCHAR CAMBIOS DE LOCALSTORAGE EN TIEMPO REAL
+window.addEventListener('storage', function(e){
+  if(e.key == 'reportes3A' || e.key == 'canjes3A'){
+    document.getElementById('alertaSync').classList.remove('hidden');
+    setTimeout(()=>{cargarDatos(); document.getElementById('alertaSync').classList.add('hidden')}, 500);
   }
-  setInterval(cargarTodo, 3000);
 });
 
-function loginAdmin(){
-  let user = document.getElementById('userAdmin').value;
-  let pass = document.getElementById('passAdmin').value;
-  if(user==USER_ADMIN && pass==PASS_ADMIN){
-    localStorage.setItem('adminLogueado','true');
-    mostrarAdmin();
-    toast("✅ Bienvenido Admin");
-  }else{
-    toast("❌ Usuario o contraseña incorrecta");
+window.onload = function(){
+  let ultimo = localStorage.getItem('ultimoAccesoAdmin');
+  let duracion = localStorage.getItem('duracionUltimaSesion');
+  if(ultimo && duracion){
+    let fecha = new Date(parseInt(ultimo));
+    document.getElementById('ultimoAcceso').innerHTML = 
+      `<b>Último tiempo de conexión:</b> ${duracion}<br><small>${fecha.toLocaleString('es-AR')}</small>`;
   }
 }
 
-function logout(){
-  localStorage.setItem('adminLogueado','false');
-  document.getElementById('pantalla-login').classList.remove('hidden');
-  document.getElementById('pantalla-admin').classList.add('hidden');
+function entrar(){
+  if(document.getElementById('pass').value === CLAVE){
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('panel').classList.remove('hidden');
+    inicioSesion = Date.now();
+    localStorage.setItem('ultimoAccesoAdmin', inicioSesion);
+    cargarDatos();
+    intervaloActualizacion = setInterval(cargarDatos, 2000);
+    intervaloContador = setInterval(actualizarContadorSesion, 1000);
+  }else{alert("Contraseña incorrecta")}
 }
 
-function mostrarAdmin(){
-  document.getElementById('pantalla-login').classList.add('hidden');
-  document.getElementById('pantalla-admin').classList.remove('hidden');
-  cargarTodo();
+function actualizarContadorSesion(){
+  if(!inicioSesion) return;
+  let diff = Date.now() - inicioSesion;
+  let h = String(Math.floor(diff / 3600000)).padStart(2,'0');
+  let m = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+  let s = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+  document.getElementById('contadorSesion').innerText = `${h}:${m}:${s}`;
 }
 
-function toast(msg){
-  const t = document.getElementById('toast');
-  t.innerText = msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 3000);
+function salir(){
+  if(inicioSesion){
+    let diff = Date.now() - inicioSesion;
+    let h = Math.floor(diff / 3600000);
+    let m = Math.floor((diff % 3600000) / 60000);
+    let s = Math.floor((diff % 60000) / 1000);
+    let duracion = `${h} horas, ${m} minutos, ${s} segundos`;
+    localStorage.setItem('duracionUltimaSesion', duracion);
+  }
+  clearInterval(intervaloActualizacion);
+  clearInterval(intervaloContador);
+  location.reload();
 }
 
-function cambiarTab(tab, btn){
-  tabActual = tab;
-  document.querySelectorAll('.tab-admin').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  
-  document.getElementById('tab-pendientes').classList.add('hidden');
-  document.getElementById('tab-historial').classList.add('hidden');
-  document.getElementById('tab-canjes').classList.add('hidden');
-  
-  document.getElementById('tab-'+tab).classList.remove('hidden');
-  cargarTodo();
+function cargarDatos(){
+  actualizarStats();
+  cargarReportes();
+  cargarCanjes();
+  cargarHistorial();
+  cargarRanking();
 }
 
-function cargarTodo(){
+function actualizarStats(){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
-  let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
+  let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
+  let usuario = JSON.parse(localStorage.getItem('usuario3A'));
   
-  // ACTUALIZAR CONTADOR
-  document.getElementById('contPendientes').innerText = reportes.length;
-  document.getElementById('contAprobadas').innerText = historial.filter(h=>h.estado=='Aprobada').length;
-  let puntosPend = reportes.reduce((acc,r)=>acc+r.puntos,0);
-  document.getElementById('contPuntos').innerText = puntosPend;
+  let puntosEntregados = historial.filter(r=>r.estado=='Aprobado').reduce((sum,r)=>sum+r.puntos,0);
   
-  if(tabActual=='pendientes') cargarPendientes(reportes);
-  if(tabActual=='historial') cargarHistorial(historial);
-  if(tabActual=='canjes') cargarCanjes(canjes);
+  document.getElementById('statPendientes').innerText = reportes.length;
+  document.getElementById('statCanjes').innerText = canjes.filter(c=>c.estado=="Pendiente").length;
+  document.getElementById('statVecinos').innerText = usuario ? 1 : 0;
+  document.getElementById('statPuntos').innerText = puntosEntregados.toLocaleString();
 }
 
-function cargarPendientes(reportes){
-  if(reportes.length==0){
-    document.getElementById('listaPendientes').innerHTML = '<div class="empty"><div class="icon">✅</div><h3>No hay pendientes</h3><p>Todo al día</p></div>';
-    return;
-  }
+function cargarReportes(){
+  let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  let html = "";
   
-  let html = '';
-  reportes.forEach(rep=>{
-    html += `
-    <div class="reporte-admin" id="rep-${rep.id}">
-      <div class="header-reporte">
-        <h3>${rep.mision}</h3>
-        <span class="estado-badge estado-pendiente">PENDIENTE</span>
-      </div>
-      
-      <div class="info-linea"><b>Usuario:</b> ${rep.usuario}</div>
-      <div class="info-linea"><b>Barrio:</b> ${rep.barrio}</div>
-      <div class="info-linea"><b>Dirección:</b> ${rep.direccion}</div>
-      <div class="info-linea"><b>Puntos:</b> <span style="color:var(--verde);font-weight:800">${rep.puntos} pts</span></div>
-      <div class="info-linea"><b>Fecha:</b> ${new Date(rep.fecha).toLocaleString('es-AR')}</div>
-      
-      <div class="descripcion-box">
-        <b>Descripción:</b><br>${rep.descripcion}
-      </div>
-      
-      ${rep.foto ? `<img src="${rep.foto}" class="foto-admin">` : ''}
-      
-      <div>
-        <button class="btn btn-verde" onclick="aprobarMision(${rep.id})">✅ Aprobar</button>
-        <button class="btn btn-rojo" onclick="rechazarMision(${rep.id})">❌ Rechazar</button>
-      </div>
-    </div>
-    `
-  });
-  document.getElementById('listaPendientes').innerHTML = html;
-}
-
-function cargarHistorial(historial){
-  if(historial.length==0){
-    document.getElementById('listaHistorial').innerHTML = '<div class="empty"><div class="icon">📚</div><h3>Historial Vacío</h3></div>';
-    return;
-  }
+  if(reportes.length == 0) 
+    html = "<div class='card'>✅ No hay misiones pendientes</div>";
   
-  let html = '';
-  historial.reverse().forEach(rep=>{
-    let claseEstado = rep.estado=='Aprobada'?'estado-aprobada':'estado-rechazada';
-    let icono = rep.estado=='Aprobada'?'✅':'❌';
-    html += `
-    <div class="reporte-admin" style="opacity:.8;border-left-color:#ccc">
-      <div class="header-reporte">
-        <h3>${rep.mision}</h3>
-        <span class="estado-badge ${claseEstado}">${icono} ${rep.estado}</span>
+  reportes.forEach(r=>{
+    html += `<div class="card reporte-pendiente">
+      <h3>${r.mision}</h3>
+      <div class="datos"><b>Vecino:</b> ${r.usuario} - <b>Barrio:</b> ${r.barrio}</div>
+      <div class="datos"><b>Dirección:</b> ${r.direccion}</div>
+      <div class="datos"><b>Descripción:</b> ${r.descripcion}</div>
+      <div class="datos"><b>Puntos:</b> ${r.puntos} pts - <b>Fecha:</b> ${new Date(r.fecha).toLocaleString('es-AR')}</div>
+      <div class="acciones">
+        <button class="btn" onclick="aprobarMision(${r.id})">✅ Aprobar</button>
+        <button class="btn btn-rojo" onclick="rechazarMision(${r.id})">❌ Rechazar</button>
       </div>
-      <div class="info-linea"><b>Usuario:</b> ${rep.usuario}</div>
-      <div class="info-linea"><b>Barrio:</b> ${rep.barrio}</div>
-      <div class="info-linea"><b>Puntos:</b> ${rep.puntos} pts</div>
-      <div class="info-linea"><b>Fecha:</b> ${new Date(rep.fecha).toLocaleString('es-AR')}</div>
-    </div>
-    `
+    </div>`
   });
-  document.getElementById('listaHistorial').innerHTML = html;
-}
-
-function cargarCanjes(canjes){
-  if(canjes.length==0){
-    document.getElementById('listaCanjes').innerHTML = '<div class="empty"><div class="icon">🎁</div><h3>No hay canjes</h3></div>';
-    return;
-  }
-  
-  let html = '';
-  canjes.forEach(c=>{
-    html += `
-    <div class="reporte-admin">
-      <div class="header-reporte">
-        <h3>🎁 ${c.beneficio}</h3>
-        <span class="estado-badge estado-pendiente">${c.estado}</span>
-      </div>
-      <div class="info-linea"><b>Nombre:</b> ${c.nombre}</div>
-      <div class="info-linea"><b>DNI:</b> ${c.dni}</div>
-      <div class="info-linea"><b>Tel:</b> ${c.telefono}</div>
-      <div class="info-linea"><b>Barrio:</b> ${c.barrio}</div>
-      <div class="info-linea"><b>Dirección:</b> ${c.direccion||'-'}</div>
-      <div class="info-linea"><b>Costo:</b> <span style="color:var(--rojo);font-weight:800">${c.costo} pts</span></div>
-      
-      <div>
-        <button class="btn btn-verde" onclick="entregarCanje(${c.id})">📦 Entregado</button>
-        <button class="btn btn-rojo" onclick="cancelarCanje(${c.id})">Cancelar</button>
-      </div>
-    </div>
-    `
-  });
-  document.getElementById('listaCanjes').innerHTML = html;
+  document.getElementById('listaReportes').innerHTML = html;
 }
 
 function aprobarMision(id){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
   let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
-  
-  let reporte = reportes.find(r=>r.id==id);
-  if(!reporte) return;
-  
-  reportes = reportes.filter(r=>r.id!=id);
+  let r = reportes.find(x=>x.id==id);
+  if(r){
+    r.estado = "Aprobado";
+    r.fechaValidacion = new Date().toISOString();
+    historial.push(r);
+    reportes = reportes.filter(x=>x.id!=id);
+  }
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
-  
-  reporte.estado = "Aprobada";
-  historial.push(reporte);
   localStorage.setItem('historialMisiones3A', JSON.stringify(historial));
-  
-  localStorage.setItem('ultimaAccion', Date.now()); // FIX BUG
-  
-  toast(`✅ Aprobada! ${reporte.usuario}`);
-  cargarTodo();
+  localStorage.setItem('ultimaAccion', Date.now()); // <<<< SOLO AGREGUE ESTO
+  alert(`✅ Misión aprobada`);
+  cargarDatos();
 }
 
 function rechazarMision(id){
-  if(!confirm('¿Rechazar esta misión?')) return;
-  
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
   let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
-  let usuario = JSON.parse(localStorage.getItem('usuario3A')) || {};
-  
-  let reporte = reportes.find(r=>r.id==id);
-  if(!reporte) return;
-  
-  usuario.puntos = (usuario.puntos || 0) - reporte.puntos;
-  localStorage.setItem('usuario3A', JSON.stringify(usuario));
-  
-  reportes = reportes.filter(r=>r.id!=id);
+  let r = reportes.find(x=>x.id==id);
+  if(r){
+    r.estado = "Rechazado";
+    r.fechaValidacion = new Date().toISOString();
+    historial.push(r);
+    let usuario = JSON.parse(localStorage.getItem('usuario3A'));
+    if(usuario && usuario.id == r.usuarioId){usuario.puntos -= r.puntos;localStorage.setItem('usuario3A', JSON.stringify(usuario));}
+    reportes = reportes.filter(x=>x.id!=id);
+  }
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
-  
-  reporte.estado = "Rechazada";
-  historial.push(reporte);
   localStorage.setItem('historialMisiones3A', JSON.stringify(historial));
-  
-  localStorage.setItem('ultimaAccion', Date.now()); // FIX BUG
-  
-  toast(`❌ Rechazada. -${reporte.puntos} pts`);
-  cargarTodo();
+  localStorage.setItem('ultimaAccion', Date.now()); // <<<< SOLO AGREGUE ESTO
+  alert("❌ Misión rechazada");
+  cargarDatos();
 }
 
-function entregarCanje(id){
+function cargarCanjes(){
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
-  canjes = canjes.filter(c=>c.id!=id);
-  localStorage.setItem('canjes3A', JSON.stringify(canjes));
-  localStorage.setItem('ultimaAccion', Date.now());
-  toast('✅ Canje entregado');
-  cargarTodo();
+  let html = "";
+  let pendientes = canjes.filter(c=>c.estado=="Pendiente");
+  if(pendientes.length == 0) html = "<tr><td colspan='5' style='text-align:center;padding:20px'>No hay canjes pendientes</td></tr>";
+  pendientes.forEach(c=>{
+    html += `<tr>
+      <td>${new Date(c.fecha).toLocaleString('es-AR')}</td>
+      <td><b>${c.nombre}</b><br><small>DNI: ${c.dni} - ${c.barrio} - Tel: ${c.telefono}</small></td>
+      <td>${c.beneficio}</td>
+      <td>${c.costo.toLocaleString()} pts</td>
+      <td><button class="btn btn-verde" onclick="abrirModalEntrega(${c.id})">Entregado + WhatsApp</button></td>
+    </tr>`
+  });
+  document.getElementById('listaCanjes').innerHTML = html;
 }
 
-function cancelarCanje(id){
+function abrirModalEntrega(id){
+  canjeSeleccionado = id;
+  document.getElementById('lugarRetiro').value = "";
+  document.getElementById('horarioRetiro').value = "";
+  document.getElementById('notasRetiro').value = "";
+  document.getElementById('modalEntregar').classList.remove('hidden');
+}
+
+function cerrarModal(){
+  document.getElementById('modalEntregar').classList.add('hidden');
+  canjeSeleccionado = null;
+}
+
+function confirmarEntrega(){
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
-  let canje = canjes.find(c=>c.id==id);
-  let usuario = JSON.parse(localStorage.getItem('usuario3A')) || {};
+  let c = canjes.find(x=>x.id==canjeSeleccionado);
+  if(c){
+    c.estado = "Entregado";
+    c.fechaEntrega = new Date().toISOString();
+    localStorage.setItem('canjes3A', JSON.stringify(canjes));
+    localStorage.setItem('ultimaAccion', Date.now()); // <<<< SOLO AGREGUE ESTO
+    
+    let lugar = document.getElementById('lugarRetiro').value || "Acción Social Municipal";
+    let horario = document.getElementById('horarioRetiro').value || "8 a 13hs";
+    let notas = document.getElementById('notasRetiro').value || "Traer DNI";
+    
+    let mensaje = `Hola ${c.nombre}!%0A%0ATu canje de *${c.beneficio}* ya esta aprobado. %0A%0A*Lugar:* ${lugar}%0A*Horario:* ${horario}%0A*Requisito:* ${notas} + DNI ${c.dni}%0A%0AGracias por sumar por Tres Arroyos!%0A- 3A Somos Todos`;
+    let url = `https://wa.me/54${c.telefono.replace(/[^0-9]/g, '')}?text=${mensaje}`;
+    window.open(url, '_blank');
+    
+    cerrarModal();
+    cargarDatos();
+    alert("✅ Canje marcado y WhatsApp enviado");
+  }
+}
+
+function cargarHistorial(){
+  let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
+  let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
   
-  usuario.puntos = (usuario.puntos || 0) + canje.costo;
-  localStorage.setItem('usuario3A', JSON.stringify(usuario));
+  // HISTORIAL MISIONES
+  let htmlM = "<thead><tr><th>Fecha Envio</th><th>Fecha Validacion</th><th>Vecino</th><th>Misión</th><th>Puntos</th><th>Estado</th></tr></thead><tbody>";
+  if(historial.length==0) htmlM += "<tr><td colspan='6'>No hay historial</td></tr>";
+  historial.forEach(r=>{
+    htmlM += `<tr>
+      <td>${new Date(r.fecha).toLocaleString('es-AR')}</td>
+      <td>${new Date(r.fechaValidacion).toLocaleString('es-AR')}</td>
+      <td><b>${r.usuario}</b><br><small>${r.barrio}</small></td>
+      <td>${r.mision}<br><small>${r.direccion}</small></td>
+      <td>${r.puntos}</td>
+      <td><span class="badge ${r.estado=='Rechazado'?'rechazado':'aprobado'}">${r.estado}</span></td>
+    </tr>`
+  });
+  htmlM += "</tbody>";
+  document.getElementById('tablaHistorialMisiones').innerHTML = htmlM;
   
-  canjes = canjes.filter(c=>c.id!=id);
-  localStorage.setItem('canjes3A', JSON.stringify(canjes));
-  localStorage.setItem('ultimaAccion', Date.now());
-  
-  toast(`↩️ Canje cancelado. +${canje.costo} pts`);
-  cargarTodo();
+  // HISTORIAL CANJES
+  let htmlC = "<thead><tr><th>Fecha Solicitud</th><th>Fecha Entrega</th><th>Vecino - DNI</th><th>Beneficio</th><th>Puntos</th></tr></thead><tbody>";
+  let entregados = canjes.filter(c=>c.estado=="Entregado");
+  if(entregados.length==0) htmlC += "<tr><td colspan='5'>No hay historial</td></tr>";
+  entregados.forEach(c=>{
+    htmlC += `<tr>
+      <td>${new Date(c.fecha).toLocaleString('es-AR')}</td>
+      <td>${new Date(c.fechaEntrega).toLocaleString('es-AR')}</td>
+      <td><b>${c.nombre}</b><br><small>DNI: ${c.dni} - ${c.barrio} - Tel: ${c.telefono}</small></td>
+      <td>${c.beneficio}</td>
+      <td>${c.costo.toLocaleString()}</td>
+    </tr>`
+  });
+  htmlC += "</tbody>";
+  document.getElementById('tablaHistorialCanjes').innerHTML = htmlC;
+}
+
+function cargarRanking(){
+  let usuario = JSON.parse(localStorage.getItem('usuario3A'));
+  let html = "";
+  if(usuario){
+    html = `<tr><td>1</td><td>${usuario.nombre}</td><td>${usuario.barrio}</td><td>${usuario.puntos.toLocaleString()}</td><td>${usuario.nivel}</td></tr>`
+  }else{
+    html = `<tr><td colspan='5' style='text-align:center;padding:20px'>No hay vecinos registrados</td></tr>`
+  }
+  document.getElementById('listaRanking').innerHTML = html;
+}
+
+function mostrarTab(tab, btn){
+  document.querySelectorAll('[id^="tab-"]').forEach(t=>t.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.remove('hidden');
+  btn.classList.add('active');
 }
 </script>
 </body>
