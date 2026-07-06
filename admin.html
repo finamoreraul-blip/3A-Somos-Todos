@@ -47,6 +47,7 @@
   .salir{position:absolute;top:15px;right:20px;background:rgba(255,255,255,.2);border:none;color:white;padding:8px 15px;border-radius:20px;cursor:pointer;font-weight:600}
   .modal{background:rgba(0,0,0,.5);position:fixed;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:99}
   .modal-content{background:white;padding:25px;border-radius:18px;width:90%;max-width:400px}
+  .alerta-sync{background:var(--naranja);color:white;padding:10px;border-radius:10px;margin-bottom:15px;text-align:center;font-weight:700}
 </style>
 </head>
 <body>
@@ -86,6 +87,8 @@
   </header>
 
   <div class="container">
+    <div id="alertaSync" class="alerta-sync hidden">⚡ Se detectaron cambios. Recargando...</div>
+    
     <div class="stat-box">
       <div class="stat"><h3 id="statPendientes">0</h3><p>Misiones Pendientes</p></div>
       <div class="stat"><h3 id="statCanjes">0</h3><p>Canjes Pendientes</p></div>
@@ -142,6 +145,14 @@ let intervaloContador = null;
 let inicioSesion = null;
 let canjeSeleccionado = null;
 
+// ESCUCHAR CAMBIOS DE LOCALSTORAGE EN TIEMPO REAL
+window.addEventListener('storage', function(e){
+  if(e.key == 'reportes3A' || e.key == 'canjes3A'){
+    document.getElementById('alertaSync').classList.remove('hidden');
+    setTimeout(()=>{cargarDatos(); document.getElementById('alertaSync').classList.add('hidden')}, 500);
+  }
+});
+
 window.onload = function(){
   let ultimo = localStorage.getItem('ultimoAccesoAdmin');
   let duracion = localStorage.getItem('duracionUltimaSesion');
@@ -159,7 +170,7 @@ function entrar(){
     inicioSesion = Date.now();
     localStorage.setItem('ultimoAccesoAdmin', inicioSesion);
     cargarDatos();
-    intervaloActualizacion = setInterval(cargarDatos, 3000);
+    intervaloActualizacion = setInterval(cargarDatos, 2000);
     intervaloContador = setInterval(actualizarContadorSesion, 1000);
   }else{alert("Contraseña incorrecta")}
 }
@@ -244,6 +255,7 @@ function aprobarMision(id){
   }
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
   localStorage.setItem('historialMisiones3A', JSON.stringify(historial));
+  localStorage.setItem('ultimaAccion', Date.now()); // FORZAR SYNC
   alert(`✅ Misión aprobada`);
   cargarDatos();
 }
@@ -262,6 +274,7 @@ function rechazarMision(id){
   }
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
   localStorage.setItem('historialMisiones3A', JSON.stringify(historial));
+  localStorage.setItem('ultimaAccion', Date.now()); // FORZAR SYNC
   alert("❌ Misión rechazada");
   cargarDatos();
 }
@@ -303,6 +316,7 @@ function confirmarEntrega(){
     c.estado = "Entregado";
     c.fechaEntrega = new Date().toISOString();
     localStorage.setItem('canjes3A', JSON.stringify(canjes));
+    localStorage.setItem('ultimaAccion', Date.now()); // FORZAR SYNC
     
     let lugar = document.getElementById('lugarRetiro').value || "Acción Social Municipal";
     let horario = document.getElementById('horarioRetiro').value || "8 a 13hs";
