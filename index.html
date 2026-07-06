@@ -6,39 +6,62 @@
 <title>3A SOMOS TODOS - App Vecinal</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700}
+  :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700;--gris:#f0f4f8}
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-  body{background:#f0f4f8;color:#222}
-  .header{background:linear-gradient(135deg,var(--azul),var(--rojo));color:white;padding:20px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.2)}
-  .header h1{font-size:1.8em;font-weight:800}
-  .header p{font-size:.9em;opacity:.9}
-  .puntos-bar{background:var(--oro);color:#000;padding:15px;text-align:center;font-weight:800;font-size:1.2em;position:sticky;top:85px;z-index:9}
-  .container{max-width:800px;margin:0 auto;padding:15px}
-  .card{background:white;margin-bottom:15px;border-radius:16px;padding:20px;box-shadow:0 3px 12px rgba(0,0,0,.08)}
-  .btn{background:var(--verde);color:white;border:none;padding:14px 20px;border-radius:12px;font-weight:700;cursor:pointer;width:100%;font-size:1em;transition:.2s}
-  .btn:hover{transform:scale(.98)}
-  .btn:disabled{background:#ccc;cursor:not-allowed}
-  .input-form{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins';font-size:1em}
-  .input-form:focus{border-color:var(--azul);outline:none}
-  .tabs{display:flex;gap:10px;margin-bottom:15px}
-  .tab-btn{flex:1;padding:14px;background:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-  .tab-btn.active{background:var(--azul);color:white}
-  .hidden{display:none}
-  .mision-card{border-left:5px solid var(--naranja)}
-  .mision-enviada{border-left:5px solid var(--verde);opacity:.7}
-  .beneficio-item{background:#f8f9fa;padding:15px;border-radius:12px;margin-bottom:10px;border:2px solid #eee}
-  .beneficio-item h4{color:var(--azul);margin-bottom:5px}
-  .beneficio-item small{color:#666}
-  label{font-weight:600;font-size:.9em;margin-top:8px;display:block}
-  
-  /* CARRUSEL */
-  .carrusel{position:relative;overflow:hidden;border-radius:16px;margin-bottom:20px}
-  .carrusel-track{display:flex;transition:transform .5s}
-  .carrusel-item{min-width:100%;background:linear-gradient(135deg,var(--azul),var(--verde));color:white;padding:30px;text-align:center}
-  .carrusel-item h2{font-size:1.5em;margin-bottom:10px}
-  .carrusel-dots{text-align:center;margin-top:10px}
-  .dot{display:inline-block;width:10px;height:10px;background:#ccc;border-radius:50%;margin:0 5px;cursor:pointer}
-  .dot.active{background:var(--azul)}
+  body{background:var(--gris);color:#222;padding-bottom:80px}
+ .header{background:linear-gradient(135deg,var(--azul),var(--rojo));color:white;padding:20px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+ .header h1{font-size:1.8em;font-weight:800;letter-spacing:1px}
+ .header p{font-size:.9em;opacity:.9;margin-top:5px}
+ .puntos-bar{background:var(--oro);color:#000;padding:15px;text-align:center;font-weight:800;font-size:1.3em;position:sticky;top:85px;z-index:9;box-shadow:0 2px 5px rgba(0,0,0,.1)}
+ .puntos-bar span{font-size:1.4em}
+ .container{max-width:800px;margin:0 auto;padding:15px}
+ .card{background:white;margin-bottom:15px;border-radius:16px;padding:20px;box-shadow:0 3px 12px rgba(0,0,0,.08);animation:fadeIn.3s}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+ .btn{background:var(--verde);color:white;border:none;padding:14px 20px;border-radius:12px;font-weight:700;cursor:pointer;width:100%;font-size:1em;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+ .btn:hover{transform:scale(.98);opacity:.9}
+ .btn:disabled{background:#ccc;cursor:not-allowed}
+ .btn-rojo{background:var(--rojo)}
+ .input-form{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins';font-size:1em;transition:.2s}
+ .input-form:focus{border-color:var(--azul);outline:none;box-shadow:0 0 0 3px rgba(0,86,179,.1)}
+ .tabs{display:flex;gap:10px;margin-bottom:15px;overflow-x:auto}
+ .tab-btn{flex:1;min-width:120px;padding:14px;background:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:.2s;white-space:nowrap}
+ .tab-btn.active{background:var(--azul);color:white}
+ .hidden{display:none}
+ .mision-card{border-left:5px solid var(--naranja)}
+ .mision-enviada{border-left:5px solid var(--verde);opacity:.7}
+  label{font-weight:600;font-size:.9em;margin-top:8px;display:block;color:#444}
+
+  /* CARRUSEL CON FOTOS */
+ .carrusel{position:relative;overflow:hidden;border-radius:16px;margin-bottom:20px;height:220px;box-shadow:0 4px 15px rgba(0,0,0,.1)}
+ .carrusel-track{display:flex;transition:transform.5s;height:100%}
+ .carrusel-item{min-width:100%;height:100%;background-size:cover;background-position:center;position:relative;color:white;display:flex;align-items:flex-end;padding:20px}
+ .carrusel-item::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(transparent, rgba(0,0,0,.7))}
+ .carrusel-text{position:relative;z-index:2}
+ .carrusel-text h2{font-size:1.5em;margin-bottom:5px;font-weight:800}
+ .carrusel-text p{font-size:.9em}
+ .carrusel-dots{text-align:center;margin-top:10px}
+ .dot{display:inline-block;width:10px;height:10px;background:#ccc;border-radius:50%;margin:0 5px;cursor:pointer;transition:.3s}
+ .dot.active{background:var(--azul);transform:scale(1.3)}
+
+  /* BENEFICIOS CON FOTO */
+ .beneficio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+ .beneficio-card{background:white;border-radius:14px;overflow:hidden;box-shadow:0 3px 10px rgba(0,0,0,.08);cursor:pointer;transition:.2s}
+ .beneficio-card:hover{transform:translateY(-3px);box-shadow:0 5px 15px rgba(0,0,0,.12)}
+ .beneficio-img{height:110px;background-size:cover;background-position:center}
+ .beneficio-info{padding:12px}
+ .beneficio-info h4{font-size:.95em;color:var(--azul);margin-bottom:4px}
+ .beneficio-info p{font-size:.85em;color:var(--verde);font-weight:700}
+
+  /* SUBIR FOTO */
+ .preview-img{width:100%;max-height:200px;object-fit:cover;border-radius:10px;margin-top:10px;display:none}
+ .upload-box{border:2px dashed #ccc;border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:.2s}
+ .upload-box:hover{border-color:var(--azul);background:#f8f9ff}
+
+  /* NAVBAR INFERIOR */
+ .navbar{position:fixed;bottom:0;left:0;width:100%;background:white;display:flex;justify-content:space-around;padding:10px 0;box-shadow:0 -2px 10px rgba(0,0,0,.1);z-index:10}
+ .nav-item{text-align:center;font-size:.75em;color:#666;cursor:pointer}
+ .nav-item.active{color:var(--azul);font-weight:700}
+ .nav-item span{font-size:1.5em;display:block}
 </style>
 </head>
 <body>
@@ -49,30 +72,28 @@
 <div class="puntos-bar">Tus Puntos: <span id="misPuntos">0</span> pts</div>
 
 <div class="container">
-  
-  <!-- CARRUSEL -->
+
+  <!-- CARRUSEL CON FOTOS -->
   <div class="carrusel">
     <div class="carrusel-track" id="carruselTrack">
-      <div class="carrusel-item">
-        <h2>🌳 Suma por tu Barrio</h2>
-        <p>Reporta misiones y gana puntos para canjear beneficios</p>
+      <div class="carrusel-item" style="background-image:url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800')">
+        <div class="carrusel-text"><h2>🌳 Suma por tu Barrio</h2><p>Reporta misiones y gana puntos para canjear</p></div>
       </div>
-      <div class="carrusel-item">
-        <h2>🎁 Canjea tus Puntos</h2>
-        <p>Bolsas, kits, entradas y descuentos para vos</p>
+      <div class="carrusel-item" style="background-image:url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800')">
+        <div class="carrusel-text"><h2>🎁 Canjea tus Puntos</h2><p>Bolsas, kits, entradas y descuentos</p></div>
       </div>
-      <div class="carrusel-item">
-        <h2>🏆 Se parte del Ranking</h2>
-        <p>Los vecinos que mas suman aparecen primeros</p>
+      <div class="carrusel-item" style="background-image:url('https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=800')">
+        <div class="carrusel-text"><h2>🏆 Se parte del Ranking</h2><p>Los vecinos que mas suman aparecen primeros</p></div>
       </div>
     </div>
     <div class="carrusel-dots" id="carruselDots"></div>
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="mostrarTab('reportar', this)">📸 Reportar Misión</button>
-    <button class="tab-btn" onclick="mostrarTab('canjear', this)">🎁 Canjear Puntos</button>
+    <button class="tab-btn active" onclick="mostrarTab('reportar', this)">📸 Reportar</button>
+    <button class="tab-btn" onclick="mostrarTab('canjear', this)">🎁 Canjear</button>
     <button class="tab-btn" onclick="mostrarTab('beneficios', this)">🏪 Beneficios</button>
+    <button class="tab-btn" onclick="mostrarTab('ranking', this)">🏆 Ranking</button>
   </div>
 
   <!-- TAB REPORTAR -->
@@ -81,46 +102,42 @@
       <h3 style="color:var(--azul);margin-bottom:15px">Reportar Nueva Misión</h3>
       <label>Que hiciste?</label>
       <input type="text" id="mision" class="input-form" placeholder="Ej: Limpiar plaza, pintar cordon">
-      
       <label>Dirección</label>
       <input type="text" id="direccion" class="input-form" placeholder="Ej: Av. Belgrano 123">
-      
       <label>Barrio</label>
       <input type="text" id="barrio" class="input-form" placeholder="Ej: Centro">
-      
       <label>Puntos que solicitas</label>
       <input type="number" id="puntos" class="input-form" placeholder="Ej: 100">
-      
-      <label>Descripción y Evidencia</label>
+      <label>Descripción</label>
       <textarea id="descripcion" class="input-form" rows="3" placeholder="Contanos que hiciste..."></textarea>
-      
-      <button class="btn" onclick="enviarMision()">Enviar a Validar</button>
+      <label>Evidencia - Foto</label>
+      <div class="upload-box" onclick="document.getElementById('fotoInput').click()">
+        <span>📷 Click para subir foto</span>
+        <input type="file" id="fotoInput" accept="image/*" style="display:none" onchange="previewFoto(event)">
+        <img id="preview" class="preview-img">
+      </div>
+      <button class="btn" onclick="enviarMision()">📤 Enviar a Validar</button>
     </div>
     <div id="misMisiones"></div>
   </div>
 
-  <!-- TAB CANJEAR -->
+  <!-- TAB CANJEAR CON FORMULARIO COMPLETO -->
   <div id="tab-canjear" class="hidden">
     <div class="card">
       <h3 style="color:var(--azul);margin-bottom:15px">Formulario de Canje</h3>
-      <p style="font-size:.9em;color:#666;margin-bottom:15px">Completa todos tus datos. Te vamos a avisar por WhatsApp cuando este listo para retirar.</p>
-      
-      <label>Nombre y Apellido</label>
+      <p style="font-size:.9em;color:#666;margin-bottom:15px">Completa todos tus datos. Te avisamos por WhatsApp cuando este listo para retirar.</p>
+
+      <label>Nombre y Apellido *</label>
       <input type="text" id="nombreCanje" class="input-form" placeholder="Juan Perez">
-      
-      <label>DNI</label>
+      <label>DNI *</label>
       <input type="text" id="dniCanje" class="input-form" placeholder="12345678">
-      
-      <label>Teléfono con WhatsApp</label>
+      <label>Teléfono con WhatsApp *</label>
       <input type="text" id="telCanje" class="input-form" placeholder="2983-123456">
-      
       <label>Barrio</label>
       <input type="text" id="barrioCanje" class="input-form" placeholder="Centro">
-      
       <label>Dirección de entrega</label>
       <input type="text" id="direccionCanje" class="input-form" placeholder="Opcional">
-      
-      <label>Elegi tu Beneficio</label>
+      <label>Elegi tu Beneficio *</label>
       <select id="beneficioCanje" class="input-form" onchange="actualizarCosto()">
         <option value="">Selecciona un beneficio</option>
         <option value="Bolsa de Residuos" data-costo="500">Bolsa de Residuos - 500 pts</option>
@@ -128,39 +145,53 @@
         <option value="Entrada al Cine" data-costo="800">Entrada al Cine - 800 pts</option>
         <option value="Descuento Comercio" data-costo="1200">Descuento Comercio - 1200 pts</option>
       </select>
-      
-      <div id="costoInfo" style="background:#e8f5e9;padding:10px;border-radius:8px;margin:10px 0;text-align:center;font-weight:700;color:var(--verde)" class="hidden"></div>
-      
-      <button class="btn" onclick="solicitarCanje()">Solicitar Canje</button>
+      <div id="costoInfo" style="background:#e8f5e9;padding:12px;border-radius:8px;margin:10px 0;text-align:center;font-weight:700;color:var(--verde)" class="hidden"></div>
+      <button class="btn" onclick="solicitarCanje()">✅ Solicitar Canje</button>
     </div>
-    
     <div id="misCanjes"></div>
   </div>
 
-  <!-- TAB BENEFICIOS -->
+  <!-- TAB BENEFICIOS CON FOTOS -->
   <div id="tab-beneficios" class="hidden">
     <h3 style="color:var(--azul);margin-bottom:15px">Beneficios Disponibles</h3>
-    <div class="beneficio-item">
-      <h4>🎒 Bolsa de Residuos</h4>
-      <small>500 puntos - Retiro en Acción Social</small>
-    </div>
-    <div class="beneficio-item">
-      <h4>♻️ Kit de Reciclado</h4>
-      <small>1000 puntos - Incluye cestos y bolsas</small>
-    </div>
-    <div class="beneficio-item">
-      <h4>🎬 Entrada al Cine</h4>
-      <small>800 puntos - 2x1 en Cine Municipal</small>
-    </div>
-    <div class="beneficio-item">
-      <h4>🏪 Descuento Comercio</h4>
-      <small>1200 puntos - 20% en comercios adheridos</small>
+    <div class="beneficio-grid">
+      <div class="beneficio-card" onclick="seleccionarBeneficio('Bolsa de Residuos', 500)">
+        <div class="beneficio-img" style="background-image:url('https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=400')"></div>
+        <div class="beneficio-info"><h4>Bolsa de Residuos</h4><p>500 pts</p></div>
+      </div>
+      <div class="beneficio-card" onclick="seleccionarBeneficio('Kit de Reciclado', 1000)">
+        <div class="beneficio-img" style="background-image:url('https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400')"></div>
+        <div class="beneficio-info"><h4>Kit de Reciclado</h4><p>1000 pts</p></div>
+      </div>
+      <div class="beneficio-card" onclick="seleccionarBeneficio('Entrada al Cine', 800)">
+        <div class="beneficio-img" style="background-image:url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400')"></div>
+        <div class="beneficio-info"><h4>Entrada al Cine</h4><p>800 pts</p></div>
+      </div>
+      <div class="beneficio-card" onclick="seleccionarBeneficio('Descuento Comercio', 1200)">
+        <div class="beneficio-img" style="background-image:url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=400')"></div>
+        <div class="beneficio-info"><h4>Descuento Comercio</h4><p>1200 pts</p></div>
+      </div>
     </div>
   </div>
+
+  <!-- TAB RANKING -->
+  <div id="tab-ranking" class="hidden">
+    <h3 style="color:var(--azul);margin-bottom:15px">🏆 Ranking de Vecinos</h3>
+    <div id="listaRanking"></div>
+  </div>
+</div>
+
+<!-- NAVBAR INFERIOR -->
+<div class="navbar">
+  <div class="nav-item active" onclick="mostrarTab('reportar', document.querySelectorAll('.tab-btn')[0])"><span>📸</span>Reportar</div>
+  <div class="nav-item" onclick="mostrarTab('canjear', document.querySelectorAll('.tab-btn')[1])"><span>🎁</span>Canjear</div>
+  <div class="nav-item" onclick="mostrarTab('beneficios', document.querySelectorAll('.tab-btn')[2])"><span>🏪</span>Beneficios</div>
+  <div class="nav-item" onclick="mostrarTab('ranking', document.querySelectorAll('.tab-btn')[3])"><span>🏆</span>Ranking</div>
 </div>
 
 <script>
 let usuario = JSON.parse(localStorage.getItem('usuario3A')) || {id:1,nombre:"Vecino",puntos:2500,barrio:"Centro",nivel:"Bronce"};
+let fotoBase64 = "";
 localStorage.setItem('usuario3A', JSON.stringify(usuario));
 
 // CARRUSEL
@@ -170,82 +201,73 @@ function iniciarCarrusel(){
   let items = track.children.length;
   let dots = document.getElementById('carruselDots');
   dots.innerHTML = "";
-  for(let i=0;i<items;i++){
-    dots.innerHTML += `<span class="dot ${i==0?'active':''}" onclick="irASlide(${i})"></span>`;
-  }
-  setInterval(()=>{
-    slideActual = (slideActual + 1) % items;
-    irASlide(slideActual);
-  }, 4000);
+  for(let i=0;i<items;i++){dots.innerHTML += `<span class="dot ${i==0?'active':''}" onclick="irASlide(${i})"></span>`;}
+  setInterval(()=>{slideActual = (slideActual + 1) % items; irASlide(slideActual);}, 4000);
 }
-function irASlide(n){
-  slideActual = n;
-  document.getElementById('carruselTrack').style.transform = `translateX(-${n*100}%)`;
-  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active', i==n));
+function irASlide(n){slideActual = n; document.getElementById('carruselTrack').style.transform = `translateX(-${n*100}%)`; document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active', i==n));}
+
+// PREVIEW FOTO
+function previewFoto(e){
+  let file = e.target.files[0];
+  if(file){
+    let reader = new FileReader();
+    reader.onload = function(ev){
+      fotoBase64 = ev.target.result;
+      document.getElementById('preview').src = fotoBase64;
+      document.getElementById('preview').style.display = 'block';
+    }
+    reader.readAsDataURL(file);
+  }
 }
 
 function mostrarTab(tab, btn){
   document.querySelectorAll('[id^="tab-"]').forEach(t=>t.classList.add('hidden'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.remove('hidden');
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
   if(tab=='reportar') cargarMisMisiones();
   if(tab=='canjear') cargarMisCanjes();
+  if(tab=='ranking') cargarRanking();
 }
 
 function actualizarCosto(){
   let select = document.getElementById('beneficioCanje');
   let costo = select.options[select.selectedIndex].getAttribute('data-costo');
   let info = document.getElementById('costoInfo');
-  if(costo){
-    info.innerHTML = `Este beneficio cuesta: ${costo} puntos`;
-    info.classList.remove('hidden');
-  }else{
-    info.classList.add('hidden');
-  }
+  if(costo){info.innerHTML = `Este beneficio cuesta: ${parseInt(costo).toLocaleString()} puntos`; info.classList.remove('hidden');}else{info.classList.add('hidden');}
+}
+
+function seleccionarBeneficio(nombre, costo){
+  mostrarTab('canjear', document.querySelectorAll('.tab-btn')[1]);
+  document.getElementById('beneficioCanje').value = nombre;
+  actualizarCosto();
 }
 
 function enviarMision(){
   let mision = document.getElementById('mision').value;
-  if(!mision || !document.getElementById('direccion').value) return alert("Completa todos los campos");
-  
+  if(!mision ||!document.getElementById('direccion').value) return alert("Completa Mision y Direccion");
+
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
-  let nueva = {
-    id: Date.now(),
-    mision: mision,
-    direccion: document.getElementById('direccion').value,
-    barrio: document.getElementById('barrio').value,
-    descripcion: document.getElementById('descripcion').value,
-    puntos: parseInt(document.getElementById('puntos').value) || 0,
-    usuario: usuario.nombre,
-    usuarioId: usuario.id,
-    fecha: new Date().toISOString(),
-    estado: "Pendiente"
-  };
+  let nueva = {id: Date.now(), mision: mision, direccion: document.getElementById('direccion').value, barrio: document.getElementById('barrio').value, descripcion: document.getElementById('descripcion').value, puntos: parseInt(document.getElementById('puntos').value) || 0, foto: fotoBase64, usuario: usuario.nombre, usuarioId: usuario.id, fecha: new Date().toISOString(), estado: "Pendiente"};
   reportes.push(nueva);
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
   localStorage.setItem('ultimaAccion', Date.now());
-  
+
   alert("✅ Misión enviada a validar");
-  document.querySelectorAll('#tab-reportar .input-form').forEach(i=>i.value="");
+  document.querySelectorAll('#tab-reportar.input-form').forEach(i=>i.value="");
+  document.getElementById('preview').style.display = 'none';
+  fotoBase64 = "";
   cargarMisMisiones();
 }
 
 function cargarMisMisiones(){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
   let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
-  let todos = [...reportes, ...historial].filter(r=>r.usuarioId==usuario.id);
+  let todos = [...reportes,...historial].filter(r=>r.usuarioId==usuario.id);
   let html = "<h3 style='margin:20px 0;color:var(--azul)'>Mis Misiones</h3>";
   if(todos.length==0) html += "<div class='card'>Aun no enviaste misiones</div>";
-  todos.forEach(r=>{
-    let clase = r.estado=="Pendiente" ? "mision-card" : "mision-enviada";
-    let estadoTxt = r.estado||'Pendiente';
-    html += `<div class="card ${clase}">
-      <b>${r.mision}</b> - ${r.puntos} pts<br>
-      <small><b>Estado:</b> ${estadoTxt} - <b>Fecha:</b> ${new Date(r.fecha).toLocaleDateString('es-AR')}</small><br>
-      <small>${r.direccion} - ${r.barrio}</small>
-    </div>`
-  });
+  todos.forEach(r=>{let clase = r.estado=="Pendiente"? "mision-card" : "mision-enviada"; let estadoTxt = r.estado||'Pendiente'; html += `<div class="card ${clase}"><b>${r.mision}</b> - ${r.puntos} pts<br><small><b>Estado:</b> ${estadoTxt} - <b>Fecha:</b> ${new Date(r.fecha).toLocaleDateString('es-AR')}</small><br><small>${r.direccion} - ${r.barrio}</small>${r.foto?`<img src="${r.foto}" style="width:100%;border-radius:8px;margin-top:10px">`:''}</div>`});
   document.getElementById('misMisiones').innerHTML = html;
   document.getElementById('misPuntos').innerText = usuario.puntos.toLocaleString();
 }
@@ -253,33 +275,18 @@ function cargarMisMisiones(){
 function solicitarCanje(){
   let select = document.getElementById('beneficioCanje');
   let costo = parseInt(select.options[select.selectedIndex]?.getAttribute('data-costo') || 0);
-  
-  if(!document.getElementById('nombreCanje').value || !document.getElementById('dniCanje').value || !document.getElementById('telCanje').value) 
-    return alert("Completa Nombre, DNI y Telefono");
+  if(!document.getElementById('nombreCanje').value ||!document.getElementById('dniCanje').value ||!document.getElementById('telCanje').value) return alert("Completa Nombre, DNI y Telefono");
   if(!costo) return alert("Selecciona un beneficio");
   if(usuario.puntos < costo) return alert("No tenes suficientes puntos");
-  
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
-  let nuevo = {
-    id: Date.now(),
-    nombre: document.getElementById('nombreCanje').value,
-    dni: document.getElementById('dniCanje').value,
-    telefono: document.getElementById('telCanje').value,
-    barrio: document.getElementById('barrioCanje').value,
-    direccion: document.getElementById('direccionCanje').value,
-    beneficio: select.value,
-    costo: costo,
-    fecha: new Date().toISOString(),
-    estado: "Pendiente"
-  };
+  let nuevo = {id: Date.now(), nombre: document.getElementById('nombreCanje').value, dni: document.getElementById('dniCanje').value, telefono: document.getElementById('telCanje').value, barrio: document.getElementById('barrioCanje').value, direccion: document.getElementById('direccionCanje').value, beneficio: select.value, costo: costo, fecha: new Date().toISOString(), estado: "Pendiente"};
   canjes.push(nuevo);
   usuario.puntos -= costo;
   localStorage.setItem('canjes3A', JSON.stringify(canjes));
   localStorage.setItem('usuario3A', JSON.stringify(usuario));
   localStorage.setItem('ultimaAccion', Date.now());
-  
   alert("✅ Canje solicitado. Te avisamos por WhatsApp cuando este listo");
-  document.querySelectorAll('#tab-canjear .input-form').forEach(i=>i.value="");
+  document.querySelectorAll('#tab-canjear.input-form').forEach(i=>i.value="");
   document.getElementById('costoInfo').classList.add('hidden');
   cargarMisCanjes();
   cargarMisMisiones();
@@ -290,13 +297,13 @@ function cargarMisCanjes(){
   let misCanjes = canjes.filter(c=>c.dni == document.getElementById('dniCanje').value || c.nombre.includes(usuario.nombre));
   let html = "<h3 style='margin:20px 0;color:var(--azul)'>Mis Solicitudes de Canje</h3>";
   if(misCanjes.length==0) html += "<div class='card'>No tenes canjes solicitados</div>";
-  misCanjes.forEach(c=>{
-    html += `<div class="card">
-      <b>${c.beneficio}</b> - ${c.costo} pts<br>
-      <small><b>Estado:</b> ${c.estado} - <b>Fecha:</b> ${new Date(c.fecha).toLocaleDateString('es-AR')}</small>
-    </div>`
-  });
+  misCanjes.forEach(c=>{html += `<div class="card"><b>${c.beneficio}</b> - ${c.costo.toLocaleString()} pts<br><small><b>Estado:</b> ${c.estado} - <b>Fecha:</b> ${new Date(c.fecha).toLocaleDateString('es-AR')}</small></div>`});
   document.getElementById('misCanjes').innerHTML = html;
+}
+
+function cargarRanking(){
+  let html = `<div class="card"><b>1. ${usuario.nombre}</b><br><small>${usuario.barrio} - ${usuario.puntos.toLocaleString()} pts - Nivel ${usuario.nivel}</small></div>`;
+  document.getElementById('listaRanking').innerHTML = html;
 }
 
 iniciarCarrusel();
