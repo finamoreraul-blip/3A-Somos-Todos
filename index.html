@@ -3,334 +3,230 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>3A SOMOS TODOS</title>
+<title>3A SOMOS TODOS - App Vecinal</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700;--violeta:#8e44ad}
+  :root{--azul:#0056b3;--verde:#0d8a4f;--naranja:#ff9800;--rojo:#d32f2f;--oro:#FFD700}
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-  body{background:#f0f4f8;color:#222;padding-bottom:90px}
- .hidden{display:none}
- .header{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;padding:18px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.1)}
- .header h1{font-size:1.4em;font-weight:800;letter-spacing:.5px}
- .header p{font-size:.8em;opacity:.9}
- .eslogan-box{background:linear-gradient(135deg,var(--azul),var(--verde));color:white;text-align:center;padding:25px 15px 20px 15px}
- .eslogan-box h2{font-size:1.9em;font-weight:800;margin-bottom:8px}
- .eslogan-box p{font-size:1em;opacity:.95}
- .carrusel-wrapper{padding:15px 0 0 0;background:#f0f4f8}
- .carrusel{position:relative;overflow:hidden;border-radius:0;margin:0;background:#000;box-shadow:0 4px 15px rgba(0,0,0,.15)}
- .carrusel-track{display:flex;transition:transform.6s cubic-bezier(.4,0,.2,1)}
- .carrusel-item{min-width:100%;position:relative;background:#000}
- .carrusel-item img{width:100%;height:100%;aspect-ratio:16/9;object-fit:cover;display:block}
- .carrusel-text{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent, rgba(0,0,0,.9));color:white;padding:35px 20px 20px 20px;font-weight:800;font-size:1.3em;line-height:1.4;text-align:center}
- .carrusel-dots{display:flex;justify-content:center;gap:10px;padding:15px 0}
- .dot{width:12px;height:12px;border-radius:50%;background:#bbb;cursor:pointer;transition:.3s}
- .dot.active{background:var(--verde);width:14px;height:14px}
- .card{background:white;margin:15px;border-radius:18px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.08)}
- .puntos{display:flex;justify-content:space-between;align-items:center}
- .puntos h2{color:var(--azul);font-size:2.2em;font-weight:800}
- .nivel-badge{background:var(--oro);color:#333;padding:6px 14px;border-radius:20px;font-weight:800;font-size:.8em}
- .barra{height:12px;background:#e0e0e0;border-radius:10px;margin-top:12px;overflow:hidden}
- .progreso{height:100%;width:0;background:linear-gradient(90deg,var(--azul),var(--verde));border-radius:10px;transition:width.8s ease}
- .titulo{padding:0 20px;margin:25px 0 12px;font-size:1.3em;font-weight:700;color:var(--azul)}
- .mision{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:white;border-left:6px solid;box-shadow:0 3px 10px rgba(0,0,0,.06);transition:.2s}
- .mision:active{transform:scale(.98)}
- .mision.verde{border-color:var(--verde)}.mision.naranja{border-color:var(--naranja)}.mision.rojo{border-color:var(--rojo)}.mision.violeta{border-color:var(--violeta)}
- .beneficio{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:linear-gradient(135deg,#fff,#e8f5e9);border:2px solid var(--verde)}
- .grupo-whatsapp{display:flex;gap:15px;align-items:center;margin:12px 15px;padding:16px;border-radius:16px;background:linear-gradient(135deg,#e8f5e9,#d4f1d7);border:2px solid #25D366}
- .icon{font-size:2.5em;min-width:45px;text-align:center}.info{flex:1}.info h3,h4{color:var(--azul);margin-bottom:4px;font-weight:700}
- .info p{font-size:.85em;color:#555}.pts{font-weight:800;font-size:1.1em}
- .pts.verde{color:var(--verde)}.pts.naranja{color:var(--naranja)}.pts.rojo{color:var(--rojo)}.pts.violeta{color:var(--violeta)}
- .btn{background:var(--verde);color:white;border:none;padding:10px 18px;border-radius:25px;font-weight:700;cursor:pointer;transition:.2s}
- .btn:active{transform:scale(.95)}.btn:disabled{background:#ccc;cursor:not-allowed}.btn-azul{background:var(--azul)}.btn-rojo{background:var(--rojo)}.btn-verde{background:#25D366}
- .input-form{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins';font-size:1em}
-  textarea.input-form{min-height:80px;resize:vertical}
- .mapa{height:250px;background:#dbeafe;border-radius:15px;margin:15px;display:flex;align-items:center;justify-content:center;font-size:3em;text-align:center;font-weight:700;color:var(--azul)}
- .alerta-card{background:#fff3cd;border-left:5px solid var(--naranja);padding:12px;margin:12px 15px;border-radius:10px;font-size:.9em}
- .ranking-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee}
- .insignia{display:inline-block;background:#e8f5e9;color:var(--verde);padding:5px 10px;border-radius:15px;font-size:.8em;margin:4px;font-weight:600}
- .menu-bottom{position:fixed;bottom:0;width:100%;background:white;display:flex;justify-content:space-around;padding:8px 0;box-shadow:0 -3px 12px rgba(0,0,0,.1)}
- .menu-item{text-align:center;font-size:.7em;color:#888;cursor:pointer;flex:1}.menu-item.active{color:var(--azul);font-weight:700}
- .menu-item span{font-size:1.8em;display:block}.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#333;color:white;padding:12px 20px;border-radius:25px;z-index:99;opacity:0;transition:.3s}
- .toast.show{opacity:1} #previewImg{width:100%;border-radius:10px;margin-top:10px;max-height:200px;object-fit:cover}
- .alerta-fraude{background:#ffebee;border:1px solid var(--rojo);color:var(--rojo);padding:10px;border-radius:10px;margin-top:10px;font-size:.85em;font-weight:600}
- .contador{font-weight:800;color:#25D366;font-size:.9em}
+  body{background:#f0f4f8;color:#222}
+  .header{background:linear-gradient(135deg,var(--azul),var(--rojo));color:white;padding:20px;text-align:center;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+  .header h1{font-size:1.8em;font-weight:800}
+  .header p{font-size:.9em;opacity:.9}
+  .puntos-bar{background:var(--oro);color:#000;padding:15px;text-align:center;font-weight:800;font-size:1.2em;position:sticky;top:85px;z-index:9}
+  .container{max-width:800px;margin:0 auto;padding:15px}
+  .card{background:white;margin-bottom:15px;border-radius:16px;padding:20px;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+  .btn{background:var(--verde);color:white;border:none;padding:14px 20px;border-radius:12px;font-weight:700;cursor:pointer;width:100%;font-size:1em;transition:.2s}
+  .btn:hover{transform:scale(.98)}
+  .btn:disabled{background:#ccc;cursor:not-allowed}
+  .input-form{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #ccc;font-family:'Poppins';font-size:1em}
+  .input-form:focus{border-color:var(--azul);outline:none}
+  .tabs{display:flex;gap:10px;margin-bottom:15px}
+  .tab-btn{flex:1;padding:14px;background:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .tab-btn.active{background:var(--azul);color:white}
+  .hidden{display:none}
+  .mision-card{border-left:5px solid var(--naranja)}
+  .mision-enviada{border-left:5px solid var(--verde);opacity:.7}
+  .beneficio-item{background:#f8f9fa;padding:15px;border-radius:12px;margin-bottom:10px;border:2px solid #eee}
+  .beneficio-item h4{color:var(--azul);margin-bottom:5px}
+  .beneficio-item small{color:#666}
+  label{font-weight:600;font-size:.9em;margin-top:8px;display:block}
 </style>
 </head>
 <body>
+<div class="header">
+  <h1>3A SOMOS TODOS</h1>
+  <p>Municipalidad de Tres Arroyos</p>
+</div>
+<div class="puntos-bar">Tus Puntos: <span id="misPuntos">0</span> pts</div>
 
-<div id="pantalla-inicio">
-  <header class="header"><h1>3A SOMOS TODOS</h1><p>El que cuida, gana. El que ayuda, suma</p></header>
-
-  <div class="eslogan-box">
-    <h2>Transformemos 3A entre todos</h2>
-    <p>Tu acción vale puntos. Tus puntos valen beneficios.</p>
+<div class="container">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="mostrarTab('reportar', this)">📸 Reportar Misión</button>
+    <button class="tab-btn" onclick="mostrarTab('canjear', this)">🎁 Canjear Puntos</button>
   </div>
 
-  <div class="carrusel-wrapper">
-    <div class="carrusel">
-      <div class="carrusel-track" id="carruselTrack">
-        <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=1200"><div class="carrusel-text">🧹 Limpiando la plaza del barrio</div></div>
-        <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200"><div class="carrusel-text">👴 Ayudando a un vecino</div></div>
-        <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200"><div class="carrusel-text">🚧 Tapando baches entre todos</div></div>
-        <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1462143338525-5a35afba7e13?w=1200"><div class="carrusel-text">🌱 Armando huerta comunitaria</div></div>
-        <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200"><div class="carrusel-text">🎨 Pintando murales en la escuela</div></div>
-        <div class="carrusel-item"><img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1200"><div class="carrusel-text">♻️ Jornada de reciclado barrial</div></div>
-      </div>
-      <div class="carrusel-dots" id="carruselDots"></div>
+  <!-- TAB REPORTAR -->
+  <div id="tab-reportar">
+    <div class="card">
+      <h3 style="color:var(--azul);margin-bottom:15px">Reportar Nueva Misión</h3>
+      <label>Que hiciste?</label>
+      <input type="text" id="mision" class="input-form" placeholder="Ej: Limpiar plaza, pintar cordon">
+      
+      <label>Dirección</label>
+      <input type="text" id="direccion" class="input-form" placeholder="Ej: Av. Belgrano 123">
+      
+      <label>Barrio</label>
+      <input type="text" id="barrio" class="input-form" placeholder="Ej: Centro">
+      
+      <label>Puntos que solicitas</label>
+      <input type="number" id="puntos" class="input-form" placeholder="Ej: 100">
+      
+      <label>Descripción y Evidencia</label>
+      <textarea id="descripcion" class="input-form" rows="3" placeholder="Contanos que hiciste..."></textarea>
+      
+      <button class="btn" onclick="enviarMision()">Enviar a Validar</button>
     </div>
+    <div id="misMisiones"></div>
   </div>
 
-  <div class="card">
-    <div class="puntos">
-      <div><h2 id="puntosTotales">0</h2><span id="userInfo">Cargando...</span></div>
-      <div class="nivel-badge" id="nivelBadge">BRONCE</div>
+  <!-- TAB CANJEAR -->
+  <div id="tab-canjear" class="hidden">
+    <div class="card">
+      <h3 style="color:var(--azul);margin-bottom:15px">Formulario de Canje</h3>
+      <p style="font-size:.9em;color:#666;margin-bottom:15px">Completa todos tus datos. Te vamos a avisar por WhatsApp cuando este listo para retirar.</p>
+      
+      <label>Nombre y Apellido</label>
+      <input type="text" id="nombreCanje" class="input-form" placeholder="Juan Perez">
+      
+      <label>DNI</label>
+      <input type="text" id="dniCanje" class="input-form" placeholder="12345678">
+      
+      <label>Teléfono con WhatsApp</label>
+      <input type="text" id="telCanje" class="input-form" placeholder="2983-123456">
+      
+      <label>Barrio</label>
+      <input type="text" id="barrioCanje" class="input-form" placeholder="Centro">
+      
+      <label>Dirección de entrega</label>
+      <input type="text" id="direccionCanje" class="input-form" placeholder="Opcional">
+      
+      <label>Elegi tu Beneficio</label>
+      <select id="beneficioCanje" class="input-form" onchange="actualizarCosto()">
+        <option value="">Selecciona un beneficio</option>
+        <option value="Bolsa de Residuos" data-costo="500">Bolsa de Residuos - 500 pts</option>
+        <option value="Kit de Reciclado" data-costo="1000">Kit de Reciclado - 1000 pts</option>
+        <option value="Entrada al Cine" data-costo="800">Entrada al Cine - 800 pts</option>
+        <option value="Descuento Comercio" data-costo="1200">Descuento Comercio - 1200 pts</option>
+      </select>
+      
+      <div id="costoInfo" style="background:#e8f5e9;padding:10px;border-radius:8px;margin:10px 0;text-align:center;font-weight:700;color:var(--verde)" class="hidden"></div>
+      
+      <button class="btn" onclick="solicitarCanje()">Solicitar Canje</button>
     </div>
-    <div class="barra"><div class="progreso" id="barraProgreso"></div></div>
-    <p style="font-size:.85em;margin-top:8px" id="siguienteNivel"></p>
-    <div id="misInsignias" style="margin-top:10px"></div>
-  </div>
-
-  <h2 class="titulo">🎯 Misiones</h2><div id="listaMisiones"></div>
-  <h2 class="titulo">🎁 Beneficios Municipales</h2><div id="listaBeneficios"></div>
-  <h2 class="titulo">💬 Grupos de WhatsApp del Barrio</h2><div id="listaGrupos"></div>
-</div>
-
-<div id="pantalla-reporte" class="hidden">
-  <header class="header"><h1>Reportar Misión</h1></header>
-  <div class="card">
-    <h3 id="tituloReporte">Misión</h3>
-    <p style="font-size:.85em;color:#666;margin-bottom:10px" id="descReporte"></p>
-    <label style="font-weight:700;font-size:.9em">1. Dirección donde lo hiciste</label>
-    <input type="text" id="inputDireccion" class="input-form" placeholder="Ej: Av. Moreno 1200">
-    <label style="font-weight:700;font-size:.9em">2. Describí lo que hiciste</label>
-    <textarea id="inputDescripcion" class="input-form" placeholder="Contanos qué hiciste, cuánto tiempo, etc."></textarea>
-    <label style="font-weight:700;font-size:.9em">3. Adjuntá una foto como evidencia</label>
-    <input type="file" id="inputFoto" class="input-form" accept="image/*" capture="environment" onchange="previsualizarFoto(event)">
-    <img id="previewImg" class="hidden">
-    <div id="alertaFraude" class="alerta-fraude hidden">⚠️ Anti-fraude: Esta foto ya fue usada en otra misión</div>
-    <button class="btn" style="width:100%;margin-top:15px" onclick="enviarReporte()">Enviar para Validar</button>
-    <button class="btn btn-rojo" style="width:100%;margin-top:10px" onclick="mostrarPantalla('inicio')">Cancelar</button>
+    
+    <div id="misCanjes"></div>
   </div>
 </div>
-
-<div id="pantalla-mapa" class="hidden">
-  <header class="header"><h1>Mapa de Calor 3A</h1></header>
-  <div class="mapa">🗺️<br><span style="font-size:.4em">Puntos rojos: Problemas<br>Puntos verdes: Solucionado<br>Puntos violeta: Ayuda</span></div>
-  <div class="card"><h3>Últimos Reportes</h3><p>🔴 Bache - Av. Moreno 1200</p><p>🟣 Abuelo necesita pasto - Barrio Unión</p><p>🟢 Plaza Limpia - Parque Cabañas</p><p>🔴 Luz rota - Calle 25 de Mayo 800</p></div>
-</div>
-
-<div id="pantalla-alertas" class="hidden">
-  <header class="header"><h1>Alertas Vecinales</h1></header>
-  <div class="alerta-card"><b>🚨 Corte de Luz</b><p>Tu cuadra: Barrio Unión. EDEA trabajando. Est. 18hs</p></div>
-  <div class="alerta-card"><b>🛠️ Jornada de Obra</b><p>Sábado 9hs: Pintamos la plaza. Suma 250pts + vianda</p></div>
-  <div class="alerta-card"><b>♻️ Reciclado</b><p>Hoy pasa el camión por tu barrio a las 15hs</p></div>
-  <div class="alerta-card"><b>💧 Corte de Agua</b><p>Mañana 8 a 12hs. Barrio Obrero por mantenimiento</p></div>
-</div>
-
-<div id="pantalla-ranking" class="hidden">
-  <header class="header"><h1>Ranking 3A</h1></header>
-  <div class="card"><h3>🏆 Barrios</h3>
-    <div class="ranking-item"><span>1. Barrio Unión</span><b>15.420 pts</b></div>
-    <div class="ranking-item"><span>2. Barrio Obrero</span><b>12.100 pts</b></div>
-    <div class="ranking-item"><span>3. Centro</span><b>9.800 pts</b></div>
-    <div class="ranking-item"><span>4. Villa Clelia</span><b>8.500 pts</b></div>
-    <div class="ranking-item"><span>5. Barrio San Martín</span><b>7.200 pts</b></div>
-  </div>
-  <div class="card"><h3>🏫 Escuelas</h3>
-    <div class="ranking-item"><span>1. Secundaria N°1</span><b>8.200 pts</b></div>
-    <div class="ranking-item"><span>2. Comercial</span><b>6.500 pts</b></div>
-    <div class="ranking-item"><span>3. Técnica N°2</span><b>5.900 pts</b></div>
-    <div class="ranking-item"><span>4. EP N°14</span><b>4.300 pts</b></div>
-  </div>
-  <div class="card"><h3>👤 Vecinos Destacados</h3>
-    <div class="ranking-item"><span>1. María López</span><b>3.450 pts</b></div>
-    <div class="ranking-item"><span>2. Juan Pérez</span><b>3.200 pts</b></div>
-    <div class="ranking-item"><span>3. Ana García</span><b>2.980 pts</b></div>
-  </div>
-</div>
-
-<nav class="menu-bottom">
-  <div class="menu-item active" onclick="mostrarPantalla('inicio')"><span>🏠</span>Inicio</div>
-  <div class="menu-item" onclick="mostrarPantalla('mapa')"><span>🗺️</span>Mapa</div>
-  <div class="menu-item" onclick="mostrarPantalla('alertas')"><span>🔔</span>Alertas</div>
-  <div class="menu-item" onclick="mostrarPantalla('ranking')"><span>🏆</span>Ranking</div>
-</nav>
-
-<div class="toast" id="toast"></div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  iniciarCarrusel();
-  actualizarUI();
-});
+let usuario = JSON.parse(localStorage.getItem('usuario3A')) || {id:1,nombre:"Vecino",puntos:2500,barrio:"Centro",nivel:"Bronce"};
+localStorage.setItem('usuario3A', JSON.stringify(usuario));
 
-let carruselIndex = 0;
-function iniciarCarrusel(){
-  const track = document.getElementById('carruselTrack');
-  if(!track) return;
-  const items = track.children.length;
-  const dotsContainer = document.getElementById('carruselDots');
-  dotsContainer.innerHTML = '';
-  for(let i=0; i<items; i++){
-    const dot = document.createElement('div');
-    dot.className = 'dot' + (i==0?' active':'');
-    dot.onclick = () => irCarrusel(i);
-    dotsContainer.appendChild(dot);
+function mostrarTab(tab, btn){
+  document.querySelectorAll('[id^="tab-"]').forEach(t=>t.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.remove('hidden');
+  btn.classList.add('active');
+  if(tab=='reportar') cargarMisMisiones();
+  if(tab=='canjear') cargarMisCanjes();
+}
+
+function actualizarCosto(){
+  let select = document.getElementById('beneficioCanje');
+  let costo = select.options[select.selectedIndex].getAttribute('data-costo');
+  let info = document.getElementById('costoInfo');
+  if(costo){
+    info.innerHTML = `Este beneficio cuesta: ${costo} puntos`;
+    info.classList.remove('hidden');
+  }else{
+    info.classList.add('hidden');
   }
-  setInterval(() => {carruselIndex = (carruselIndex + 1) % items; irCarrusel(carruselIndex)}, 4500);
-}
-function irCarrusel(i){
-  carruselIndex = i;
-  document.getElementById('carruselTrack').style.transform = `translateX(-${i*100}%)`;
-  document.querySelectorAll('.dot').forEach((d,idx)=>d.classList.toggle('active', idx==i));
 }
 
-let usuario = JSON.parse(localStorage.getItem('usuario3A')) || {id: "vecino_001", nombre: "Juan Pérez", barrio: "Barrio Unión", puntos: 1250, nivel: "BRONCE", insignias: [], gruposUnidos: []};
-let baseFotos = JSON.parse(localStorage.getItem('baseFotos3A')) || [];
-let reportesPendientes = JSON.parse(localStorage.getItem('reportes3A')) || [];
-let contadoresGrupos = JSON.parse(localStorage.getItem('contadoresGrupos3A')) || {union: 240, obra: 85};
-
-const NIVELES = [{nombre:"BRONCE", min:0, max:1000}, {nombre:"PLATA", min:1000, max:2000}, {nombre:"ORO", min:2000, max:5000}, {nombre:"DIAMANTE", min:5000, max:99999}];
-const MISIONES = [
-  {id:1, cat:"verde", icon:"🧹", titulo:"Vereda Limpia", desc:"Foto de tu cuadra limpia", pts:50},
-  {id:2, cat:"verde", icon:"♻️", titulo:"Punto Verde", desc:"Entregar 5kg reciclables", pts:80},
-  {id:3, cat:"naranja", icon:"🚨", titulo:"Reportar Problema", desc:"Bache, luz, basura", pts:100},
-  {id:4, cat:"naranja", icon:"👴", titulo:"Ayudar a un Abuelo", desc:"Cortar pasto / Hacer compras", pts:150},
-  {id:5, cat:"naranja", icon:"🔧", titulo:"Arreglo Vecinal", desc:"Canilla, luz, puerta", pts:200},
-  {id:6, cat:"rojo", icon:"🏞️", titulo:"Limpiar Plaza", desc:"Foto limpiando plaza", pts:300},
-  {id:7, cat:"rojo", icon:"🚧", titulo:"Tapar Bache", desc:"Con material o tierra", pts:300},
-  {id:8, cat:"rojo", icon:"🎨", titulo:"Pintar Espacio", desc:"Juegos, pared, cordón", pts:250},
-  {id:9, cat:"rojo", icon:"🛡️", titulo:"Denuncia Violencia", desc:"Alerta anónima", pts:500},
-  {id:10, cat:"rojo", icon:"🚑", titulo:"Emergencia Vecinal", desc:"Accidente / Ayuda urgente", pts:500},
-  {id:11, cat:"violeta", icon:"🌱", titulo:"Huerta Comunitaria", desc:"Armar/regar huerta", pts:400},
-  {id:12, cat:"violeta", icon:"🛠️", titulo:"Arreglar Juegos", desc:"Plaza en condiciones", pts:500}
-];
-const BENEFICIOS = [
-  {id:1, img:"🏊", titulo:"Mes Gratis Poli", costo:800},
-  {id:2, img:"📦", titulo:"Bolsón Mercadería", costo:1500},
-  {id:3, img:"🎒", titulo:"Kit Escolar", costo:2000},
-  {id:4, img:"🧱", titulo:"Bolsa de Cemento", costo:3000},
-  {id:5, img:"🔨", titulo:"Kit Herramientas", costo:2500},
-  {id:6, img:"🏠", titulo:"2 Chapas", costo:5000}
-];
-const GRUPOS = [
-  {id:'union', icon:'📱', titulo:'Grupo Barrio Unión', desc:'Alertas, ayuda, compra/venta', link:'https://chat.whatsapp.com/TU-LINK-BARRIO-UNION'},
-  {id:'obra', icon:'🛠️', titulo:'Grupo Manos a la Obra 3A', desc:'Para coordinar misiones y obras', link:'https://chat.whatsapp.com/TU-LINK-MANOS-OBRA'}
-];
-
-let misionActual = null; let fotoActualHash = null;
-function guardar(){
-  localStorage.setItem('usuario3A', JSON.stringify(usuario));
-  localStorage.setItem('baseFotos3A', JSON.stringify(baseFotos));
-  localStorage.setItem('reportes3A', JSON.stringify(reportesPendientes));
-  localStorage.setItem('contadoresGrupos3A', JSON.stringify(contadoresGrupos));
-}
-function toast(msg){const t=document.getElementById('toast');t.innerText=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
-
-async function generarHashImagen(file){return btoa(file.name + file.size + file.lastModified)}
-async function previsualizarFoto(event){
-  const file = event.target.files[0]; if(!file) return;
-  document.getElementById('previewImg').src = URL.createObjectURL(file); document.getElementById('previewImg').classList.remove('hidden');
-  fotoActualHash = await generarHashImagen(file);
-  let duplicada = baseFotos.find(f => f.hash === fotoActualHash);
-  document.getElementById('alertaFraude').classList.toggle('hidden',!duplicada);
-}
-
-function actualizarUI(){
-  let nivelActual = NIVELES.find(n => usuario.puntos >= n.min && usuario.puntos < n.max);
-  usuario.nivel = nivelActual.nombre;
-  document.getElementById('puntosTotales').innerText = usuario.puntos.toLocaleString();
-  document.getElementById('userInfo').innerText = `${usuario.nombre} - ${usuario.barrio}`;
-  document.getElementById('nivelBadge').innerText = `NIVEL ${usuario.nivel}`;
-  let progreso = ((usuario.puntos - nivelActual.min) / (nivelActual.max - nivelActual.min)) * 100;
-  document.getElementById('barraProgreso').style.width = progreso + '%';
-  let prox = NIVELES[NIVELES.indexOf(nivelActual)+1];
-  document.getElementById('siguienteNivel').innerText = prox? `Faltan ${(prox.min - usuario.puntos).toLocaleString()} pts para ${prox.nombre}` : "¡Máximo nivel!";
-
-  document.getElementById('misInsignias').innerHTML = usuario.insignias.length? '<b>Insignias:</b><br>' + usuario.insignias.map(i=>`<span class="insignia">${i}</span>`).join('') : '';
-
-  document.getElementById('listaMisiones').innerHTML = MISIONES.map(m => `<div class="mision ${m.cat}"><div class="icon">${m.icon}</div><div class="info"><h3>${m.titulo}</h3><p>${m.desc}</p></div><div><p class="pts ${m.cat}">+${m.pts}</p><button class="btn" onclick="abrirReporte(${m.id})">Hacer</button></div></div>`).join('');
-
-  document.getElementById('listaBeneficios').innerHTML = BENEFICIOS.map(b => `<div class="beneficio"><div class="icon">${b.img}</div><div class="info"><h4>${b.titulo}</h4><p class="pts">${b.costo.toLocaleString()} Puntos</p></div><button class="btn btn-azul" ${usuario.puntos < b.costo? 'disabled' : ''} onclick="canjear(${b.id})">Canjear</button></div>`).join('');
-
-  document.getElementById('listaGrupos').innerHTML = GRUPOS.map(g => {
-    let yaUnido = usuario.gruposUnidos.includes(g.id);
-    return `<div class="grupo-whatsapp"><div class="icon">${g.icon}</div><div class="info"><h4>${g.titulo}</h4><p>${g.desc}</p><p class="contador">${contadoresGrupos[g.id].toLocaleString()} vecinos</p></div><button class="btn btn-verde" ${yaUnido? 'disabled' : ''} onclick="unirseGrupo('${g.id}')">${yaUnido? 'Unido ✓' : 'Unirme'}</button></div>`
-  }).join('');
-}
-
-function abrirReporte(idMision){
-  misionActual = MISIONES.find(m=>m.id==idMision);
-  document.getElementById('tituloReporte').innerText = misionActual.titulo;
-  document.getElementById('descReporte').innerText = misionActual.desc;
-  document.getElementById('inputDireccion').value = ""; document.getElementById('inputDescripcion').value = ""; document.getElementById('inputFoto').value = "";
-  document.getElementById('previewImg').classList.add('hidden'); document.getElementById('alertaFraude').classList.add('hidden');
-  mostrarPantalla('reporte');
-}
-
-function enviarReporte(){
-  const direccion = document.getElementById('inputDireccion').value; const descripcion = document.getElementById('inputDescripcion').value;
-  if(!direccion ||!descripcion){toast("Completá dirección y descripción"); return;}
-  if(!fotoActualHash){toast("Adjuntá una foto"); return;}
-  if(baseFotos.find(f => f.hash === fotoActualHash)){toast("❌ Fraude detectado"); return;}
-  baseFotos.push({hash: fotoActualHash, usuario: usuario.id, mision: misionActual.titulo, fecha: new Date().toISOString()});
-  reportesPendientes.push({id: Date.now(), usuarioId: usuario.id, usuario: usuario.nombre, barrio: usuario.barrio, mision: misionActual.titulo, direccion: direccion, descripcion: descripcion, puntos: misionActual.pts, estado: "Pendiente", fecha: new Date().toISOString()});
-  usuario.puntos += misionActual.pts;
-  if(misionActual.pts==300 &&!usuario.insignias.includes("Guardián de Plazas")) usuario.insignias.push("🏞️ Guardián de Plazas");
-  if(misionActual.pts==500 &&!usuario.insignias.includes("Héroe 3A")) usuario.insignias.push("🦸 Héroe 3A");
-  if(misionActual.pts==400 &&!usuario.insignias.includes("Manos a la Obra")) usuario.insignias.push("🛠️ Manos a la Obra");
-  guardar(); actualizarUI(); mostrarPantalla('inicio'); toast(`✅ Reporte enviado! +${misionActual.pts} pts en validación`);
-}
-
-function canjear(id){
-  let benef = BENEFICIOS.find(b=>b.id==id);
-  if(usuario.puntos < benef.costo){toast("No tienes puntos suficientes"); return;}
-
-  let nombre = prompt("Nombre y Apellido:");
-  let dni = prompt("DNI:");
-  let barrio = prompt("Barrio:");
-  let tel = prompt("Teléfono:");
-
-  if(!nombre ||!dni ||!barrio ||!tel){toast("Completá todos los datos"); return;}
-
-  let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
-  canjes.push({
+function enviarMision(){
+  let mision = document.getElementById('mision').value;
+  if(!mision || !document.getElementById('direccion').value) return alert("Completa todos los campos");
+  
+  let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  let nueva = {
     id: Date.now(),
+    mision: mision,
+    direccion: document.getElementById('direccion').value,
+    barrio: document.getElementById('barrio').value,
+    descripcion: document.getElementById('descripcion').value,
+    puntos: parseInt(document.getElementById('puntos').value) || 0,
+    usuario: usuario.nombre,
     usuarioId: usuario.id,
-    nombre: nombre,
-    dni: dni,
-    barrio: barrio,
-    telefono: tel,
-    beneficio: benef.titulo,
-    costo: benef.costo,
-    estado: "Pendiente",
-    fecha: new Date().toISOString()
+    fecha: new Date().toISOString(),
+    estado: "Pendiente"
+  };
+  reportes.push(nueva);
+  localStorage.setItem('reportes3A', JSON.stringify(reportes));
+  localStorage.setItem('ultimaAccion', Date.now());
+  
+  alert("✅ Misión enviada a validar");
+  document.querySelectorAll('#tab-reportar .input-form').forEach(i=>i.value="");
+  cargarMisMisiones();
+}
+
+function cargarMisMisiones(){
+  let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
+  let todos = [...reportes, ...historial].filter(r=>r.usuarioId==usuario.id);
+  let html = "<h3 style='margin:20px 0;color:var(--azul)'>Mis Misiones</h3>";
+  if(todos.length==0) html += "<div class='card'>Aun no enviaste misiones</div>";
+  todos.forEach(r=>{
+    let clase = r.estado=="Pendiente" ? "mision-card" : "mision-enviada";
+    let estadoTxt = r.estado||'Pendiente';
+    html += `<div class="card ${clase}">
+      <b>${r.mision}</b> - ${r.puntos} pts<br>
+      <small><b>Estado:</b> ${estadoTxt} - <b>Fecha:</b> ${new Date(r.fecha).toLocaleDateString('es-AR')}</small><br>
+      <small>${r.direccion} - ${r.barrio}</small>
+    </div>`
   });
+  document.getElementById('misMisiones').innerHTML = html;
+  document.getElementById('misPuntos').innerText = usuario.puntos.toLocaleString();
+}
 
-  usuario.puntos -= benef.costo;
-  guardar();
+function solicitarCanje(){
+  let costo = parseInt(document.getElementById('beneficioCanje').options[document.getElementById('beneficioCanje').selectedIndex]?.getAttribute('data-costo') || 0);
+  
+  if(!document.getElementById('nombreCanje').value || !document.getElementById('dniCanje').value || !document.getElementById('telCanje').value) 
+    return alert("Completa Nombre, DNI y Telefono");
+  if(!costo) return alert("Selecciona un beneficio");
+  if(usuario.puntos < costo) return alert("No tenes suficientes puntos");
+  
+  let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
+  let nuevo = {
+    id: Date.now(),
+    nombre: document.getElementById('nombreCanje').value,
+    dni: document.getElementById('dniCanje').value,
+    telefono: document.getElementById('telCanje').value,
+    barrio: document.getElementById('barrioCanje').value,
+    direccion: document.getElementById('direccionCanje').value,
+    beneficio: document.getElementById('beneficioCanje').value,
+    costo: costo,
+    fecha: new Date().toISOString(),
+    estado: "Pendiente"
+  };
+  canjes.push(nuevo);
+  usuario.puntos -= costo;
   localStorage.setItem('canjes3A', JSON.stringify(canjes));
-  actualizarUI();
-  toast(`¡Solicitud enviada! Retirá en Acción Social`);
+  localStorage.setItem('usuario3A', JSON.stringify(usuario));
+  localStorage.setItem('ultimaAccion', Date.now());
+  
+  alert("✅ Canje solicitado. Te avisamos por WhatsApp cuando este listo");
+  document.querySelectorAll('#tab-canjear .input-form').forEach(i=>i.value="");
+  document.getElementById('costoInfo').classList.add('hidden');
+  cargarMisCanjes();
+  cargarMisMisiones();
 }
 
-function unirseGrupo(idGrupo){
-  if(usuario.gruposUnidos.includes(idGrupo)){toast("Ya estás en este grupo"); return;}
-  let grupo = GRUPOS.find(g=>g.id==idGrupo);
-  usuario.gruposUnidos.push(idGrupo);
-  contadoresGrupos[idGrupo] += 1;
-  usuario.puntos += 30;
-  guardar(); actualizarUI();
-  toast(`✅ +30 pts! Te unimos al grupo`);
-  window.open(grupo.link, '_blank');
+function cargarMisCanjes(){
+  let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
+  let misCanjes = canjes.filter(c=>c.dni == document.getElementById('dniCanje').value || c.nombre.includes(usuario.nombre));
+  let html = "<h3 style='margin:20px 0;color:var(--azul)'>Mis Solicitudes de Canje</h3>";
+  if(misCanjes.length==0) html += "<div class='card'>No tenes canjes solicitados</div>";
+  misCanjes.forEach(c=>{
+    html += `<div class="card">
+      <b>${c.beneficio}</b> - ${c.costo} pts<br>
+      <small><b>Estado:</b> ${c.estado} - <b>Fecha:</b> ${new Date(c.fecha).toLocaleDateString('es-AR')}</small>
+    </div>`
+  });
+  document.getElementById('misCanjes').innerHTML = html;
 }
 
-function mostrarPantalla(pant){
-  ['inicio','mapa','alertas','ranking','reporte'].forEach(p=>document.getElementById('pantalla-'+p).classList.add('hidden'));
-  document.querySelectorAll('.menu-item').forEach(i=>i.classList.remove('active'));
-  document.getElementById('pantalla-'+pant).classList.remove('hidden');
-  if(pant!='reporte'){let idx = ['inicio','mapa','alertas','ranking'].indexOf(pant); if(idx>=0) document.querySelectorAll('.menu-item')[idx].classList.add('active')}
-}
+cargarMisMisiones();
 </script>
 </body>
 </html>
