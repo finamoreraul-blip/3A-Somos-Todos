@@ -26,7 +26,6 @@
   .card{background:white;margin-bottom:15px;border-radius:16px;padding:20px;box-shadow:0 3px 12px rgba(0,0,0,.08);animation:fadeIn .3s}
   @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
   .reporte-pendiente{border-left:5px solid var(--naranja)}
-  .reporte-aprobado{border-left:5px solid var(--verde);opacity:.7}
   .datos{margin:10px 0;font-size:.9em}
   .datos b{color:var(--azul)}
   .acciones{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap}
@@ -160,7 +159,7 @@ function entrar(){
     inicioSesion = Date.now();
     localStorage.setItem('ultimoAccesoAdmin', inicioSesion);
     cargarDatos();
-    intervaloActualizacion = setInterval(cargarDatos, 5000);
+    intervaloActualizacion = setInterval(cargarDatos, 3000);
     intervaloContador = setInterval(actualizarContadorSesion, 1000);
   }else{alert("Contraseña incorrecta")}
 }
@@ -199,11 +198,12 @@ function cargarDatos(){
 function actualizarStats(){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
+  let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
   let usuario = JSON.parse(localStorage.getItem('usuario3A'));
   
-  let puntosEntregados = reportes.filter(r=>r.estado=="Aprobado").reduce((sum,r)=>sum+r.puntos,0);
+  let puntosEntregados = historial.filter(r=>r.estado=='Aprobado').reduce((sum,r)=>sum+r.puntos,0);
   
-  document.getElementById('statPendientes').innerText = reportes.filter(r=>r.estado=="Pendiente").length;
+  document.getElementById('statPendientes').innerText = reportes.length;
   document.getElementById('statCanjes').innerText = canjes.filter(c=>c.estado=="Pendiente").length;
   document.getElementById('statVecinos').innerText = usuario ? 1 : 0;
   document.getElementById('statPuntos').innerText = puntosEntregados.toLocaleString();
@@ -213,12 +213,10 @@ function cargarReportes(){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
   let html = "";
   
-  let pendientes = reportes.filter(r=>r.estado=="Pendiente");
-  
-  if(pendientes.length == 0) 
+  if(reportes.length == 0) 
     html = "<div class='card'>✅ No hay misiones pendientes</div>";
   
-  pendientes.forEach(r=>{
+  reportes.forEach(r=>{
     html += `<div class="card reporte-pendiente">
       <h3>${r.mision}</h3>
       <div class="datos"><b>Vecino:</b> ${r.usuario} - <b>Barrio:</b> ${r.barrio}</div>
@@ -236,22 +234,34 @@ function cargarReportes(){
 
 function aprobarMision(id){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
   let r = reportes.find(x=>x.id==id);
-  if(r){r.estado = "Aprobado";}
+  if(r){
+    r.estado = "Aprobado";
+    r.fechaValidacion = new Date().toISOString();
+    historial.push(r);
+    reportes = reportes.filter(x=>x.id!=id);
+  }
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
+  localStorage.setItem('historialMisiones3A', JSON.stringify(historial));
   alert(`✅ Misión aprobada`);
   cargarDatos();
 }
 
 function rechazarMision(id){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
   let r = reportes.find(x=>x.id==id);
   if(r){
     r.estado = "Rechazado";
+    r.fechaValidacion = new Date().toISOString();
+    historial.push(r);
     let usuario = JSON.parse(localStorage.getItem('usuario3A'));
     if(usuario && usuario.id == r.usuarioId){usuario.puntos -= r.puntos;localStorage.setItem('usuario3A', JSON.stringify(usuario));}
+    reportes = reportes.filter(x=>x.id!=id);
   }
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
+  localStorage.setItem('historialMisiones3A', JSON.stringify(historial));
   alert("❌ Misión rechazada");
   cargarDatos();
 }
@@ -291,6 +301,7 @@ function confirmarEntrega(){
   let c = canjes.find(x=>x.id==canjeSeleccionado);
   if(c){
     c.estado = "Entregado";
+    c.fechaEntrega = new Date().toISOString();
     localStorage.setItem('canjes3A', JSON.stringify(canjes));
     
     let lugar = document.getElementById('lugarRetiro').value || "Acción Social Municipal";
@@ -308,36 +319,36 @@ function confirmarEntrega(){
 }
 
 function cargarHistorial(){
-  let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
+  let historial = JSON.parse(localStorage.getItem('historialMisiones3A')) || [];
   let canjes = JSON.parse(localStorage.getItem('canjes3A')) || [];
   
   // HISTORIAL MISIONES
-  let htmlM = "<thead><tr><th>Fecha</th><th>Vecino</th><th>Misión</th><th>Puntos</th><th>Estado</th></tr></thead><tbody>";
-  let validados = reportes.filter(r=>r.estado=="Aprobado" || r.estado=="Rechazado");
-  if(validados.length==0) htmlM += "<tr><td colspan='5'>No hay historial</td></tr>";
-  validados.forEach(r=>{
+  let htmlM = "<thead><tr><th>Fecha Envio</th><th>Fecha Validacion</th><th>Vecino</th><th>Misión</th><th>Puntos</th><th>Estado</th></tr></thead><tbody>";
+  if(historial.length==0) htmlM += "<tr><td colspan='6'>No hay historial</td></tr>";
+  historial.forEach(r=>{
     htmlM += `<tr>
       <td>${new Date(r.fecha).toLocaleString('es-AR')}</td>
+      <td>${new Date(r.fechaValidacion).toLocaleString('es-AR')}</td>
       <td><b>${r.usuario}</b><br><small>${r.barrio}</small></td>
       <td>${r.mision}<br><small>${r.direccion}</small></td>
       <td>${r.puntos}</td>
-      <td><span class="badge ${r.estado.toLowerCase()}">${r.estado}</span></td>
+      <td><span class="badge ${r.estado=='Rechazado'?'rechazado':'aprobado'}">${r.estado}</span></td>
     </tr>`
   });
   htmlM += "</tbody>";
   document.getElementById('tablaHistorialMisiones').innerHTML = htmlM;
   
   // HISTORIAL CANJES
-  let htmlC = "<thead><tr><th>Fecha</th><th>Vecino - DNI</th><th>Beneficio</th><th>Puntos</th><th>Estado</th></tr></thead><tbody>";
+  let htmlC = "<thead><tr><th>Fecha Solicitud</th><th>Fecha Entrega</th><th>Vecino - DNI</th><th>Beneficio</th><th>Puntos</th></tr></thead><tbody>";
   let entregados = canjes.filter(c=>c.estado=="Entregado");
   if(entregados.length==0) htmlC += "<tr><td colspan='5'>No hay historial</td></tr>";
   entregados.forEach(c=>{
     htmlC += `<tr>
       <td>${new Date(c.fecha).toLocaleString('es-AR')}</td>
+      <td>${new Date(c.fechaEntrega).toLocaleString('es-AR')}</td>
       <td><b>${c.nombre}</b><br><small>DNI: ${c.dni} - ${c.barrio} - Tel: ${c.telefono}</small></td>
       <td>${c.beneficio}</td>
       <td>${c.costo.toLocaleString()}</td>
-      <td><span class="badge entregado">Entregado</span></td>
     </tr>`
   });
   htmlC += "</tbody>";
