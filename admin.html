@@ -18,7 +18,7 @@
   .btn{background:var(--verde);color:white;border:none;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer;width:100%;font-size:1em;transition:.2s}
   .btn:hover{opacity:.9;transform:scale(.98)}
   .btn-rojo{background:var(--rojo)}.btn-azul{background:var(--azul)}.btn-verde{background:#25D366}
-  .hidden{display:none}
+  .hidden{display:none !important}
   .container{max-width:1200px;margin:20px auto;padding:0 15px}
   .tabs{display:flex;gap:10px;margin-bottom:20px}
   .tab-btn{flex:1;padding:15px;background:white;border:none;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:.2s}
@@ -61,7 +61,7 @@
 <!-- PANEL PRINCIPAL -->
 <div id="panel" class="hidden">
   
-  <!-- MODAL ENTREGAR CANJE -->
+  <!-- MODAL ENTREGAR CANJE - EMPIEZA OCULTO -->
   <div id="modalEntregar" class="modal hidden">
     <div class="modal-content">
       <h3 style="color:var(--azul);margin-bottom:15px">📦 Marcar como Entregado</h3>
@@ -201,7 +201,7 @@ function cargarReportes(){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
   let html = "";
   
-  // ARREGLO CLAVE: FILTRAR SOLO PENDIENTES Y VOLVER A GUARDAR
+  // ARREGLO: FILTRAR SOLO PENDIENTES Y GUARDAR
   reportes = reportes.filter(r=>r.estado=="Pendiente");
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
   
@@ -226,7 +226,7 @@ function cargarReportes(){
 
 function aprobarMision(id){
   let reportes = JSON.parse(localStorage.getItem('reportes3A')) || [];
-  reportes = reportes.filter(x=>x.id!=id); // BORRAR DEFINITIVO
+  reportes = reportes.filter(x=>x.id!=id);
   localStorage.setItem('reportes3A', JSON.stringify(reportes));
   alert(`✅ Misión aprobada`);
   cargarDatos();
